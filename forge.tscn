@@ -1,0 +1,102 @@
+[gd_scene load_steps=14 format=3 uid="uid://e5cetnbk6s3o"]
+
+[ext_resource type="Texture2D" uid="uid://c7dy663eukit2" path="res://Assets/Sprites/ShopScene/furnace_.png" id="1_stxjt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wh547"]
+atlas = ExtResource("1_stxjt")
+region = Rect2(18, 14, 28, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2cset"]
+atlas = ExtResource("1_stxjt")
+region = Rect2(18, 62, 28, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xa4lm"]
+atlas = ExtResource("1_stxjt")
+region = Rect2(50, 62, 28, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hydf5"]
+atlas = ExtResource("1_stxjt")
+region = Rect2(82, 62, 28, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cvrgv"]
+atlas = ExtResource("1_stxjt")
+region = Rect2(114, 62, 28, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aae0b"]
+atlas = ExtResource("1_stxjt")
+region = Rect2(18, 110, 28, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_btfdh"]
+atlas = ExtResource("1_stxjt")
+region = Rect2(50, 110, 28, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dad18"]
+atlas = ExtResource("1_stxjt")
+region = Rect2(82, 110, 28, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_isc77"]
+atlas = ExtResource("1_stxjt")
+region = Rect2(114, 110, 28, 47)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0qlsy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wh547")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2cset")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xa4lm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hydf5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cvrgv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aae0b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_btfdh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dad18")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_isc77")
+}],
+"loop": true,
+"name": &"default",
+"speed": 0.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kit3j"]
+size = Vector2(30.4211, 46.4097)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nn4i7"]
+size = Vector2(26, 35.5507)
+
+[node name="Forge" type="AnimatedSprite2D"]
+texture_filter = 5
+position = Vector2(494, -54)
+scale = Vector2(4.75, 4.54)
+sprite_frames = SubResource("SpriteFrames_0qlsy")
+centered = false
+
+[node name="Area2D" type="Area2D" parent="."]
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(14.5263, 34.7247)
+shape = SubResource("RectangleShape2D_kit3j")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(14.3684, 29.3612)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_nn4i7")
+debug_color = Color(0.937255, 0.129412, 0.541176, 0.419608)

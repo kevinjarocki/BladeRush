@@ -9,3 +9,7 @@ func _on_player_interacted(station):
 		print(station.owner.name)
 	else:
 		print("No station nearby")
+	
+	if station.owner.name == "Anvil":
+		
+		

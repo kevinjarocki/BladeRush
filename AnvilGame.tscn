@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://b1qqtnco6o3b5"]
+[gd_scene load_steps=4 format=3 uid="uid://b1qqtnco6o3b5"]
 
 [ext_resource type="Script" path="res://AnvilGame.gd" id="1_3ooct"]
+[ext_resource type="PackedScene" uid="uid://c0ueyn2x5thma" path="res://clickTarget.tscn" id="2_s28fy"]
+[ext_resource type="Texture2D" uid="uid://cin7oklhjhe8s" path="res://Assets/Tiny Swords/Tiny Swords (Update 010)/UI/Banners/Banner_Horizontal.png" id="2_tk58i"]
 
-[node name="Control" type="Control"]
+[node name="AnvilGame" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -10,6 +12,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3ooct")
+clickTarget = ExtResource("2_s28fy")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
@@ -20,3 +23,5 @@ offset_bottom = 511.0
 color = Color(0.188235, 0.188235, 0.188235, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(157, 111)
+texture = ExtResource("2_tk58i")

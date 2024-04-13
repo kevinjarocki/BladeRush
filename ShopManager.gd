@@ -1,8 +1,7 @@
 extends Node2D
 
 @export var money = 0
-
-
+@export var minigame: PackedScene
 
 func _on_player_interacted(station):
 	
@@ -21,8 +20,6 @@ func _on_player_interacted(station):
 			
 	else:
 		print("No station nearby")
-	
-
 	
 func playerAtAnvil():
 	$Player.freeze()
@@ -73,3 +70,4 @@ func reparentNode(newParent, oldParent, node):
 	newParent.add_child(node)
 	
 	node.transform = oldParent.global_transform
+  

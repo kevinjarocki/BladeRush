@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://ShopManager.gd" id="1_07efy"]
 [ext_resource type="PackedScene" uid="uid://c2foh3xf7xqox" path="res://ore_box.tscn" id="2_lioss"]
+[ext_resource type="PackedScene" uid="uid://b1qqtnco6o3b5" path="res://AnvilGame.tscn" id="2_vq7so"]
 [ext_resource type="PackedScene" uid="uid://e5cetnbk6s3o" path="res://forge.tscn" id="3_oi4xx"]
 [ext_resource type="PackedScene" uid="uid://b050eg4ti6ipn" path="res://anvil.tscn" id="4_aakto"]
 [ext_resource type="PackedScene" uid="uid://bewrwdr2l45aj" path="res://cash_register.tscn" id="5_bnaeq"]
@@ -10,6 +11,7 @@
 
 [node name="Shop" type="Node2D"]
 script = ExtResource("1_07efy")
+minigame = ExtResource("2_vq7so")
 
 [node name="OreBox" parent="." instance=ExtResource("2_lioss")]
 
@@ -26,5 +28,7 @@ position = Vector2(622, 401)
 
 [node name="Ingot" parent="." instance=ExtResource("7_s6hrv")]
 visible = false
+
+[node name="AnvilGame" parent="." instance=ExtResource("2_vq7so")]
 
 [connection signal="interacted" from="Player" to="." method="_on_player_interacted"]

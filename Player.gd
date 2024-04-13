@@ -4,6 +4,7 @@ extends CharacterBody2D
 signal interacted(station)
 
 var station = Area2D
+var isFrozen = false
 
 @export var speed = 400
 
@@ -17,36 +18,37 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	velocity = Vector2.ZERO
-	if Input.is_action_pressed("move_right"):
-		velocity.x += 1
-	if Input.is_action_pressed("move_left"):
-		velocity.x -= 1
-	if Input.is_action_pressed("move_down"):
-		velocity.y += 1
-	if Input.is_action_pressed("move_up"):
-		velocity.y -= 1
-	
-	if velocity.length() > 0:
-		velocity = velocity.normalized() * speed
-	
-	move_and_slide()
-	position = position.clamp(Vector2.ZERO, screen_size)
-	
-	if Input.is_action_just_pressed("interact"):
-		interacted.emit(station)
+	if not isFrozen:
+		velocity = Vector2.ZERO
+		if Input.is_action_pressed("move_right"):
+			velocity.x += 1
+		if Input.is_action_pressed("move_left"):
+			velocity.x -= 1
+		if Input.is_action_pressed("move_down"):
+			velocity.y += 1
+		if Input.is_action_pressed("move_up"):
+			velocity.y -= 1
 		
-	
-	if velocity.x != 0:
-		$Area2D/AnimatedSprite2D.animation = "walk"
-		$Area2D/AnimatedSprite2D.flip_v = false
-		$Area2D/AnimatedSprite2D.flip_h = velocity.x < 0
-	elif velocity.y < 0:
-		$Area2D/AnimatedSprite2D.animation = "up"
-	elif velocity.y > 0:
-		$Area2D/AnimatedSprite2D.animation = "down"
-	else:
-		$Area2D/AnimatedSprite2D.animation = "Idle"
+		if velocity.length() > 0:
+			velocity = velocity.normalized() * speed
+		
+		move_and_slide()
+		position = position.clamp(Vector2.ZERO, screen_size)
+		
+		if Input.is_action_just_pressed("interact"):
+			interacted.emit(station)
+			
+		
+		if velocity.x != 0:
+			$Area2D/AnimatedSprite2D.animation = "walk"
+			$Area2D/AnimatedSprite2D.flip_v = false
+			$Area2D/AnimatedSprite2D.flip_h = velocity.x < 0
+		elif velocity.y < 0:
+			$Area2D/AnimatedSprite2D.animation = "up"
+		elif velocity.y > 0:
+			$Area2D/AnimatedSprite2D.animation = "down"
+		else:
+			$Area2D/AnimatedSprite2D.animation = "Idle"
 
 
 func start(pos):
@@ -59,3 +61,9 @@ func _on_area_2d_body_entered(body):
 
 func _on_area_2d_body_exited(body):
 	station = null
+	
+func freeze():
+	isFrozen = true
+	
+func unfreeze():
+	isFrozen = false

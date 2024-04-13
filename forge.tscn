@@ -81,7 +81,6 @@ size = Vector2(26, 35.5507)
 
 [node name="Forge" type="AnimatedSprite2D"]
 texture_filter = 5
-position = Vector2(494, -54)
 scale = Vector2(4.75, 4.54)
 sprite_frames = SubResource("SpriteFrames_0qlsy")
 centered = false

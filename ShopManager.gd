@@ -28,15 +28,24 @@ func playerAtAnvil():
 	pass
 	
 func playerAtForge():
-	if ingotCheck($Anvil):
-		print("Cant add another ingot, ")
 	
-	if ingotCheck($Player):
-		ingotCheck($Player)
-				
-		
+	if ingotCheck($Anvil) and ingotCheck($Player):
+		print("Cant add another ingot")
+	
+	elif ingotCheck($Anvil):
+		var IngotNode = ingotCheck($Anvil)
+		$Anvil.remove_child(IngotNode)
+		$Player.add_child(IngotNode)
+		IngotNode.isForge = false
+	
 	else:
-		ingotCheck($Player)
+		if ingotCheck($Player):
+			var ingotNode = ingotCheck($Player)
+			reparentNode($Anvil, $Player, ingotNode)
+			ingotNode.isForge = true
+			
+		else:
+			print("Nothing to do, player does not have ingot")
 	
 func playerAtOreBox():
 	if !ingotCheck($Player):
@@ -56,3 +65,9 @@ func ingotCheck(node):
 		if child.name == "Ingot":
 			return child
 	return false
+
+func reparentNode(newParent, oldParent, node):
+	oldParent.remove_child(node)
+	newParent.add_child(node)
+	
+	node.transform = oldParent.global_transform

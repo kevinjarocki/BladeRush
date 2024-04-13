@@ -14,9 +14,10 @@ script = ExtResource("1_07efy")
 [node name="OreBox" parent="." instance=ExtResource("2_lioss")]
 
 [node name="Forge" parent="." instance=ExtResource("3_oi4xx")]
+position = Vector2(510, -38)
 
 [node name="Anvil" parent="." instance=ExtResource("4_aakto")]
-position = Vector2(824, 185)
+position = Vector2(845, 121)
 
 [node name="CashRegister" parent="." instance=ExtResource("5_bnaeq")]
 
@@ -24,5 +25,6 @@ position = Vector2(824, 185)
 position = Vector2(622, 401)
 
 [node name="Ingot" parent="." instance=ExtResource("7_s6hrv")]
+visible = false
 
 [connection signal="interacted" from="Player" to="." method="_on_player_interacted"]

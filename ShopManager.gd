@@ -3,11 +3,9 @@ extends Node2D
 @export var money = 0
 @export var minigame: PackedScene
 
-
-@export var materialBook = {
-	"bronze": {"minTemp": 25, "maxTemp": 1200, "coolCurve": 2},
-	"iron": {"minTemp": 25, "maxTemp": 800, "coolCurve": 4},
-	"gold": {"minTemp": 25, "maxTemp": 1200, "coolCurve": 5}
+var recipeBook = {
+	"dagger" : [Vector2(100,100),Vector2(200,200),Vector2(150,150)],
+	"scimtar" : [Vector2(600,100),Vector2(420,696),Vector2(337,808)]
 }
 
 func _on_player_interacted(station):
@@ -30,17 +28,17 @@ func _on_player_interacted(station):
 	
 func playerAtAnvil():
 	$Player.freeze()
-	$AnvilGame.summonMinigame(InstancePlaceholder)
-
+	var IngotNode = ingotCheck($Player)
+	IngotNode.recipe = recipeBook[IngotNode.recipeName]
+	$AnvilGame.summonMinigame(ingotCheck($Player))
+	$Player.unFreeze()
+	print("here")
 	
 func playerAtForge():
 	
-	var query := PhysicsPointQueryParameters2D.new()
-	query.collide_with_areas = true
-	query.collide_with_bodies = false
-	query.position = Vector2(575,155)
-	var space = get_world_2d().direct_space_state
-	
+	if ingotCheck($Anvil) and ingotCheck($Player):
+		print("Cant add another ingot")
+
 	for x in get_world_2d().direct_space_state.intersect_point(query):
 		print(x.collider.owner.name)
 		if x.collider.owner.is_in_group("ingot"):
@@ -64,11 +62,18 @@ func playerAtForge():
 		ingotNode.isForge = true
 		$Forge.play()
 			
+
 	else:
-		print("Nothing to do, player does not have ingot")
+		if ingotCheck($Player):
+			var ingotNode = ingotCheck($Player)
+			reparentNode($Anvil, $Player, ingotNode)
+			ingotNode.isForge = true
+			
+		else:
+			print("Nothing to do, player does not have ingot")
 	
 func playerAtOreBox():
-	if !ingotCheck():
+	if !ingotCheck($Player):
 		var item = load("res://ingot.tscn").instantiate()
 		$Player.add_child(item)
 		print ("Picked up ingot")
@@ -81,9 +86,11 @@ func playerAtCashRegister():
 		ingotCheck().queue_free()
 
 #Checks if player is holding an ingot, returns ingot node or false
+
 func ingotCheck():
 	for child in $Player.get_children():
 		if child.is_in_group("ingot"):
+
 			return child
 	return false
 
@@ -93,6 +100,3 @@ func reparentNode(newParent, oldParent, node):
 	
 	node.transform = oldParent.global_transform
   
-func _input(event):
-	if Input.is_action_just_pressed("click"):
-		print(event.position)

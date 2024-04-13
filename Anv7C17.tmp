@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b1qqtnco6o3b5"]
 
 [ext_resource type="Script" path="res://AnvilGame.gd" id="1_3ooct"]
-[ext_resource type="PackedScene" uid="uid://bxch7joyvexmh" path="res://click_target.tscn" id="2_k18te"]
+[ext_resource type="PackedScene" uid="uid://bkn8isdtwk2tr" path="res://click_target.tscn" id="2_k18te"]
 [ext_resource type="Texture2D" uid="uid://cin7oklhjhe8s" path="res://Assets/Tiny Swords/Tiny Swords (Update 010)/UI/Banners/Banner_Horizontal.png" id="2_tk58i"]
 
 [node name="AnvilGame" type="Control"]

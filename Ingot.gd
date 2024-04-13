@@ -4,9 +4,11 @@ extends Node2D
 
 var quality = 100;
 var isCompleted = false;
-var recipeName = "DefaultRecipe"; #i.e Could be "Longsword"
+var recipeName = "dagger"; #i.e Could be "Longsword"
 var timeLeftHeated = 30.0;
 var isForge = false
+var recipe = []
+var stage = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -28,3 +30,4 @@ func _process(delta):
 		if temperature > 0: temperature -= 10
 	
 	pass
+

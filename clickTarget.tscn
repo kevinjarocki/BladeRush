@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0ueyn2x5thma"]
+
+[ext_resource type="Texture2D" uid="uid://dbxyqadajdmm8" path="res://icon.svg" id="1_e1ib2"]
+
+[node name="Button" type="Button"]
+anchors_preset = -1
+offset_left = -17.0
+offset_top = -16.0
+offset_right = 119.0
+offset_bottom = 120.0
+scale = Vector2(0.25, 0.25)
+icon = ExtResource("1_e1ib2")

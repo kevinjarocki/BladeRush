@@ -58,8 +58,6 @@ func start(pos):
 
 func _on_area_2d_body_entered(body):
 	station = body
-	print("signal entry triggered")
-
 
 func _on_area_2d_body_exited(body):
 	station = null

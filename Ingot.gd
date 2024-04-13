@@ -1,11 +1,12 @@
 extends Node2D
 
+@export var temperature = 0;
+
 var quality = 100;
 var isCompleted = false;
-var isHeld = false;
-@export var temperature = 0;
 var recipeName = "DefaultRecipe"; #i.e Could be "Longsword"
 var timeLeftHeated = 30.0;
+var isForge = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -20,4 +21,11 @@ func _process(delta):
 	var MetalGlow = ColdMetal + Color(.146/500 * temperature, .202/2000*temperature, .002/1000*temperature, .100/1000*temperature)
 	#print(MetalGlow)
 	$ColorRect.set_color(MetalGlow)
+	
+	if isForge:
+		temperature += 1
+		
+	else:
+		if temperature > 0: temperature -= 1
+	
 	pass

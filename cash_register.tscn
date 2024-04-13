@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://bewrwdr2l45aj"]
+
+[ext_resource type="Texture2D" uid="uid://dgvx3do8qxc35" path="res://Assets/Sprites/ShopScene/stallObjects_.png" id="1_pjgru"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hmlun"]
+size = Vector2(20, 25.8397)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lui1a"]
+size = Vector2(14.6738, 14.2557)
+
+[node name="CashRegister" type="Sprite2D"]
+texture_filter = 5
+position = Vector2(177, 392)
+scale = Vector2(6.67857, 6.31325)
+texture = ExtResource("1_pjgru")
+region_enabled = true
+region_rect = Rect2(40.431, 87.2699, 14.7292, 15.2698)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -2.91986)
+shape = SubResource("RectangleShape2D_hmlun")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(0.149733, 0.633587)
+shape = SubResource("RectangleShape2D_lui1a")
+debug_color = Color(0.960784, 0, 0.505882, 0.419608)

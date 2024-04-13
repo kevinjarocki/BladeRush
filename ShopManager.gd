@@ -25,7 +25,9 @@ func _on_player_interacted(station):
 
 	
 func playerAtAnvil():
-	pass
+	$Player.freeze()
+	$AnvilGame.summonMinigame(InstancePlaceholder)
+	print("here")
 	
 func playerAtForge():
 	

@@ -11,9 +11,7 @@ var isForge = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	print($ColorRect.color)
-	#hide()
-
-
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var WhiteHot = Color(0.229,0.202,0.002,0.250)
@@ -23,9 +21,10 @@ func _process(delta):
 	$ColorRect.set_color(MetalGlow)
 	
 	if isForge:
-		temperature += 1
+		if temperature < 9000:
+			temperature += 25
 		
 	else:
-		if temperature > 0: temperature -= 1
+		if temperature > 0: temperature -= 10
 	
 	pass

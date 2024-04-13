@@ -5,6 +5,10 @@ var missDistanceVector = Vector2()
 var userClick = Vector2(-100000,100000)
 var nextClick = InstancePlaceholder
 var ingotInstance = InstancePlaceholder
+var gameCompletedBool = false
+
+signal gameCompleteSignal
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	hide()
@@ -13,7 +17,7 @@ func _process(delta):
 	pass
 	
 func _input(event):
-	if (event is InputEventMouseButton and visible and Input.is_action_just_pressed("click")):
+	if (event is InputEventMouseButton and visible and Input.is_action_just_pressed("click") and not gameCompletedBool):
 		userClick = event.position
 		missDistanceVector = userClick - nextClick.position
 		missDistance = missDistanceVector.length()
@@ -27,12 +31,18 @@ func _input(event):
 		else:
 			nextClick.killInstance()
 			print("kill me")
+			gameCompletedBool = true
+			gameCompleteSignal.emit()
 func summonMinigame(instance):
+
 	ingotInstance = instance
-	show()
-	nextClick = clickTarget.instantiate()
-	nextClick.position = ingotInstance.recipe[0]
-	add_child(nextClick)
+	if (ingotInstance.stage < ingotInstance.recipe.size()):
+		show()
+		nextClick = clickTarget.instantiate()
+		nextClick.position = ingotInstance.recipe[0]
+		add_child(nextClick)
+	else:
+		hide()
 
 	#await get_tree().create_timer(1.0).timeout
 	

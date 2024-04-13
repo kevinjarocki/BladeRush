@@ -65,5 +65,5 @@ func _on_area_2d_body_exited(body):
 func freeze():
 	isFrozen = true
 	
-func unfreeze():
+func unFreeze():
 	isFrozen = false

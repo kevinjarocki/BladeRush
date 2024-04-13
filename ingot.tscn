@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bf7p7hexxqp4d"]
+[gd_scene load_steps=8 format=3 uid="uid://7nch364v2svb"]
 
 [ext_resource type="Script" path="res://Ingot.gd" id="1_iac0r"]
 [ext_resource type="Texture2D" uid="uid://cimw46c1oonm0" path="res://Assets/Ingot&Ore_Kit/Ingot/Ingot Blue 4.png" id="1_w3osd"]

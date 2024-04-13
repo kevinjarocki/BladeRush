@@ -3,6 +3,11 @@ extends Node2D
 @export var money = 0
 @export var minigame: PackedScene
 
+var recipeBook = {
+	"dagger" : [Vector2(100,100),Vector2(200,200),Vector2(150,150)],
+	"scimtar" : [Vector2(600,100),Vector2(420,696),Vector2(337,808)]
+}
+
 func _on_player_interacted(station):
 	
 	#If player is at an interactable station -> Go to a function for each station
@@ -23,7 +28,10 @@ func _on_player_interacted(station):
 	
 func playerAtAnvil():
 	$Player.freeze()
-	$AnvilGame.summonMinigame(InstancePlaceholder)
+	var IngotNode = ingotCheck($Player)
+	IngotNode.recipe = recipeBook[IngotNode.recipeName]
+	$AnvilGame.summonMinigame(ingotCheck($Player))
+	$Player.unFreeze()
 	print("here")
 	
 func playerAtForge():

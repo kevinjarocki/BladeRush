@@ -38,13 +38,31 @@ func playerAtForge():
 	
 	if ingotCheck($Anvil) and ingotCheck($Player):
 		print("Cant add another ingot")
+
+	for x in get_world_2d().direct_space_state.intersect_point(query):
+		print(x.collider.owner.name)
+		if x.collider.owner.is_in_group("ingot"):
+			remove_child(x.collider.owner)
+			$Player.add_child(x.collider.owner)
+			x.collider.owner.position = Vector2.ZERO
+			x.collider.owner.isForge = false
+			print("here")
+			return
+#
+		#print (x.collider.owner.position)
+		#print($Player.position)
+		#return
 	
-	elif ingotCheck($Anvil):
-		var IngotNode = ingotCheck($Anvil)
-		$Anvil.remove_child(IngotNode)
-		$Player.add_child(IngotNode)
-		IngotNode.isForge = false
-	
+	if ingotCheck():
+		var ingotNode = ingotCheck()
+		$Player.remove_child(ingotNode)
+		add_child(ingotNode)
+		ingotNode.name = "Ingot"
+		ingotNode.position = Vector2(575,155)
+		ingotNode.isForge = true
+		$Forge.play()
+			
+
 	else:
 		if ingotCheck($Player):
 			var ingotNode = ingotCheck($Player)
@@ -64,12 +82,15 @@ func playerAtOreBox():
 		print ("Player already holding ingot")
 	
 func playerAtCashRegister():
-	pass
+	if ingotCheck():
+		ingotCheck().queue_free()
 
 #Checks if player is holding an ingot, returns ingot node or false
-func ingotCheck(node):
-	for child in node.get_children():
-		if child.name == "Ingot":
+
+func ingotCheck():
+	for child in $Player.get_children():
+		if child.is_in_group("ingot"):
+
 			return child
 	return false
 

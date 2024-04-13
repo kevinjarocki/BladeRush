@@ -50,5 +50,6 @@ debug_color = Color(0.960784, 0, 0.505882, 0.419608)
 position = Vector2(622, 401)
 
 [node name="AnvilGame" parent="." instance=ExtResource("2_vq7so")]
+visible = false
 
 [connection signal="interacted" from="Player" to="." method="_on_player_interacted"]

@@ -1,98 +1,11 @@
-[gd_scene load_steps=23 format=3 uid="uid://exotdqgxx2rx"]
+[gd_scene load_steps=9 format=3 uid="uid://cab2q7cer6567"]
 
 [ext_resource type="Script" path="res://ShopManager.gd" id="1_07efy"]
-[ext_resource type="Texture2D" uid="uid://bw1av66vqn0xt" path="res://Assets/Sprites/ShopScene/interiorObjects_.png" id="2_5dr7r"]
-[ext_resource type="Texture2D" uid="uid://c7dy663eukit2" path="res://Assets/Sprites/ShopScene/furnace_.png" id="3_x31ue"]
+[ext_resource type="PackedScene" uid="uid://c2foh3xf7xqox" path="res://ore_box.tscn" id="2_lioss"]
+[ext_resource type="PackedScene" uid="uid://e5cetnbk6s3o" path="res://forge.tscn" id="3_oi4xx"]
+[ext_resource type="PackedScene" uid="uid://b050eg4ti6ipn" path="res://anvil.tscn" id="4_aakto"]
 [ext_resource type="Texture2D" uid="uid://dgvx3do8qxc35" path="res://Assets/Sprites/ShopScene/stallObjects_.png" id="4_kseq3"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wqsir"]
-size = Vector2(15.0909, 25.7333)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7nix2"]
-size = Vector2(9.88312, 14.3333)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wh547"]
-atlas = ExtResource("3_x31ue")
-region = Rect2(18, 14, 28, 47)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2cset"]
-atlas = ExtResource("3_x31ue")
-region = Rect2(18, 62, 28, 47)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xa4lm"]
-atlas = ExtResource("3_x31ue")
-region = Rect2(50, 62, 28, 47)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hydf5"]
-atlas = ExtResource("3_x31ue")
-region = Rect2(82, 62, 28, 47)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cvrgv"]
-atlas = ExtResource("3_x31ue")
-region = Rect2(114, 62, 28, 47)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_aae0b"]
-atlas = ExtResource("3_x31ue")
-region = Rect2(18, 110, 28, 47)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_btfdh"]
-atlas = ExtResource("3_x31ue")
-region = Rect2(50, 110, 28, 47)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dad18"]
-atlas = ExtResource("3_x31ue")
-region = Rect2(82, 110, 28, 47)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_isc77"]
-atlas = ExtResource("3_x31ue")
-region = Rect2(114, 110, 28, 47)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_0qlsy"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wh547")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2cset")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xa4lm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hydf5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cvrgv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_aae0b")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_btfdh")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dad18")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_isc77")
-}],
-"loop": true,
-"name": &"default",
-"speed": 0.0
-}]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kit3j"]
-size = Vector2(30.4211, 46.4097)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nn4i7"]
-size = Vector2(26, 35.5507)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_l1pib"]
-size = Vector2(20, 24.8365)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pav70"]
-size = Vector2(13.2583, 12.9598)
+[ext_resource type="PackedScene" uid="uid://devtoi3ah4vy2" path="res://Player.tscn" id="5_lp5dw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hmlun"]
 size = Vector2(20, 25.8397)
@@ -103,72 +16,12 @@ size = Vector2(14.6738, 14.2557)
 [node name="Shop" type="Node2D"]
 script = ExtResource("1_07efy")
 
-[node name="OreBox" type="Sprite2D" parent="."]
-texture_filter = 5
-position = Vector2(344, 101)
-scale = Vector2(9.625, 7.5)
-texture = ExtResource("2_5dr7r")
-region_enabled = true
-region_rect = Rect2(145.638, 62.092, 12.7023, 16.6211)
+[node name="OreBox" parent="." instance=ExtResource("2_lioss")]
 
-[node name="Area2D" type="Area2D" parent="OreBox"]
+[node name="Forge" parent="." instance=ExtResource("3_oi4xx")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="OreBox/Area2D"]
-position = Vector2(0, 1.4)
-scale = Vector2(1, 1)
-shape = SubResource("RectangleShape2D_wqsir")
-
-[node name="RigidBody2D" type="RigidBody2D" parent="OreBox"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="OreBox/RigidBody2D"]
-position = Vector2(0.149353, -0.366667)
-scale = Vector2(1, 1)
-shape = SubResource("RectangleShape2D_7nix2")
-debug_color = Color(0.933333, 0.188235, 0.443137, 0.419608)
-
-[node name="Forge" type="AnimatedSprite2D" parent="."]
-texture_filter = 5
-position = Vector2(494, -54)
-scale = Vector2(4.75, 4.54)
-sprite_frames = SubResource("SpriteFrames_0qlsy")
-centered = false
-
-[node name="Area2D" type="Area2D" parent="Forge"]
-input_pickable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Forge/Area2D"]
-position = Vector2(14.5263, 34.7247)
-shape = SubResource("RectangleShape2D_kit3j")
-
-[node name="RigidBody2D" type="RigidBody2D" parent="Forge"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Forge/RigidBody2D"]
-position = Vector2(14.3684, 29.3612)
-shape = SubResource("RectangleShape2D_nn4i7")
-debug_color = Color(0.937255, 0.129412, 0.541176, 0.419608)
-
-[node name="Anvil" type="Sprite2D" parent="."]
-texture_filter = 5
-position = Vector2(790, 108)
-scale = Vector2(9.20291, 7.77083)
-texture = ExtResource("2_5dr7r")
-region_enabled = true
-region_rect = Rect2(96.4317, 64.1198, 13.8177, 12.7023)
-
-[node name="Area2D" type="Area2D" parent="Anvil"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Anvil/Area2D"]
-position = Vector2(0, -0.707773)
-scale = Vector2(1, 1)
-shape = SubResource("RectangleShape2D_l1pib")
-
-[node name="RigidBody2D" type="RigidBody2D" parent="Anvil"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Anvil/RigidBody2D"]
-position = Vector2(-0.107872, -0.64343)
-scale = Vector2(1, 1)
-shape = SubResource("RectangleShape2D_pav70")
-debug_color = Color(0.980392, 0, 0.368627, 0.419608)
+[node name="Anvil" parent="." instance=ExtResource("4_aakto")]
+position = Vector2(824, 185)
 
 [node name="CashRegister" type="Sprite2D" parent="."]
 texture_filter = 5
@@ -182,13 +35,16 @@ region_rect = Rect2(40.431, 87.2699, 14.7292, 15.2698)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CashRegister/Area2D"]
 position = Vector2(0, -2.91986)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_hmlun")
 
 [node name="RigidBody2D" type="RigidBody2D" parent="CashRegister"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CashRegister/RigidBody2D"]
 position = Vector2(0.149733, 0.633587)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_lui1a")
 debug_color = Color(0.960784, 0, 0.505882, 0.419608)
+
+[node name="Player" parent="." instance=ExtResource("5_lp5dw")]
+position = Vector2(622, 401)
+
+[connection signal="interacted" from="Player" to="." method="_on_player_interacted"]

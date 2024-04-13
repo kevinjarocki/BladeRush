@@ -1,4 +1,5 @@
-extends Area2D
+
+extends CharacterBody2D
 
 signal interacted(station)
 
@@ -10,13 +11,13 @@ var screen_size
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport_rect().size
-	$AnimatedSprite2D.play()
+	$Area2D/AnimatedSprite2D.play()
 	#hide()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	var velocity = Vector2.ZERO #instantiating player and setting vel to 0 to start, this creates it as a vector
+	velocity = Vector2.ZERO
 	if Input.is_action_pressed("move_right"):
 		velocity.x += 1
 	if Input.is_action_pressed("move_left"):
@@ -29,7 +30,7 @@ func _process(delta):
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
 	
-	position += velocity * delta
+	move_and_slide()
 	position = position.clamp(Vector2.ZERO, screen_size)
 	
 	if Input.is_action_just_pressed("interact"):
@@ -37,15 +38,15 @@ func _process(delta):
 		
 	
 	if velocity.x != 0:
-		$AnimatedSprite2D.animation = "walk"
-		$AnimatedSprite2D.flip_v = false
-		$AnimatedSprite2D.flip_h = velocity.x < 0
+		$Area2D/AnimatedSprite2D.animation = "walk"
+		$Area2D/AnimatedSprite2D.flip_v = false
+		$Area2D/AnimatedSprite2D.flip_h = velocity.x < 0
 	elif velocity.y < 0:
-		$AnimatedSprite2D.animation = "up"
+		$Area2D/AnimatedSprite2D.animation = "up"
 	elif velocity.y > 0:
-		$AnimatedSprite2D.animation = "down"
+		$Area2D/AnimatedSprite2D.animation = "down"
 	else:
-		$AnimatedSprite2D.animation = "Idle"
+		$Area2D/AnimatedSprite2D.animation = "Idle"
 
 
 func start(pos):
@@ -53,9 +54,10 @@ func start(pos):
 	show()
 	$CollisionShape2D.disabled = false
 
-
-func _on_body_entered(body):
+func _on_area_2d_body_entered(body):
 	station = body
+	print("signal entry triggered")
 
-func _on_body_exited(body):
+
+func _on_area_2d_body_exited(body):
 	station = null

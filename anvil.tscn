@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://b050eg4ti6ipn"]
+
+[ext_resource type="Texture2D" uid="uid://bw1av66vqn0xt" path="res://Assets/Sprites/ShopScene/interiorObjects_.png" id="1_s5en6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l1pib"]
+size = Vector2(20, 24.8365)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ov7ng"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pav70"]
+size = Vector2(11.3008, 12.1421)
+
+[node name="Anvil" type="Sprite2D"]
+texture_filter = 5
+scale = Vector2(9.20291, 7.77083)
+texture = ExtResource("1_s5en6")
+region_enabled = true
+region_rect = Rect2(96.4317, 64.1198, 13.8177, 12.7023)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -0.707773)
+shape = SubResource("RectangleShape2D_l1pib")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_ov7ng")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -0.234581)
+shape = SubResource("RectangleShape2D_pav70")
+debug_color = Color(0.980392, 0, 0.368627, 0.419608)

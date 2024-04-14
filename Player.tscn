@@ -1,7 +1,8 @@
-[gd_scene load_steps=24 format=3 uid="uid://devtoi3ah4vy2"]
+[gd_scene load_steps=31 format=3 uid="uid://devtoi3ah4vy2"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_g1068"]
 [ext_resource type="Texture2D" uid="uid://dyh7wr01ij1g2" path="res://Assets/Tiny Swords/Tiny Swords (Update 010)/Factions/Knights/Troops/Warrior/Blue/Warrior_Blue.png" id="2_u1xoe"]
+[ext_resource type="Texture2D" uid="uid://dpjpqh73a8uds" path="res://Assets/Tiny Swords/Tiny Swords (Update 010)/Factions/Knights/Troops/Warrior/Red/BlackSmith.png" id="3_yvduj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fl4ui"]
 radius = 33.0
@@ -42,6 +43,30 @@ region = Rect2(192, 768, 192, 192)
 [sub_resource type="AtlasTexture" id="AtlasTexture_chjno"]
 atlas = ExtResource("2_u1xoe")
 region = Rect2(384, 768, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i8dmr"]
+atlas = ExtResource("3_yvduj")
+region = Rect2(0, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0l7cu"]
+atlas = ExtResource("3_yvduj")
+region = Rect2(192, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_woqt5"]
+atlas = ExtResource("3_yvduj")
+region = Rect2(384, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7an5v"]
+atlas = ExtResource("3_yvduj")
+region = Rect2(576, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sra0x"]
+atlas = ExtResource("3_yvduj")
+region = Rect2(768, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6s4vb"]
+atlas = ExtResource("3_yvduj")
+region = Rect2(960, 384, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f8inx"]
 atlas = ExtResource("2_u1xoe")
@@ -120,6 +145,29 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_i8dmr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0l7cu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_woqt5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7an5v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sra0x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6s4vb")
+}],
+"loop": true,
+"name": &"swing",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_f8inx")
 }, {
 "duration": 1.0,
@@ -175,7 +223,8 @@ shape = SubResource("CapsuleShape2D_fl4ui")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D"]
 sprite_frames = SubResource("SpriteFrames_coupt")
-animation = &"down"
+animation = &"swing"
+frame_progress = 0.627693
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
 position = Vector2(0, 18.39)

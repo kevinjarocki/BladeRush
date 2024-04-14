@@ -11,11 +11,12 @@ var recipe = []
 var stage = 0
 var materialProperties = {
 	"name" : "tin",
-	"maxTemp" : 1500, 
 	"coolRate" : 10, 
 	"heatRate" : 25, 
 	"idealTemp": 1000, 
-	"idealTempRange": 500
+	"idealTempRange": 500,
+	"valueMod": 6,
+	"cost": 1
 	}
 
 # Called when the node enters the scene tree for the first time.

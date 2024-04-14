@@ -9,10 +9,10 @@ var recipeBook = {
 }
 
 var materialBook = {
-	"tin" : {"maxTemp" : 1500, "coolRate" : 10, "heatRate" : 25, "idealTemp": 1000, "idealTempRange": 500},
-	"iron" : {"maxTemp" : 2200, "coolRate" : 8, "heatRate" : 25, "idealTemp": 1600, "idealTempRange": 300},
-	"bronze" : {"maxTemp" : 2600, "coolRate" : 4, "heatRate" : 25, "idealTemp": 2000, "idealTempRange": 500},
-	"gold": {"maxTemp" : 1000, "coolRate" : 25, "heatRate" : 50, "idealTemp": 700, "idealTempRange": 200}
+	"tin" : {"coolRate" : 10, "heatRate" : 25, "idealTemp": 1000, "idealTempRange": 500, "valueMod": 1, "cost": 1},
+	"iron" : {"coolRate" : 8, "heatRate" : 25, "idealTemp": 1600, "idealTempRange": 300, "valueMod": 2, "cost": 1},
+	"bronze" : {"coolRate" : 4, "heatRate" : 25, "idealTemp": 2000, "idealTempRange": 500, "valueMod": 4, "cost": 1},
+	"gold": {"coolRate" : 25, "heatRate" : 50, "idealTemp": 700, "idealTempRange": 200, "valueMod": 6, "cost": 1}
 }
 
 func _on_player_interacted(station):

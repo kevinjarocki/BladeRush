@@ -8,4 +8,13 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	
 	pass
+
+
+
+func _on_ingot_temperature_broadcast(temp, maxTemp):
+	#rint(temp)
+	#$ProgressBar.value = temp
+	#$ProgressBar.max_value = maxTemp
+	pass # Replace with function body.

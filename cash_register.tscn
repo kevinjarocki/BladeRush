@@ -20,7 +20,6 @@ region_rect = Rect2(40.431, 87.2699, 14.7292, 15.2698)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, -3.95993)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_hmlun")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://7nch364v2svb"]
+[gd_scene load_steps=9 format=3 uid="uid://7nch364v2svb"]
 
 [ext_resource type="Script" path="res://Ingot.gd" id="1_iac0r"]
 [ext_resource type="Texture2D" uid="uid://cimw46c1oonm0" path="res://Assets/Ingot&Ore_Kit/Ingot/Ingot Blue 4.png" id="1_w3osd"]
@@ -43,11 +43,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_t1o80"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d1cr4"]
 size = Vector2(166, 78)
 
 [node name="Ingot" type="Node2D" groups=["ingot"]]
-
 scale = Vector2(0.25, 0.25)
 script = ExtResource("1_iac0r")
 temperature = -430
@@ -63,3 +62,10 @@ offset_right = 75.0
 offset_bottom = 95.0
 rotation = -0.628319
 color = Color(0.32549, 0, 0, 0.796078)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-3.99999, -4)
+rotation = -0.628319
+shape = SubResource("RectangleShape2D_d1cr4")

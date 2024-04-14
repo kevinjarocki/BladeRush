@@ -27,12 +27,15 @@ func _on_player_interacted(station):
 		print("No station nearby")
 	
 func playerAtAnvil():
-	$Player.freeze()
-	var IngotNode = ingotCheck()
-	IngotNode.recipe = recipeBook[IngotNode.recipeName]
-	$AnvilGame.summonMinigame(ingotCheck())
-	$Player.unFreeze()
-	print("here")
+	if (ingotCheck()):
+		$Player.freeze()
+		var IngotNode = ingotCheck()
+		IngotNode.recipe = recipeBook[IngotNode.recipeName]
+		$AnvilGame.summonMinigame(ingotCheck())
+		$Player.unFreeze()
+		print("here")
+	else:
+		print("no ingot")
 	
 func playerAtForge():
 	

@@ -15,8 +15,6 @@ var screen_size
 func _ready():
 	screen_size = get_viewport_rect().size
 	$Area2D/AnimatedSprite2D.play()
-	#hide()
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -39,8 +37,6 @@ func _process(delta):
 		
 		if Input.is_action_just_pressed("interact"):
 			interacted.emit(station)
-			
-			
 		
 		if velocity.x != 0:
 			$Area2D/AnimatedSprite2D.animation = "walk"
@@ -51,17 +47,17 @@ func _process(delta):
 		elif velocity.y > 0:
 			$Area2D/AnimatedSprite2D.animation = "down"
 		if station:
-			if station.owner.name == "Anvil":
-				$Area2D/AnimatedSprite2D.animation = "swing"
-			if station.owner.name == "Forge":
-				$Area2D/AnimatedSprite2D.animation = "swing"
-			if station.owner.name == "OreBox":
-				$Area2D/AnimatedSprite2D.animation = "swing"
-			if station.owner.name == "CashRegister":
-				$Area2D/AnimatedSprite2D.animation = "swing"
+			if station.owner:
+				if station.owner.name == "Anvil":
+					$Area2D/AnimatedSprite2D.animation = "swing"
+				if station.owner.name == "Forge":
+					$Area2D/AnimatedSprite2D.animation = "swing"
+				if station.owner.name == "OreBox":
+					$Area2D/AnimatedSprite2D.animation = "swing"
+				if station.owner.name == "CashRegister":
+					$Area2D/AnimatedSprite2D.animation = "swing"
 		else:
 			$Area2D/AnimatedSprite2D.animation = "Idle"
-
 
 func start(pos):
 	position = pos
@@ -74,7 +70,9 @@ func _on_area_2d_body_entered(body):
 
 func _on_area_2d_body_exited(body):
 	station = null
-	departed.emit(body)
+	if body.owner:
+		if body.owner.name == "Anvil":
+			departed.emit(body)
 	
 func freeze():
 	isFrozen = true

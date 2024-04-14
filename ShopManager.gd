@@ -162,9 +162,9 @@ func createCustomer():
 func _on_anvil_game_game_complete_signal():
 	$AnvilGame.hide()
 
-func _input(event):
-	if Input.is_action_just_pressed("click"):
-		print(event.get_position())
+#func _input(event):
+	#if Input.is_action_just_pressed("click"):
+		#print(event.get_position())
 
 func _on_button_pressed():
 	createCustomer()

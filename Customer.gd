@@ -28,7 +28,6 @@ func _process(delta):
 	if Input.is_action_just_pressed("interact"):
 		interacted.emit(station)
 		
-	
 	if velocity.x != 0:
 		$Area2D/AnimatedSprite2D.animation = "Walk_Hands_Down"
 		$Area2D/AnimatedSprite2D.flip_v = false

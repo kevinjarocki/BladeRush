@@ -30,7 +30,7 @@ func _process(delta):
 	$ColorRect.set_color(MetalGlow)
 	
 	if isForge:
-		if temperature < materialProperties["maxTemp"]:
+		if temperature < 15000:
 			temperature += materialProperties["heatRate"]
 	else:
 		if temperature > 0:

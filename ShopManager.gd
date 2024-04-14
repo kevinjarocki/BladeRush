@@ -55,9 +55,9 @@ var materialBook = {
 }
 
 func _on_ingot_temperature_broadcast(temp, maxTemp):
-	print(temp)
-	$ProgressBar.value = temp
-	#$ProgressBar.max_value = maxTemp
+
+	$"GUI HUD/ProgressBar".value = temp
+	
 	pass # Replace with function body.
 
 func _process(delta):

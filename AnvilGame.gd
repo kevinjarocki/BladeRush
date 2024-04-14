@@ -9,6 +9,7 @@ var gameCompletedBool = false
 var recipeTool = false
 var tempRecipeArray = []
 var instanceCounter = 0
+var instanceBudget = 1
 
 signal gameCompleteSignal
 
@@ -17,6 +18,7 @@ func _ready():
 	hide()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	
 	pass
 	
 func _input(event):
@@ -42,8 +44,10 @@ func summonMinigame(instance):
 	if (ingotInstance.stage < ingotInstance.recipe.size()):
 		gameCompletedBool = false
 		show()
-		nextClick = clickTarget.instantiate()
-		instanceCounter += 1
+		if instanceBudget > 0:
+			nextClick = clickTarget.instantiate()
+			instanceCounter += 1
+			instanceBudget -= 1
 		nextClick.position = ingotInstance.recipe[ingotInstance.stage]
 		add_child(nextClick)
 	else:
@@ -54,9 +58,7 @@ func summonMinigame(instance):
 func _on_button_pressed():
 	recipeTool = true
 
-
 func _on_player_departed(body):
-	if body.owner.name == "Anvil" and !gameCompletedBool and instanceCounter > 0:
-		nextClick.killInstance()
+	if !gameCompletedBool and instanceCounter > 0:
 		instanceCounter = 0
 	hide()

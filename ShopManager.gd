@@ -54,9 +54,9 @@ var materialBook = {
 	"gold": {"coolRate" : 25, "heatRate" : 50, "idealTemp": 700, "idealTempRange": 200, "valueMod": 6, "cost": 1}
 }
 func _on_ingot_temperature_broadcast(temp, maxTemp):
-	print(temp)
-	$ProgressBar.value = temp
-	#$ProgressBar.max_value = maxTemp
+
+	$"GUI HUD/ProgressBar".value = temp
+	
 	pass # Replace with function body.
 
 func _process(delta):

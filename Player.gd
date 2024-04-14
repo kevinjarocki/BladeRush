@@ -73,7 +73,7 @@ func _on_area_2d_body_entered(body):
 	print(station.name)
 
 func _on_area_2d_body_exited(body):
-	station = false
+	station = null
 	departed.emit(body)
 	
 func freeze():

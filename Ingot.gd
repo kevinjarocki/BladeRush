@@ -9,6 +9,14 @@ var timeLeftHeated = 30.0;
 var isForge = false
 var recipe = []
 var stage = 0
+var materialProperties = {
+	"name" : "tin",
+	"maxTemp" : 1500, 
+	"coolRate" : 10, 
+	"heatRate" : 25, 
+	"idealTemp": 1000, 
+	"idealTempRange": 500
+	}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -24,11 +32,8 @@ func _process(delta):
 	$ColorRect.set_color(MetalGlow)
 	
 	if isForge:
-		if temperature < 9000:
-			temperature += 25
-		
+		if temperature < materialProperties["maxTemp"]:
+			temperature += materialProperties["heatRate"]
 	else:
-		if temperature > 0: temperature -= 10
-	
-	pass
+		if temperature > 0: temperature -= materialProperties["coolRate"]
 

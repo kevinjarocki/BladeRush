@@ -5,7 +5,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fl4ui"]
 radius = 33.0
-height = 88.0
+height = 72.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kk7fc"]
 atlas = ExtResource("2_vcp4i")
@@ -221,7 +221,7 @@ animations = [{
 radius = 12.0
 height = 34.0
 
-[node name="Customer" type="CharacterBody2D"]
+[node name="Customer" type="CharacterBody2D" groups=["customer"]]
 motion_mode = 1
 platform_floor_layers = 4294936576
 platform_wall_layers = 1

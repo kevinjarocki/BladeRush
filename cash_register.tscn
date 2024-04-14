@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dgvx3do8qxc35" path="res://Assets/Sprites/ShopScene/stallObjects_.png" id="1_pjgru"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hmlun"]
-size = Vector2(20, 25.8397)
+size = Vector2(20, 23.7596)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lui1a"]
 size = Vector2(14.6738, 14.2557)
@@ -19,7 +19,8 @@ region_rect = Rect2(40.431, 87.2699, 14.7292, 15.2698)
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, -2.91986)
+position = Vector2(0, -3.95993)
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_hmlun")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]

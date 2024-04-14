@@ -54,6 +54,6 @@ func _on_button_pressed():
 
 
 func _on_player_departed(body):
-	if body.owner.name == "Anvil" and !gameCompletedBool:
+	if body.owner.name == "Anvil" and !gameCompletedBool and nextClick != InstancePlaceholder:
 		nextClick.killInstance()
 	hide()

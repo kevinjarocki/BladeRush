@@ -4,6 +4,7 @@ extends CharacterBody2D
 signal interacted(station)
 
 var station = Area2D
+var want = "dagger"
 
 @export var speed = 400
 
@@ -12,10 +13,7 @@ var screen_size
 func _ready():
 	screen_size = get_viewport_rect().size
 	$Area2D/AnimatedSprite2D.play()
-	#hide()
 	
-
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	velocity = Vector2.ZERO
@@ -60,9 +58,6 @@ func _on_area_2d_body_exited(body):
 func ExitShop():
 	$Timer.start()
 	velocity.x = -1
-
-	
-
 
 func _on_timer_timeout():
 	queue_free()

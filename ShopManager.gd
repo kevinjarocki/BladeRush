@@ -53,6 +53,7 @@ var materialBook = {
 	"bronze" : {"coolRate" : 4, "heatRate" : 25, "idealTemp": 2000, "idealTempRange": 500, "valueMod": 4, "cost": 1},
 	"gold": {"coolRate" : 25, "heatRate" : 50, "idealTemp": 700, "idealTempRange": 200, "valueMod": 6, "cost": 1}
 }
+
 func _on_ingot_temperature_broadcast(temp, maxTemp):
 
 	$"GUI HUD/ProgressBar".value = temp
@@ -102,7 +103,7 @@ func playerAtForge():
 	var query := PhysicsPointQueryParameters2D.new()
 	query.collide_with_areas = true
 	query.collide_with_bodies = false
-	query.position = $Anvil.position + Vector2(-270,30)
+	query.position = $Anvil.position + Vector2(-270,24)
 	var space = get_world_2d().direct_space_state
 	
 	for x in get_world_2d().direct_space_state.intersect_point(query):
@@ -124,7 +125,6 @@ func playerAtForge():
 		ingotNode.position = $Anvil.position + Vector2(-270,30)
 		ingotNode.isForge = true
 		$Forge.play()
-			
 			
 	else:
 		print("Nothing to do, player does not have ingot")
@@ -152,5 +152,21 @@ func ingotCheck():
 			return child
 	return false
   
+func createCustomer():
+	var item = load("res://Customer.tscn").instantiate()
+	add_child(item)
+	item.position = Vector2(172,580)
+	item.speed = 100
+	item.want = randi_range(0, recipeBook.size()-1)
+	print(item.want)
+
 func _on_anvil_game_game_complete_signal():
 	$AnvilGame.hide()
+
+func _input(event):
+	if Input.is_action_just_pressed("click"):
+		print(event.get_position())
+		
+func _on_button_pressed():
+	createCustomer()
+	pass # Replace with function body.

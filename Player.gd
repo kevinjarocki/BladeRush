@@ -1,7 +1,9 @@
 
 extends CharacterBody2D
 
+
 signal interacted(station)
+signal departed(body)
 
 var station = Area2D
 var isFrozen = false
@@ -38,6 +40,7 @@ func _process(delta):
 		if Input.is_action_just_pressed("interact"):
 			interacted.emit(station)
 			
+			
 		
 		if velocity.x != 0:
 			$Area2D/AnimatedSprite2D.animation = "walk"
@@ -47,6 +50,8 @@ func _process(delta):
 			$Area2D/AnimatedSprite2D.animation = "up"
 		elif velocity.y > 0:
 			$Area2D/AnimatedSprite2D.animation = "down"
+		elif station.owner.name == "Anvil":
+			$Area2D/AnimatedSprite2D.animation = "swing"
 		else:
 			$Area2D/AnimatedSprite2D.animation = "Idle"
 
@@ -60,7 +65,8 @@ func _on_area_2d_body_entered(body):
 	station = body
 
 func _on_area_2d_body_exited(body):
-	station = null
+	station = null	
+	departed.emit(body)
 	
 func freeze():
 	isFrozen = true

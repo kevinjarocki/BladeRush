@@ -17,10 +17,11 @@ func _input(event):
 
 
 func _on_button_pressed():
+	tempRecipeArray.pop_back()
 	recipeTool = !recipeTool
 	if !recipeTool:
 		print("[")
 		for x in tempRecipeArray:
-			print("Vector2D",x)
+			print("Vector2",x,",")
 		print("]")
 

@@ -1,7 +1,6 @@
 extends Node2D
 
-@export var temperature = 0;
-
+var temperature = 0;
 var quality = 100;
 var isCompleted = false;
 var recipeName = "dagger"; #i.e Could be "Longsword"
@@ -11,13 +10,13 @@ var recipe = []
 var stage = 0
 var materialProperties = {
 	"name" : "tin",
-	"maxTemp" : 1500, 
+	"maxTemp" : 15000, 
 	"coolRate" : 10, 
 	"heatRate" : 25, 
 	"idealTemp": 1000, 
 	"idealTempRange": 500
 	}
-
+signal temperatureBroadcast(temp, maxTemp)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	print($ColorRect.color)
@@ -28,12 +27,15 @@ func _process(delta):
 	var WhiteHot = Color(0.229,0.202,0.002,0.250)
 	var ColdMetal = Color(0.0150,0,0,0.198)
 	var MetalGlow = ColdMetal + Color(.146/500 * temperature, .202/2000*temperature, .002/1000*temperature, .100/1000*temperature)
-	#print(MetalGlow)
 	$ColorRect.set_color(MetalGlow)
 	
 	if isForge:
 		if temperature < materialProperties["maxTemp"]:
 			temperature += materialProperties["heatRate"]
 	else:
-		if temperature > 0: temperature -= materialProperties["coolRate"]
+		if temperature > 0:
+			temperature -= materialProperties["coolRate"]
+	temperatureBroadcast.emit(temperature, materialProperties["maxTemp"])
+
+
 

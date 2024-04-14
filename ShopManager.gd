@@ -2,6 +2,7 @@ extends Node2D
 
 @export var money = 0
 @export var minigame: PackedScene
+var ingotNode = null
 
 var recipeBook = {
 	"dagger" : [Vector2(100,100),Vector2(200,200),Vector2(150,150)],
@@ -14,6 +15,20 @@ var materialBook = {
 	"bronze" : {"maxTemp" : 2600, "coolRate" : 4, "heatRate" : 25, "idealTemp": 2000, "idealTempRange": 500},
 	"gold": {"maxTemp" : 1000, "coolRate" : 25, "heatRate" : 50, "idealTemp": 700, "idealTempRange": 200}
 }
+func _on_ingot_temperature_broadcast(temp, maxTemp):
+	print(temp)
+	$ProgressBar.value = temp
+	#$ProgressBar.max_value = maxTemp
+	pass # Replace with function body.
+
+func _process(delta):
+	if(ingotNode != null):
+		var temp = ingotNode.temperature
+		ingotNode.temperature
+		$"GUI HUD/ProgressBar".value = temp
+	else:
+		var temp = 0
+		$"GUI HUD/ProgressBar".value = temp
 
 func _on_player_interacted(station):
 	
@@ -64,7 +79,7 @@ func playerAtForge():
 			return
 	
 	if ingotCheck():
-		var ingotNode = ingotCheck()
+		ingotNode = ingotCheck()
 		$Player.remove_child(ingotNode)
 		add_child(ingotNode)
 		ingotNode.name = "Ingot"
@@ -72,19 +87,15 @@ func playerAtForge():
 		ingotNode.isForge = true
 		$Forge.play()
 			
-	else:
-		if ingotCheck():
-			var ingotNode = ingotCheck()
-			reparentNode($Anvil, $Player, ingotNode)
-			ingotNode.isForge = true
 			
-		else:
-			print("Nothing to do, player does not have ingot")
+	else:
+		print("Nothing to do, player does not have ingot")
 	
 func playerAtOreBox():
 	if !ingotCheck():
 		var item = load("res://ingot.tscn").instantiate()
 		$Player.add_child(item)
+		ingotNode = item
 		print ("Picked up ingot")
 	
 	else:
@@ -102,14 +113,6 @@ func ingotCheck():
 
 			return child
 	return false
-
-func reparentNode(newParent, oldParent, node):
-	oldParent.remove_child(node)
-	newParent.add_child(node)
-	
-	node.transform = oldParent.global_transform
   
-
-
 func _on_anvil_game_game_complete_signal():
 	$AnvilGame.hide()

@@ -10,10 +10,10 @@ var recipeBook = {
 }
 
 var materialBook = {
-	"tin" : {"maxTemp" : 1500, "coolRate" : 10, "heatRate" : 25, "idealTemp": 1000, "idealTempRange": 500},
-	"iron" : {"maxTemp" : 2200, "coolRate" : 8, "heatRate" : 25, "idealTemp": 1600, "idealTempRange": 300},
-	"bronze" : {"maxTemp" : 2600, "coolRate" : 4, "heatRate" : 25, "idealTemp": 2000, "idealTempRange": 500},
-	"gold": {"maxTemp" : 1000, "coolRate" : 25, "heatRate" : 50, "idealTemp": 700, "idealTempRange": 200}
+	"tin" : {"coolRate" : 10, "heatRate" : 25, "idealTemp": 1000, "idealTempRange": 500, "valueMod": 1, "cost": 1},
+	"iron" : {"coolRate" : 8, "heatRate" : 25, "idealTemp": 1600, "idealTempRange": 300, "valueMod": 2, "cost": 1},
+	"bronze" : {"coolRate" : 4, "heatRate" : 25, "idealTemp": 2000, "idealTempRange": 500, "valueMod": 4, "cost": 1},
+	"gold": {"coolRate" : 25, "heatRate" : 50, "idealTemp": 700, "idealTempRange": 200, "valueMod": 6, "cost": 1}
 }
 func _on_ingot_temperature_broadcast(temp, maxTemp):
 	print(temp)
@@ -64,11 +64,11 @@ func playerAtForge():
 	var query := PhysicsPointQueryParameters2D.new()
 	query.collide_with_areas = true
 	query.collide_with_bodies = false
-	query.position = Vector2(575,155)
+	query.position = $Anvil.position + Vector2(-270,30)
 	var space = get_world_2d().direct_space_state
 	
 	for x in get_world_2d().direct_space_state.intersect_point(query):
-		print(x.collider.owner.name)
+
 		if x.collider.owner.is_in_group("ingot"):
 			remove_child(x.collider.owner)
 			$Player.add_child(x.collider.owner)
@@ -83,7 +83,7 @@ func playerAtForge():
 		$Player.remove_child(ingotNode)
 		add_child(ingotNode)
 		ingotNode.name = "Ingot"
-		ingotNode.position = Vector2(575,155)
+		ingotNode.position = $Anvil.position + Vector2(-270,30)
 		ingotNode.isForge = true
 		$Forge.play()
 			

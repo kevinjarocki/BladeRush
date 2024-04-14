@@ -11,6 +11,7 @@ offset_bottom = 40.0
 script = ExtResource("2_5i8w6")
 
 [node name="Button" type="Button" parent="."]
+layout_mode = 0
 offset_left = 964.0
 offset_top = 124.0
 offset_right = 1015.0

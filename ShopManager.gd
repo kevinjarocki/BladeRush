@@ -102,7 +102,7 @@ func playerAtForge():
 	var query := PhysicsPointQueryParameters2D.new()
 	query.collide_with_areas = true
 	query.collide_with_bodies = false
-	query.position = $Anvil.position + Vector2(-270,30)
+	query.position = $Anvil.position + Vector2(-270,24)
 	var space = get_world_2d().direct_space_state
 	
 	for x in get_world_2d().direct_space_state.intersect_point(query):
@@ -124,7 +124,6 @@ func playerAtForge():
 		ingotNode.position = $Anvil.position + Vector2(-270,30)
 		ingotNode.isForge = true
 		$Forge.play()
-			
 			
 	else:
 		print("Nothing to do, player does not have ingot")
@@ -154,3 +153,4 @@ func ingotCheck():
   
 func _on_anvil_game_game_complete_signal():
 	$AnvilGame.hide()
+

@@ -34,20 +34,26 @@ func _input(event):
 			nextClick.killInstance()
 			gameCompletedBool = true
 			gameCompleteSignal.emit()
+			
 func summonMinigame(instance):
-	gameCompletedBool = false
+	
 	ingotInstance = instance
 	if (ingotInstance.stage < ingotInstance.recipe.size()):
+		gameCompletedBool = false
 		show()
 		nextClick = clickTarget.instantiate()
-		nextClick.position = ingotInstance.recipe[0]
+		nextClick.position = ingotInstance.recipe[ingotInstance.stage]
 		add_child(nextClick)
 	else:
 		hide()
 
 	#await get_tree().create_timer(1.0).timeout
 	
-
-
 func _on_button_pressed():
 	recipeTool = true
+
+
+func _on_player_departed(body):
+	if body.owner.name == "Anvil" and !gameCompletedBool:
+		nextClick.killInstance()
+	hide()

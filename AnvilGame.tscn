@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://b1qqtnco6o3b5"]
+[gd_scene load_steps=6 format=3 uid="uid://b1qqtnco6o3b5"]
 
 [ext_resource type="Script" path="res://AnvilGame.gd" id="1_3ooct"]
 [ext_resource type="PackedScene" uid="uid://bxch7joyvexmh" path="res://click_target.tscn" id="2_k18te"]
 [ext_resource type="Texture2D" uid="uid://cin7oklhjhe8s" path="res://Assets/Tiny Swords/Tiny Swords (Update 010)/UI/Banners/Banner_Horizontal.png" id="2_tk58i"]
+[ext_resource type="Texture2D" uid="uid://bhkymdrc1sxlj" path="res://Assets/weapons/axe.png" id="4_d3kt5"]
+[ext_resource type="PackedScene" uid="uid://bdnf3f3fjgnoh" path="res://recipeTool.tscn" id="5_wpmrd"]
 
 [node name="AnvilGame" type="Control"]
 layout_mode = 3
@@ -16,12 +18,24 @@ clickTarget = ExtResource("2_k18te")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
-offset_left = 285.0
-offset_top = 87.0
-offset_right = 816.0
-offset_bottom = 511.0
+offset_left = 465.0
+offset_top = 101.0
+offset_right = 706.0
+offset_bottom = 525.0
 color = Color(0.188235, 0.188235, 0.188235, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(157, 111)
 texture = ExtResource("2_tk58i")
+
+[node name="Axe" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(483, 403)
+scale = Vector2(15, 15)
+texture = ExtResource("4_d3kt5")
+
+[node name="recipeTool" parent="." instance=ExtResource("5_wpmrd")]
+offset_left = 242.506
+offset_top = 235.848
+offset_right = 282.506
+offset_bottom = 275.848

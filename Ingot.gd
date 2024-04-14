@@ -3,7 +3,7 @@ extends Node2D
 var temperature = 0;
 var quality = 100;
 var isCompleted = false;
-var recipeName = "dagger"; #i.e Could be "Longsword"
+var recipeName = "axe"; #i.e Could be "Longsword"
 var timeLeftHeated = 30.0;
 var isForge = false
 var recipe = []

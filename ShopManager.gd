@@ -6,7 +6,45 @@ var ingotNode = null
 
 var recipeBook = {
 	"dagger" : [Vector2(100,100),Vector2(200,200),Vector2(150,150)],
-	"scimtar" : [Vector2(600,100),Vector2(420,696),Vector2(337,808)]
+	"scimtar" : [Vector2(600,100),Vector2(420,696),Vector2(337,808)],
+	"axe" : 
+		[
+		Vector2(466, 236),
+		Vector2(480, 263),
+		Vector2(473, 284),
+		Vector2(454, 306),
+		Vector2(452, 309),
+		Vector2(413, 319),
+		Vector2(412, 320),
+		Vector2(397, 333),
+		Vector2(397, 334),
+		Vector2(439, 350),
+		Vector2(440, 350),
+		Vector2(504, 347),
+		Vector2(508, 347),
+		Vector2(558, 327),
+		Vector2(602, 284),
+		Vector2(603, 282),
+		Vector2(618, 250),
+		Vector2(619, 249),
+		Vector2(631, 226),
+		Vector2(593, 234),
+		Vector2(564, 229),
+		Vector2(562, 229),
+		Vector2(525, 200),
+		Vector2(525, 199),
+		Vector2(561, 245),
+		Vector2(543, 261),
+		Vector2(542, 261),
+		Vector2(512, 267),
+		Vector2(510, 267),
+		Vector2(488, 269),
+		Vector2(458, 349),
+		Vector2(570, 338),
+		Vector2(571, 338),
+		Vector2(620, 274),
+		Vector2(620, 273),
+		]
 }
 
 var materialBook = {

@@ -17,7 +17,10 @@ func _process(delta):
 	pass
 	
 func _input(event):
+	print(gameCompletedBool)
+	print(visible)
 	if (event is InputEventMouseButton and visible and Input.is_action_just_pressed("click") and not gameCompletedBool):
+		print("hi")
 		userClick = event.position
 		missDistanceVector = userClick - nextClick.position
 		missDistance = missDistanceVector.length()
@@ -34,7 +37,7 @@ func _input(event):
 			gameCompletedBool = true
 			gameCompleteSignal.emit()
 func summonMinigame(instance):
-
+	gameCompletedBool = false
 	ingotInstance = instance
 	if (ingotInstance.stage < ingotInstance.recipe.size()):
 		show()

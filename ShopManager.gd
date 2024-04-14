@@ -103,3 +103,7 @@ func reparentNode(newParent, oldParent, node):
 	
 	node.transform = oldParent.global_transform
   
+
+
+func _on_anvil_game_game_complete_signal():
+	$AnvilGame.hide()

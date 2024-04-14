@@ -33,3 +33,4 @@ visible = false
 visible = false
 
 [connection signal="interacted" from="Player" to="." method="_on_player_interacted"]
+[connection signal="gameCompleteSignal" from="AnvilGame" to="." method="_on_anvil_game_game_complete_signal"]

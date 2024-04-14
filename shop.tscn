@@ -440,7 +440,6 @@ offset_bottom = 508.0
 text = "Get Customer"
 
 [node name="TileMap" type="TileMap" parent="."]
-light_mask = 0
 tile_set = SubResource("TileSet_sq3e3")
 format = 2
 layer_0/z_index = -10

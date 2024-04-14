@@ -8,7 +8,6 @@ var ingotInstance = InstancePlaceholder
 var gameCompletedBool = false
 var recipeTool = false
 var tempRecipeArray = []
-var instanceCounter = 0
 
 signal gameCompleteSignal
 
@@ -43,7 +42,6 @@ func summonMinigame(instance):
 		gameCompletedBool = false
 		show()
 		nextClick = clickTarget.instantiate()
-		instanceCounter += 1
 		nextClick.position = ingotInstance.recipe[ingotInstance.stage]
 		add_child(nextClick)
 	else:
@@ -56,7 +54,6 @@ func _on_button_pressed():
 
 
 func _on_player_departed(body):
-	if body.owner.name == "Anvil" and !gameCompletedBool and instanceCounter > 0:
+	if body.owner.name == "Anvil" and !gameCompletedBool and nextClick != InstancePlaceholder:
 		nextClick.killInstance()
-		instanceCounter = 0
 	hide()

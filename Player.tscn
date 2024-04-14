@@ -224,8 +224,7 @@ shape = SubResource("CapsuleShape2D_fl4ui")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D"]
 sprite_frames = SubResource("SpriteFrames_coupt")
 animation = &"swing"
-frame = 4
-frame_progress = 0.713577
+frame_progress = 0.627693
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
 position = Vector2(0, 18.39)

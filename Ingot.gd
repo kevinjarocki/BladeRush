@@ -16,7 +16,6 @@ var materialProperties = {
 	"idealTemp": 1000, 
 	"idealTempRange": 500
 	}
-signal temperatureBroadcast(temp, maxTemp)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	print($ColorRect.color)
@@ -35,7 +34,7 @@ func _process(delta):
 	else:
 		if temperature > 0:
 			temperature -= materialProperties["coolRate"]
-	temperatureBroadcast.emit(temperature, materialProperties["maxTemp"])
+
 
 
 

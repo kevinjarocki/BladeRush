@@ -6,6 +6,8 @@ var userClick = Vector2(-100000,100000)
 var nextClick = InstancePlaceholder
 var ingotInstance = InstancePlaceholder
 var gameCompletedBool = false
+var recipeTool = false
+var tempRecipeArray = []
 
 signal gameCompleteSignal
 
@@ -45,3 +47,7 @@ func summonMinigame(instance):
 
 	#await get_tree().create_timer(1.0).timeout
 	
+
+
+func _on_button_pressed():
+	recipeTool = true

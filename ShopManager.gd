@@ -28,17 +28,20 @@ func _on_player_interacted(station):
 	
 func playerAtAnvil():
 	$Player.freeze()
-	var IngotNode = ingotCheck($Player)
+	var IngotNode = ingotCheck()
 	IngotNode.recipe = recipeBook[IngotNode.recipeName]
-	$AnvilGame.summonMinigame(ingotCheck($Player))
+	$AnvilGame.summonMinigame(ingotCheck())
 	$Player.unFreeze()
 	print("here")
 	
 func playerAtForge():
 	
-	if ingotCheck($Anvil) and ingotCheck($Player):
-		print("Cant add another ingot")
-
+	var query := PhysicsPointQueryParameters2D.new()
+	query.collide_with_areas = true
+	query.collide_with_bodies = false
+	query.position = Vector2(575,155)
+	var space = get_world_2d().direct_space_state
+	
 	for x in get_world_2d().direct_space_state.intersect_point(query):
 		print(x.collider.owner.name)
 		if x.collider.owner.is_in_group("ingot"):
@@ -64,8 +67,8 @@ func playerAtForge():
 			
 
 	else:
-		if ingotCheck($Player):
-			var ingotNode = ingotCheck($Player)
+		if ingotCheck():
+			var ingotNode = ingotCheck()
 			reparentNode($Anvil, $Player, ingotNode)
 			ingotNode.isForge = true
 			
@@ -73,7 +76,7 @@ func playerAtForge():
 			print("Nothing to do, player does not have ingot")
 	
 func playerAtOreBox():
-	if !ingotCheck($Player):
+	if !ingotCheck():
 		var item = load("res://ingot.tscn").instantiate()
 		$Player.add_child(item)
 		print ("Picked up ingot")

@@ -1,6 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cab2q7cer6567"]
-
-
+[gd_scene load_steps=16 format=3 uid="uid://cab2q7cer6567"]
 
 [ext_resource type="Script" path="res://ShopManager.gd" id="1_07efy"]
 [ext_resource type="PackedScene" uid="uid://c2foh3xf7xqox" path="res://ore_box.tscn" id="2_lioss"]
@@ -9,17 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://b050eg4ti6ipn" path="res://anvil.tscn" id="4_aakto"]
 [ext_resource type="PackedScene" uid="uid://bewrwdr2l45aj" path="res://cash_register.tscn" id="5_bnaeq"]
 [ext_resource type="PackedScene" uid="uid://devtoi3ah4vy2" path="res://Player.tscn" id="5_lp5dw"]
-[sub_resource type="GDScript" id="GDScript_6wcnu"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ol842"]
-bg_color = Color(0.745098, 0.462745, 0.101961, 1)
-script = SubResource("GDScript_6wcnu")
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_xsjpr"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_l1s0s"]
-texture = SubResource("CanvasTexture_xsjpr")
-modulate_color = Color(0.733333, 0, 0, 1)
 [ext_resource type="FontFile" uid="uid://d4gloc7rb6s5s" path="res://Assets/Font/vinque rg.otf" id="9_6uv7d"]
 [ext_resource type="PackedScene" uid="uid://bdnf3f3fjgnoh" path="res://recipeTool.tscn" id="9_4745i"]
 [ext_resource type="Script" path="res://GUI HUD.gd" id="9_laghi"]
@@ -413,12 +400,10 @@ script = ExtResource("9_laghi")
 
 [node name="ProgressBar" type="ProgressBar" parent="GUI HUD"]
 layout_mode = 0
-offset_left = 946.0
-offset_top = 48.0
-offset_right = 974.0
-offset_bottom = 230.0
-theme_override_styles/background = SubResource("StyleBoxFlat_ol842")
-theme_override_styles/fill = SubResource("StyleBoxTexture_l1s0s")
+offset_left = -1.0
+offset_top = 56.0
+offset_right = 81.0
+offset_bottom = 294.0
 max_value = 1500.0
 fill_mode = 3
 show_percentage = false

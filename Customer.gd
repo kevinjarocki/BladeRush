@@ -28,7 +28,6 @@ func _process(delta):
 	if Input.is_action_just_pressed("interact"):
 		interacted.emit(station)
 		
-	
 	if velocity.x != 0:
 		$Area2D/AnimatedSprite2D.animation = "Walk_Hands_Down"
 		$Area2D/AnimatedSprite2D.flip_v = false
@@ -49,7 +48,6 @@ func start(pos):
 func _on_area_2d_body_entered(body):
 	station = body
 	print("signal entry triggered")
-
 
 func _on_area_2d_body_exited(body):
 	station = null

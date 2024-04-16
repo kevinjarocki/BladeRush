@@ -73,7 +73,6 @@ func _on_player_interacted(station):
 	#If player is at an interactable station -> Go to a function for each station
 	if station:
 		print(station.owner.name)
-		
 		if station.owner.name == "Anvil":
 			playerAtAnvil()
 		elif station.owner.name == "Forge":

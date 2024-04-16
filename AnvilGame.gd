@@ -61,4 +61,6 @@ func _on_button_pressed():
 func _on_player_departed(body):
 	if !gameCompletedBool and instanceCounter > 0:
 		instanceCounter = 0
+	if gameCompletedBool:
+		instanceBudget = 1
 	hide()

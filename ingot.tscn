@@ -49,6 +49,7 @@ size = Vector2(166, 78)
 [node name="Ingot" type="Node2D" groups=["ingot"]]
 scale = Vector2(0.25, 0.25)
 script = ExtResource("1_iac0r")
+metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.308594, 0.302734)

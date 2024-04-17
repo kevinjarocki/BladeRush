@@ -369,7 +369,7 @@ minigame = ExtResource("2_vq7so")
 [node name="OreBox" parent="." instance=ExtResource("2_lioss")]
 
 [node name="Forge" parent="." instance=ExtResource("3_oi4xx")]
-position = Vector2(510, -38)
+position = Vector2(495, 1)
 
 [node name="Anvil" parent="." instance=ExtResource("4_aakto")]
 position = Vector2(845, 121)

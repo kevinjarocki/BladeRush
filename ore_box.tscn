@@ -17,6 +17,7 @@ scale = Vector2(9.625, 7.5)
 texture = ExtResource("1_uldda")
 region_enabled = true
 region_rect = Rect2(145.638, 62.092, 12.7023, 16.6211)
+metadata/_edit_group_ = true
 
 [node name="Area2D" type="Area2D" parent="."]
 

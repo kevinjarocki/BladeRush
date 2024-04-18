@@ -37,9 +37,6 @@ func _process(delta):
 
 	$Filter.self_modulate = MetalGlow
 	#$ColorRect.set_color(MetalGlow)
-	print(temperature)
-	print("filter", $Filter.self_modulate)
-	print("base", $AnimatedSprite2D.self_modulate)
 	if isForge:
 		if temperature < 8000:
 			temperature += materialProperties["heatRate"]

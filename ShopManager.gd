@@ -123,11 +123,17 @@ func playerAtForge():
 		ingotNode.position = $Anvil.position + Vector2(-270,30)
 		ingotNode.isForge = true
 		$Forge.play()
+		$Fire.play()
 			
 	else:
 		print("Nothing to do, player does not have ingot")
 	
 func playerAtOreBox():
+	
+	print("still interacting")
+	$OreBox.play()
+	$Ferret.play()
+	$Dirt.play()
 	if !ingotCheck():
 		var item = load("res://ingot.tscn").instantiate()
 		$Player.add_child(item)
@@ -168,3 +174,14 @@ func _on_anvil_game_game_complete_signal():
 func _on_button_pressed():
 	createCustomer()
 	pass # Replace with function body.
+
+
+func _on_ore_box_animation_looped():
+	print("loop anim")
+	$OreBox.pause()
+	
+
+
+func _on_ore_box_animation_finished(Start):
+	print("fninshedm")
+	$OreBox.pause()

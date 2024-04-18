@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://b050eg4ti6ipn"]
 
-[ext_resource type="Texture2D" uid="uid://cwaciop3hck2r" path="res://Assets/Shareef/Anvil.png" id="1_qradj"]
+[ext_resource type="Texture2D" path="res://Assets/Shareef/Anvil.png" id="1_qradj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l1pib"]
 size = Vector2(200.333, 163.4)

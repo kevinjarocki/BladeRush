@@ -10,6 +10,7 @@ var recipeTool = false
 var tempRecipeArray = []
 var instanceCounter = 0
 var instanceBudget = 1
+var mouseLocation = Vector2.ZERO
 
 signal gameCompleteSignal
 
@@ -18,12 +19,13 @@ func _ready():
 	hide()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	
 	pass
 	
 func _input(event):
-
+	#print(event.position)
 	if (event is InputEventMouseButton and visible and Input.is_action_just_pressed("click") and not gameCompletedBool):
+		$AnimatedSprite2D.play()
+		$Ping.play()
 		userClick = event.position
 		missDistanceVector = userClick - nextClick.position
 		missDistance = missDistanceVector.length()

@@ -101,7 +101,7 @@ func playerAtForge():
 	var query := PhysicsPointQueryParameters2D.new()
 	query.collide_with_areas = true
 	query.collide_with_bodies = false
-	query.position = $Anvil.position + Vector2(-270,24)
+	query.position = $Forge.position + Vector2(80,100)
 	var space = get_world_2d().direct_space_state
 	
 	for x in get_world_2d().direct_space_state.intersect_point(query):
@@ -120,7 +120,7 @@ func playerAtForge():
 		$Player.remove_child(ingotNode)
 		add_child(ingotNode)
 		ingotNode.name = "Ingot"
-		ingotNode.position = $Anvil.position + Vector2(-270,30)
+		ingotNode.position = $Forge.position + Vector2(80,100)
 		ingotNode.isForge = true
 		$Forge.play()
 		$Fire.play()

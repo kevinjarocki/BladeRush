@@ -44,7 +44,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d1cr4"]
-size = Vector2(166, 78)
+size = Vector2(326.435, 172.171)
 
 [node name="Ingot" type="Node2D" groups=["ingot"]]
 scale = Vector2(0.25, 0.25)
@@ -63,6 +63,6 @@ sprite_frames = SubResource("SpriteFrames_6qvr0")
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-3.99999, -4)
+position = Vector2(0.430912, -3.4069)
 rotation = -0.628319
 shape = SubResource("RectangleShape2D_d1cr4")

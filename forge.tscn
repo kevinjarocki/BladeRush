@@ -57,13 +57,11 @@ input_pickable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(96.6316, 107.34)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_kit3j")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(97.8947, 106.905)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_nn4i7")
 debug_color = Color(0.937255, 0.129412, 0.541176, 0.419608)

@@ -17,7 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://th0gdq3bowgo" path="res://Assets/Sounds/Ferret/155115__jzazvurek__ferret4.mp3" id="15_5l16s"]
 [ext_resource type="AudioStream" uid="uid://df4ym32qvy80h" path="res://Assets/Sounds/Ferret/155115__jzazvurek__ferret5.mp3" id="16_k12j5"]
 [ext_resource type="AudioStream" uid="uid://bdml4x3j8ni0w" path="res://Assets/Sounds/Ferret/477390__nuff3__steps-dirt_2a.ogg" id="17_axae4"]
-[ext_resource type="AudioStream" path="res://Assets/Sounds/214456__quaker540__hq-flamethrower-burning.wav" id="18_mw575"]
+[ext_resource type="AudioStream" uid="uid://ba8u1nix4fee7" path="res://Assets/Sounds/214456__quaker540__hq-flamethrower-burning.wav" id="18_mw575"]
 
 [sub_resource type="Theme" id="Theme_d7is4"]
 default_font = ExtResource("9_6uv7d")

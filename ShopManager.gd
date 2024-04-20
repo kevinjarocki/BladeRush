@@ -13,20 +13,21 @@ var gameFinished = false
 var recipeBook = {
 
 	"Dagger" : {"points": [Vector2(569, 139),Vector2(628, 191),Vector2(654, 237),Vector2(660, 291),Vector2(660, 293),Vector2(626, 328),Vector2(626, 329),Vector2(583, 353),Vector2(581, 354),Vector2(543, 372),Vector2(543, 373),Vector2(529, 405),Vector2(529, 407),Vector2(530, 217),Vector2(658, 471)], 
-	"name": "dagger", "perfectRange": 5, "punishRate": 10, "value" : 1},
+	"name": "dagger", "perfectRange": 5, "punishRate": 0.1, "value" : 1},
 	
 	"Scimtar" : {"points": [Vector2(553, 214),Vector2(610, 282),Vector2(515, 326),Vector2(619, 398),Vector2(534, 448)], 
-	"name": "scimtar","perfectRange": 3, "punishRate": 15, "value" : 3},
+	"name": "scimtar","perfectRange": 3, "punishRate": 0.1, "value" : 3},
 	
 	"Axe" : {"points": [Vector2(580, 508),Vector2(576, 431),Vector2(578, 365),Vector2(578, 287),Vector2(613, 492),Vector2(614, 440),Vector2(614, 391),Vector2(615, 325),Vector2(550, 266)], 
-	"name": "axe", "perfectRange": 3, "punishRate": 15, "value" : 3}
+	"name": "axe", "perfectRange": 3, "punishRate": 0.1, "value" : 3}
 }
 
 var materialBook = {
 	"Tin" : {"name": "tin", "coolRate" : 10, "heatRate" : 25, "idealTemp": 3000, "idealTempRange": 1200, "valueMod": 1, "cost": 1},
 	"Iron" : {"name": "iron", "coolRate" : 8, "heatRate" : 25, "idealTemp": 6600, "idealTempRange": 800, "valueMod": 2, "cost": 1},
 	"Bronze" : {"name": "bronze", "coolRate" : 4, "heatRate" : 25, "idealTemp": 4000, "idealTempRange": 1000, "valueMod": 4, "cost": 1},
-	"Gold": {"name": "gold", "coolRate" : 25, "heatRate" : 50, "idealTemp": 200, "idealTempRange": 1500, "valueMod": 6, "cost": 1}
+	"Gold": {"name": "gold", "coolRate" : 25, "heatRate" : 50, "idealTemp": 2000, "idealTempRange": 500, "valueMod": 6, "cost": 1}
+
 }
 
 func _process(delta):

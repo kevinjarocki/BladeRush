@@ -386,6 +386,7 @@ stream_4/weight = 1.0
 
 [node name="Shop" type="Node2D"]
 script = ExtResource("1_07efy")
+endDayTime = 60
 minigame = ExtResource("2_vq7so")
 
 [node name="OreBox" parent="." instance=ExtResource("2_lioss")]

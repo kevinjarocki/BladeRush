@@ -399,11 +399,11 @@ position = Vector2(495, 1)
 [node name="Anvil" parent="." instance=ExtResource("4_aakto")]
 position = Vector2(845, 121)
 
-[node name="CashRegister" parent="." instance=ExtResource("5_bnaeq")]
-position = Vector2(222, 367)
-
 [node name="Player" parent="." instance=ExtResource("5_lp5dw")]
 position = Vector2(622, 401)
+
+[node name="CashRegister" parent="." instance=ExtResource("5_bnaeq")]
+position = Vector2(222, 367)
 
 [node name="AnvilGame" parent="." instance=ExtResource("2_vq7so")]
 visible = false

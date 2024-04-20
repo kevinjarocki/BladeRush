@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://7nch364v2svb"]
+[gd_scene load_steps=15 format=3 uid="uid://7nch364v2svb"]
 
 [ext_resource type="Script" path="res://Ingot.gd" id="1_iac0r"]
 [ext_resource type="Texture2D" uid="uid://db52wh6xkyow2" path="res://Assets/Shareef/Ingot_Axe.png" id="2_jgmdq"]
@@ -68,8 +68,17 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d1cr4"]
 size = Vector2(31.2811, 17.7589)
 
+[sub_resource type="Gradient" id="Gradient_ietvd"]
+offsets = PackedFloat32Array(0, 0.506494)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1wrkv"]
+gradient = SubResource("Gradient_ietvd")
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.495413, 0.490826)
+
 [node name="Ingot" type="Node2D" groups=["ingot"]]
-scale = Vector2(2, 2)
 script = ExtResource("1_iac0r")
 metadata/_edit_group_ = true
 
@@ -90,3 +99,8 @@ animation = &"scimitar"
 position = Vector2(5, -4.83333)
 rotation = -1.02974
 shape = SubResource("RectangleShape2D_d1cr4")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(4.01, -3.93)
+color = Color(1, 0.831373, 0.756863, 1)
+texture = SubResource("GradientTexture2D_1wrkv")

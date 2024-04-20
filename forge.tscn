@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://e5cetnbk6s3o"]
+[gd_scene load_steps=11 format=3 uid="uid://e5cetnbk6s3o"]
 
 [ext_resource type="Texture2D" uid="uid://c23ybsu3ysp8s" path="res://Assets/Shareef/ForgeStart.png" id="1_hyjmg"]
 
@@ -44,13 +44,25 @@ size = Vector2(157.316, 214.835)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nn4i7"]
 size = Vector2(78.8947, 137.159)
 
+[sub_resource type="Gradient" id="Gradient_4v6ji"]
+offsets = PackedFloat32Array(0, 0.675325, 0.688312)
+colors = PackedColorArray(1, 1, 1, 1, 0.0660378, 0.0660378, 0.0660378, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qtmqi"]
+gradient = SubResource("Gradient_4v6ji")
+width = 300
+height = 300
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.816514, 0)
+
 [node name="Forge" type="AnimatedSprite2D"]
 texture_filter = 5
 scale = Vector2(1, 0.956)
 sprite_frames = SubResource("SpriteFrames_0qlsy")
 animation = &"Start"
 centered = false
-metadata/_edit_group_ = true
 
 [node name="Area2D" type="Area2D" parent="."]
 input_pickable = false
@@ -65,3 +77,8 @@ shape = SubResource("RectangleShape2D_kit3j")
 position = Vector2(97.8947, 106.905)
 shape = SubResource("RectangleShape2D_nn4i7")
 debug_color = Color(0.937255, 0.129412, 0.541176, 0.419608)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(99, 101.464)
+color = Color(0.635294, 0.309804, 0.054902, 1)
+texture = SubResource("GradientTexture2D_qtmqi")

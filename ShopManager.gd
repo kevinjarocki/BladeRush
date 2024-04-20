@@ -21,26 +21,28 @@ var coolingModCost = [10,12,15,20,25,35,45,50,60,80,100]
 var playerSpeedModCost = [10,12,15,20,25,35,45,50,60,80,100]
 var autoMolmolCost = 150
 
+var taxManHere = false
+
 var ingotNode = null
 var gameFinished = false
 
 var recipeBook = {
 
 	"Dagger" : {"points": [Vector2(569, 139),Vector2(628, 191),Vector2(654, 237),Vector2(660, 291),Vector2(660, 293)], 
-	"name": "dagger", "perfectRange": 5, "punishRate": 0.1, "value" : 1},
+	"name": "dagger", "perfectRange": 5, "punishRate": 0.2, "value" : 3},
 	
 	"Scimitar" : {"points": [Vector2(553, 214),Vector2(610, 282),Vector2(515, 326),Vector2(619, 398),Vector2(534, 448)], 
-	"name": "scimitar","perfectRange": 3, "punishRate": 0.1, "value" : 3},
+	"name": "scimitar","perfectRange": 3, "punishRate": 0.1, "value" : 5},
 	
 	"Axe" : {"points": [Vector2(580, 508),Vector2(576, 431),Vector2(578, 365),Vector2(578, 287),Vector2(613, 492),Vector2(614, 440),Vector2(614, 391),Vector2(615, 325),Vector2(550, 266)], 
-	"name": "axe", "perfectRange": 3, "punishRate": 0.1, "value" : 3}
+	"name": "axe", "perfectRange": 10, "punishRate": 0.5, "value" : 8}
 }
 
 var materialBook = {
 	"Tin" : {"name": "tin", "coolRate" : 10, "heatRate" : 25, "idealTemp": 7500, "idealTempRange": 1200, "valueMod": 1, "cost": 1},
 	"Iron" : {"name": "iron", "coolRate" : 8, "heatRate" : 25, "idealTemp": 6600, "idealTempRange": 800, "valueMod": 2, "cost": 1},
 	"Bronze" : {"name": "bronze", "coolRate" : 4, "heatRate" : 25, "idealTemp": 4000, "idealTempRange": 1000, "valueMod": 4, "cost": 1},
-	"Gold": {"name": "gold", "coolRate" : 25, "heatRate" : 50, "idealTemp": 2000, "idealTempRange": 500, "valueMod": 6, "cost": 1}
+	"Gold": {"name": "gold", "coolRate" : 20, "heatRate" : 50, "idealTemp": 2000, "idealTempRange": 800, "valueMod": 6, "cost": 1}
 
 }
 
@@ -70,7 +72,9 @@ func _on_player_interacted(station):
 	
 	#If player is at an interactable station -> Go to a function for each station
 	if station:
-		if station.owner.name == "Anvil":
+		if !station.owner:
+			pass
+		elif station.owner.name == "Anvil":
 			playerAtAnvil()
 		elif station.owner.name == "Forge":
 			playerAtForge()
@@ -115,7 +119,7 @@ func playerAtForge():
 		if x.collider.owner.is_in_group("ingot"):
 			remove_child(x.collider.owner)
 			$Player.add_child(x.collider.owner)
-			x.collider.owner.position = Vector2.ZERO
+			x.collider.owner.position = Vector2(20,10)
 			x.collider.owner.isForge = false
 			$Forge.pause()
 			$Forge.set_frame_and_progress(0,0)
@@ -144,6 +148,7 @@ func playerAtOreBox():
 		gameFinished = false
 		var ingotNode = load("res://ingot.tscn").instantiate()
 		$Player.add_child(ingotNode)
+		ingotNode.position = Vector2(20,10)
 		print ("Picked up ingot")
 		
 		ingotNode.recipeProperties = recipeBook[activeRecipe]
@@ -179,7 +184,8 @@ func playerAtCashRegister():
 
 			resetOrder()
 			ingotNode.queue_free()
-			
+			$CashRegister.play()
+			$CashRegister.get_node("Ding").play()
 			var query := PhysicsPointQueryParameters2D.new()
 			query.collide_with_areas = true
 			query.collide_with_bodies = false
@@ -198,6 +204,10 @@ func playerAtCashRegister():
 	elif activeRecipe == "Awaiting Order" and get_tree().get_nodes_in_group("customer"):
 		activeRecipe = recipeBook.keys()[randi_range(0, recipeBook.size()-1)]
 		activeMaterial = materialBook.keys()[randi_range(0, materialBook.size()-1)]
+	elif taxManHere:
+		activeRecipe = "Tax Man is here. Time to Pay up!"
+		activeMaterial = "Total Owed:"
+		# totalTax = 10*pwr(day,1.1)
 		
 		if autoMolmol:
 			playerAtOreBox()
@@ -225,7 +235,7 @@ func createCustomer():
 func createTaxMan():
 	var taxMan = load("res://tax_man.tscn").instantiate()
 	add_child(taxMan)
-	taxMan.position = Vector2(0,300)
+	taxMan.position = Vector2(172,580)
 	#taxMan.speed = 1
 
 func _on_anvil_game_game_complete_signal():
@@ -261,7 +271,8 @@ func _on_day_button_pressed():
 func _on_end_day_next_day_pressed():
 	day += 1
 	dayTimer = 0.00
-	createCustomer()
+	if !taxManHere:
+		createCustomer()
 	
 func _on_ready():
 	$ThwakToMainMenu.play()
@@ -289,6 +300,7 @@ func resetDay():
 		
 	resetOrder()
 	if(day % 5 == 0):
+		taxManHere = true
 		createTaxMan()
 
 func resetOrder():

@@ -408,10 +408,11 @@ position = Vector2(495, 1)
 [node name="Anvil" parent="." instance=ExtResource("4_aakto")]
 position = Vector2(845, 121)
 
-[node name="CashRegister" parent="." instance=ExtResource("5_bnaeq")]
-
 [node name="Player" parent="." instance=ExtResource("5_lp5dw")]
 position = Vector2(622, 401)
+
+[node name="CashRegister" parent="." instance=ExtResource("5_bnaeq")]
+position = Vector2(222, 367)
 
 [node name="AnvilGame" parent="." instance=ExtResource("2_vq7so")]
 visible = false
@@ -545,6 +546,12 @@ stream = ExtResource("19_p3ybx")
 [node name="TrashCan" parent="." instance=ExtResource("21_lpgaf")]
 position = Vector2(985, 309)
 scale = Vector2(0.303125, 0.303125)
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+color = Color(0.752941, 0.784314, 0.596078, 1)
+energy = 0.4
+blend_mode = 1
+shadow_enabled = true
 
 [connection signal="ready" from="." to="." method="_on_ready"]
 [connection signal="animation_finished" from="OreBox" to="." method="_on_ore_box_animation_finished1"]

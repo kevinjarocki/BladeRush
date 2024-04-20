@@ -3,7 +3,7 @@ extends Node2D
 @export var money = 0
 @export var day = 0
 @export var activeRecipe = "Awaiting Order"
-@export var activeMaterial = "Awaiting Order"
+@export var activeMaterial = ""
 @export var minigame: PackedScene
 var ingotNode = null
 var gameFinished = false
@@ -24,7 +24,7 @@ var materialBook = {
 }
 
 func _process(delta):
-	$"GUI HUD/ActiveRecipe".text = ("Active Recipe: " + str(activeRecipe))
+	$"GUI HUD/ActiveRecipe".text = ("Active Recipe: " + str(activeMaterial) + " " + str(activeRecipe))
 	$"GUI HUD/DayCount".text = ("Day " + str(day))
 	$"GUI HUD/MoneyCount".text = ("Gold: " + str(money))
 	
@@ -118,6 +118,7 @@ func playerAtOreBox():
 		$Player.add_child(item)
 		ingotNode = item
 		print ("Picked up ingot")
+		
 		var ingotNode = ingotCheck()
 		$"GUI HUD/ProgressBar/IdealHeat".size.y = ((ingotNode.materialProperties["idealTempRange"]*2)/ingotNode.maxTemp)*$"GUI HUD/ProgressBar".size.y
 		if ingotNode.materialProperties["idealTemp"] + ingotNode.materialProperties["idealTempRange"] > ingotNode.maxTemp:
@@ -131,7 +132,11 @@ func playerAtCashRegister():
 	if ingotCheck():
 		ingotCheck().queue_free()
 		money += 1
-
+		
+	elif activeRecipe == "Awaiting Order":
+		activeRecipe = recipeBook.keys()[randi_range(0, recipeBook.size()-1)]
+		activeMaterial = materialBook.keys()[randi_range(0, materialBook.size()-1)]
+		
 #Checks if player is holding an ingot, returns ingot node or false
 func ingotCheck():
 	for child in $Player.get_children():
@@ -170,15 +175,12 @@ func _on_ore_box_animation_finished(Start):
 	print("fninshedm")
 	$OreBox.pause()
 
-
 func _on_anvil_game_player_left(child):
 		remove_child(child)
 		$Player.add_child(child)
 		print($Player.get_children())
 		child.position = Vector2.ZERO
 
-
 func _on_day_button_pressed():
 	nextDay()
 	pass # Replace with function body.
-

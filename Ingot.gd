@@ -8,6 +8,13 @@ var timeLeftHeated = 30.0;
 var isForge = false
 var recipe = []
 var stage = 0
+var recipeProperties = {
+	"name" : "dagger",
+	"points": [Vector2(100,100),Vector2(200,200),Vector2(150,150)], 
+	"perfectRange": 5, 
+	"punishRate": 10, 
+	"value" : 1
+}
 var materialProperties = {
 	"name" : "tin",
 	"coolRate" : 10, 
@@ -16,7 +23,7 @@ var materialProperties = {
 	"idealTempRange": 500,
 	"valueMod": 6,
 	"cost": 1
-	}
+}
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#print($ColorRect.color)

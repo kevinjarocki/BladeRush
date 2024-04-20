@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bewrwdr2l45aj" path="res://cash_register.tscn" id="5_bnaeq"]
 [ext_resource type="PackedScene" uid="uid://devtoi3ah4vy2" path="res://Player.tscn" id="5_lp5dw"]
 [ext_resource type="FontFile" uid="uid://d4gloc7rb6s5s" path="res://Assets/Font/vinque rg.otf" id="9_6uv7d"]
-[ext_resource type="PackedScene" path="res://recipeTool.tscn" id="9_4745i"]
+[ext_resource type="PackedScene" uid="uid://bdnf3f3fjgnoh" path="res://recipeTool.tscn" id="9_4745i"]
 [ext_resource type="Script" path="res://GUI HUD.gd" id="9_laghi"]
 [ext_resource type="Texture2D" uid="uid://bbulknjel8w2a" path="res://Assets/Sprites/ShopScene/interior_.png" id="11_3pdu3"]
 [ext_resource type="AudioStream" uid="uid://btbfj47m04llr" path="res://Assets/Sounds/Ferret/155115__jzazvurek__ferret1.mp3" id="12_jdva2"]

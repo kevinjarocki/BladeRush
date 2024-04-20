@@ -62,7 +62,6 @@ metadata/_edit_group_ = true
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.308594, 0.302734)
 sprite_frames = SubResource("SpriteFrames_6qvr0")
-animation = &"coldtoHot"
 
 [node name="Filter" type="AnimatedSprite2D" parent="."]
 self_modulate = Color(0.788235, 0.678431, 0.67451, 1)

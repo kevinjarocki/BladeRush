@@ -90,10 +90,5 @@ func _on_player_departed(body):
 
 		gameStarted = false
 
-	ingotInstance.scale = Vector2(0.25,0.25)
-	remove_child(ingotInstance)
-	owner.add_child(ingotInstance)
-	playerLeft.emit(ingotInstance)
-
 	
 	hide()

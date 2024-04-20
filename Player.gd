@@ -5,7 +5,7 @@ extends CharacterBody2D
 signal interacted(station)
 signal departed(body)
 
-var station = Area2D
+var station = null
 var isFrozen = false
 
 @export var speed = 400

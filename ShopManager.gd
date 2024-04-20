@@ -10,9 +10,41 @@ var gameFinished = false
 
 var recipeBook = {
 
-	"dagger" : {"points": [Vector2(100,100),Vector2(200,200),Vector2(150,150)], "perfectRange": 5, "punishRate": 10, "value" : 1},
-	"scimtar" : {"points": [Vector2(600,100),Vector2(420,696),Vector2(337,808)], "perfectRange": 3, "punishRate": 15, "value" : 3},
-	"axe" : {"points": [Vector2(466, 236),Vector2(480, 263),Vector2(473, 284),Vector2(454, 306),Vector2(452, 309),Vector2(413, 319),Vector2(412, 320),Vector2(397, 333),Vector2(397, 334),Vector2(439, 350),Vector2(440, 350),Vector2(504, 347),Vector2(508, 347),Vector2(558, 327),Vector2(602, 284),Vector2(603, 282),Vector2(618, 250),Vector2(619, 249),Vector2(631, 226),Vector2(593, 234),Vector2(564, 229),Vector2(562, 229),Vector2(525, 200),Vector2(525, 199),Vector2(561, 245),Vector2(543, 261),Vector2(542, 261),Vector2(512, 267),Vector2(510, 267),Vector2(488, 269),Vector2(458, 349),Vector2(570, 338),Vector2(571, 338),Vector2(620, 274),Vector2(620, 273)], 
+	"dagger" : {"points": [
+Vector2(569, 139),
+Vector2(628, 191),
+Vector2(654, 237),
+Vector2(660, 291),
+Vector2(660, 293),
+Vector2(626, 328),
+Vector2(626, 329),
+Vector2(583, 353),
+Vector2(581, 354),
+Vector2(543, 372),
+Vector2(543, 373),
+Vector2(529, 405),
+Vector2(529, 407),
+Vector2(530, 217),
+Vector2(658, 471),
+], "perfectRange": 5, "punishRate": 10, "value" : 1},
+	"scimtar" : {"points": [
+		Vector2(553, 214),
+		Vector2(610, 282),
+		Vector2(515, 326),
+		Vector2(619, 398),
+		Vector2(534, 448),
+], "perfectRange": 3, "punishRate": 15, "value" : 3},
+	"axe" : {"points": [
+		Vector2(580, 508),
+		Vector2(576, 431),
+		Vector2(578, 365),
+		Vector2(578, 287),
+		Vector2(613, 492),
+		Vector2(614, 440),
+		Vector2(614, 391),
+		Vector2(615, 325),
+		Vector2(550, 266),
+], 
 		"perfectRange": 3, "punishRate": 15, "value" : 3}
 }
 
@@ -65,6 +97,7 @@ func playerAtAnvil():
 			print("take my ingot")
 			$Player.remove_child(ingotNode)
 			$AnvilGame.add_child(ingotNode)
+			$AnvilGame.move_child(ingotNode,1)
 			$AnvilGame.summonMinigame(ingotNode)
 			
 		else:

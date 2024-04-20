@@ -132,6 +132,10 @@ func playerAtOreBox():
 		ingotNode.recipeProperties = recipeBook[activeRecipe]
 		ingotNode.materialProperties = materialBook[activeMaterial]
 		
+
+		ingotNode.get_node("AnimatedSprite2D").animation = ingotNode.recipeProperties["name"]
+		ingotNode.get_node("Filter").animation = ingotNode.recipeProperties["name"]
+
 		setHeatBars()
 		
 	else:

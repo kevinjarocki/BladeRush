@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://7nch364v2svb"]
+[gd_scene load_steps=14 format=3 uid="uid://7nch364v2svb"]
 
 [ext_resource type="Script" path="res://Ingot.gd" id="1_iac0r"]
 [ext_resource type="Texture2D" uid="uid://cimw46c1oonm0" path="res://Assets/Ingot&Ore_Kit/Ingot/Ingot Blue 4.png" id="1_w3osd"]
@@ -6,7 +6,16 @@
 [ext_resource type="Texture2D" uid="uid://bm8cdevx2e7sw" path="res://Assets/Ingot&Ore_Kit/Ingot/Ingot Silver 4.png" id="2_th0rr"]
 [ext_resource type="Texture2D" uid="uid://d0fugghvi6o0c" path="res://Assets/Ingot&Ore_Kit/Ingot/Ingot Gold 4.png" id="3_2owca"]
 [ext_resource type="Texture2D" uid="uid://bmws2yp1dafx" path="res://Assets/Ingot&Ore_Kit/Ingot/Ingot Red 4.png" id="3_qynva"]
+[ext_resource type="Texture2D" uid="uid://wsjx08weifro" path="res://Assets/Shareef/dagger.png" id="6_3ku6o"]
 [ext_resource type="Texture2D" uid="uid://dg4gp6gnk1wk0" path="res://Assets/weapons/blade.png" id="7_rlxdu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tqgal"]
+atlas = ExtResource("6_3ku6o")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_61q7q"]
+atlas = ExtResource("6_3ku6o")
+region = Rect2(200, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vtc0f"]
 atlas = ExtResource("7_rlxdu")
@@ -33,6 +42,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_tqgal")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_61q7q")
+}],
+"loop": true,
+"name": &"dagger",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("2_th0rr")
 }, {
 "duration": 1.0,
@@ -52,10 +72,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d1cr4"]
-size = Vector2(326.435, 172.171)
+size = Vector2(31.2811, 17.7589)
 
 [node name="Ingot" type="Node2D" groups=["ingot"]]
-scale = Vector2(0.25, 0.25)
+scale = Vector2(2, 2)
 script = ExtResource("1_iac0r")
 metadata/_edit_group_ = true
 
@@ -67,10 +87,12 @@ sprite_frames = SubResource("SpriteFrames_6qvr0")
 self_modulate = Color(0.788235, 0.678431, 0.67451, 1)
 scale = Vector2(0.308594, 0.302734)
 sprite_frames = SubResource("SpriteFrames_6qvr0")
+animation = &"dagger"
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0.430912, -3.4069)
-rotation = -0.628319
+position = Vector2(5, -4.83333)
+rotation = -1.02974
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_d1cr4")

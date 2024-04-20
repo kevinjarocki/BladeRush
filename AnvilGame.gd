@@ -112,6 +112,7 @@ func TemptQualitySubtract():
 	print("temp mod",tempQualityMod)
 		
 func _on_player_departed(body):
+
 	if body.owner.name == "Anvil":
 		if !gameCompletedBool and instanceCounter > 0:
 			instanceCounter = 0
@@ -126,5 +127,18 @@ func _on_player_departed(body):
 
 			gameStarted = false
 
-	
+
+	hide()
+
+func abortAnvilGame():
+	if !gameCompletedBool and instanceCounter > 0:
+		instanceCounter = 0
+	if gameStarted and ingotInstance != null:
+		ingotInstance.scale = Vector2(0.25,0.25)
+		remove_child(ingotInstance)
+		owner.add_child(ingotInstance)
+		playerLeft.emit(ingotInstance)
+	if gameCompletedBool:
+		instanceBudget = 1
+		gameStarted = false
 	hide()

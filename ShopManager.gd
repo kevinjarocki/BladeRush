@@ -3,7 +3,7 @@ extends Node2D
 @export var money = 0
 @export var day = 1
 @export var dayTimer = 0.00
-@export var endDayTime = 20
+@export var endDayTime = 8000
 @export var activeRecipe = "Awaiting Order"
 @export var activeMaterial = ""
 @export var minigame: PackedScene
@@ -27,6 +27,7 @@ var materialBook = {
 	"Iron" : {"name": "iron", "coolRate" : 8, "heatRate" : 25, "idealTemp": 6600, "idealTempRange": 800, "valueMod": 2, "cost": 1},
 	"Bronze" : {"name": "bronze", "coolRate" : 4, "heatRate" : 25, "idealTemp": 4000, "idealTempRange": 1000, "valueMod": 4, "cost": 1},
 	"Gold": {"name": "gold", "coolRate" : 25, "heatRate" : 50, "idealTemp": 2000, "idealTempRange": 500, "valueMod": 6, "cost": 1}
+
 }
 
 func _process(delta):
@@ -35,7 +36,7 @@ func _process(delta):
 	dayTimer += delta
 	
 	if dayTimer > endDayTime:
-		daysDone()
+		resetDay()
 		$EndDay.endDay(day, money)
 	
 	$"GUI HUD/ActiveRecipe".text = ("Active Recipe: " + str(activeMaterial) + " " + str(activeRecipe))
@@ -131,24 +132,23 @@ func playerAtOreBox():
 		ingotNode.recipeProperties = recipeBook[activeRecipe]
 		ingotNode.materialProperties = materialBook[activeMaterial]
 		
+
 		ingotNode.get_node("AnimatedSprite2D").animation = ingotNode.recipeProperties["name"]
 		ingotNode.get_node("Filter").animation = ingotNode.recipeProperties["name"]
 
-		$"GUI HUD/ProgressBar/IdealHeat".size.y = ((ingotNode.materialProperties["idealTempRange"]*2)/ingotNode.maxTemp)*$"GUI HUD/ProgressBar".size.y
-		if ingotNode.materialProperties["idealTemp"] + ingotNode.materialProperties["idealTempRange"] > ingotNode.maxTemp:
-			pass
-		else: $"GUI HUD/ProgressBar/IdealHeat".position.y = $"GUI HUD/ProgressBar".size.y - ((ingotNode.materialProperties["idealTemp"] + ingotNode.materialProperties["idealTempRange"])/ingotNode.maxTemp)*$"GUI HUD/ProgressBar".size.y
-	
+		setHeatBars()
+		
 	else:
 		print ("Player already holding ingot")
 	
 func playerAtCashRegister():
+	
 	if ingotCheck():
+		
 		ingotNode = ingotCheck()
 		if $AnvilGame.gameCompletedBool:
 			money += int(1*ingotNode.recipeProperties["value"]*ingotNode.materialProperties["valueMod"]*(ingotNode.quality/100))
-			activeRecipe = "Awaiting Order"
-			activeMaterial = ""
+			resetOrder()
 			ingotNode.queue_free()
 			
 			var query := PhysicsPointQueryParameters2D.new()
@@ -162,6 +162,8 @@ func playerAtCashRegister():
 				if x.collider.owner.is_in_group("customer"):
 					print(x.collider)
 					x.collider.owner.ExitShop()
+					createCustomer()
+					
 		else: print("Sorry bar is not complete")
 		
 	elif activeRecipe == "Awaiting Order" and get_tree().get_nodes_in_group("customer"):
@@ -192,8 +194,7 @@ func _on_anvil_game_game_complete_signal():
 func _on_button_pressed():
 	var ingotNode = ingotCheck()
 	money += 1*ingotNode.recipeProperties["value"]*ingotNode.materialProperties["valueMod"]*(ingotNode.quality/100)
-	activeRecipe = "Awaiting Order"
-	activeMaterial = ""
+	resetOrder()
 	ingotNode.queue_free()
 
 func _on_ore_box_animation_looped():
@@ -209,14 +210,26 @@ func _on_anvil_game_player_left(child):
 		child.position = Vector2.ZERO
 
 func _on_day_button_pressed():
-	daysDone()
+	resetDay()
 	$EndDay.endDay(day, money)
 
 func _on_customer_pressed():
 	createCustomer()
 	pass # Replace with function body.
 
-func daysDone():
+func _on_end_day_next_day_pressed():
+	day += 1
+	dayTimer = 0
+	createCustomer()
+	pass # Replace with function body.
+
+func _on_ready():
+	$ThwakToMainMenu.play()
+	createCustomer()
+
+func resetDay():
+	if $AnvilGame.visible:
+		$AnvilGame.abortAnvilGame()
 	
 	if ingotCheck():
 		ingotCheck().queue_free()
@@ -233,14 +246,40 @@ func daysDone():
 			
 	for child in get_tree().get_nodes_in_group("customer"):
 		child.queue_free()
+		
+	resetOrder()
 
-func _on_end_day_next_day_pressed():
-	day += 1
-	dayTimer = 0
-	createCustomer()
-	pass # Replace with function body.
+func resetOrder():
+	
+	activeRecipe = "Awaiting Order"
+	activeMaterial = ""
+	$"GUI HUD/ProgressBar/IdealHeat".size.y = 0
+	$"GUI HUD/ProgressBar/HeatRange".size.y = 0
 
-func _on_ready():
-	$ThwakToMainMenu.play()
-	createCustomer()
+func setHeatBars():
+	
+	var idealHeat = $"GUI HUD/ProgressBar/IdealHeat"
+	var heatRange = $"GUI HUD/ProgressBar/HeatRange"
+	var ingotNode = ingotCheck()
+	
+	#Sets top of green ideal temp bar
+	if ingotNode.materialProperties["idealTemp"] + ingotNode.materialProperties["idealTempRange"] > ingotNode.maxTemp:
+		idealHeat.position.y = $"GUI HUD/ProgressBar".position.y
+	else: 
+		idealHeat.position.y = $"GUI HUD/ProgressBar".size.y - ((ingotNode.materialProperties["idealTemp"] + ingotNode.materialProperties["idealTempRange"])/ingotNode.maxTemp)*$"GUI HUD/ProgressBar".size.y
 
+	#Sets size (downwards) of ideal temp bar
+	if ingotNode.materialProperties["idealTemp"] - ingotNode.materialProperties["idealTempRange"] < 0:
+		idealHeat.size.y = $"GUI HUD/ProgressBar".size.y - idealHeat.position.y
+	else:
+		idealHeat.size.y = ((ingotNode.materialProperties["idealTempRange"]*2)/ingotNode.maxTemp)*$"GUI HUD/ProgressBar".size.y
+		
+	if ingotNode.materialProperties["idealTemp"] + ingotNode.materialProperties["idealTempRange"] + 1000 > ingotNode.maxTemp:
+		heatRange.position.y = $"GUI HUD/ProgressBar".position.y
+	else: 
+		heatRange.position.y = $"GUI HUD/ProgressBar".size.y - ((ingotNode.materialProperties["idealTemp"] + ingotNode.materialProperties["idealTempRange"] + 1000 )/ingotNode.maxTemp)*$"GUI HUD/ProgressBar".size.y
+		
+	if ingotNode.materialProperties["idealTemp"] - ingotNode.materialProperties["idealTempRange"] - 1000 < 0:
+		heatRange.size.y = $"GUI HUD/ProgressBar".size.y - heatRange.position.y
+	else:
+		heatRange.size.y = (((ingotNode.materialProperties["idealTempRange"]+1000)*2)/ingotNode.maxTemp)*$"GUI HUD/ProgressBar".size.y

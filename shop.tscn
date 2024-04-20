@@ -386,6 +386,7 @@ stream_4/weight = 1.0
 
 [node name="Shop" type="Node2D"]
 script = ExtResource("1_07efy")
+endDayTime = 60
 minigame = ExtResource("2_vq7so")
 
 [node name="OreBox" parent="." instance=ExtResource("2_lioss")]
@@ -404,7 +405,6 @@ position = Vector2(622, 401)
 
 [node name="AnvilGame" parent="." instance=ExtResource("2_vq7so")]
 visible = false
-ingotPosition = Vector2(500, -500)
 
 [node name="Button2" parent="AnvilGame" instance=ExtResource("9_4745i")]
 offset_left = 2012.0

@@ -108,7 +108,7 @@ func playerAtForge():
 		if x.collider.owner.is_in_group("ingot"):
 			remove_child(x.collider.owner)
 			$Player.add_child(x.collider.owner)
-			x.collider.owner.position = Vector2.ZERO
+			x.collider.owner.position = Vector2(20,10)
 			x.collider.owner.isForge = false
 			$Forge.pause()
 			$Forge.set_frame_and_progress(0,0)
@@ -137,6 +137,7 @@ func playerAtOreBox():
 		gameFinished = false
 		var ingotNode = load("res://ingot.tscn").instantiate()
 		$Player.add_child(ingotNode)
+		ingotNode.position = Vector2(20,10)
 		print ("Picked up ingot")
 		
 		ingotNode.recipeProperties = recipeBook[activeRecipe]

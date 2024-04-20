@@ -10,10 +10,7 @@ func _ready():
 	$Area2D/TaxManAnimatedSprite2D.play()
 
 func _process(delta):
-	#velocity = Vector2.ZERO
-	#velocity.y = 1
-	velocity.x = 1
-	
+	velocity.y = -1
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
 	

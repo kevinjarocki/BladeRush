@@ -10,6 +10,7 @@ extends Node2D
 
 @export var heatingMod = 0
 @export var coolingMod = 0
+var taxManHere = false
 
 var ingotNode = null
 var gameFinished = false
@@ -60,7 +61,9 @@ func _on_player_interacted(station):
 	
 	#If player is at an interactable station -> Go to a function for each station
 	if station:
-		if station.owner.name == "Anvil":
+		if !station.owner:
+			pass
+		elif station.owner.name == "Anvil":
 			playerAtAnvil()
 		elif station.owner.name == "Forge":
 			playerAtForge()
@@ -179,6 +182,10 @@ func playerAtCashRegister():
 	elif activeRecipe == "Awaiting Order" and get_tree().get_nodes_in_group("customer"):
 		activeRecipe = recipeBook.keys()[randi_range(0, recipeBook.size()-1)]
 		activeMaterial = materialBook.keys()[randi_range(0, materialBook.size()-1)]
+	elif taxManHere:
+		activeRecipe = "Tax Man is here. Time to Pay up!"
+		activeMaterial = "Total Owed:"
+		# totalTax = 10*pwr(day,1.1)
 		
 func playerAtTrashCan():
 	if ingotCheck():
@@ -203,7 +210,7 @@ func createCustomer():
 func createTaxMan():
 	var taxMan = load("res://tax_man.tscn").instantiate()
 	add_child(taxMan)
-	taxMan.position = Vector2(0,300)
+	taxMan.position = Vector2(172,580)
 	#taxMan.speed = 1
 
 func _on_anvil_game_game_complete_signal():
@@ -239,7 +246,8 @@ func _on_day_button_pressed():
 func _on_end_day_next_day_pressed():
 	day += 1
 	dayTimer = 0.00
-	createCustomer()
+	if !taxManHere:
+		createCustomer()
 	
 func _on_ready():
 	$ThwakToMainMenu.play()
@@ -267,6 +275,7 @@ func resetDay():
 		
 	resetOrder()
 	if(day % 5 == 0):
+		taxManHere = true
 		createTaxMan()
 
 func resetOrder():

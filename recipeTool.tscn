@@ -20,6 +20,7 @@ offset_bottom = 172.0
 icon = ExtResource("1_7j7rt")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
 offset_left = 465.0
 offset_top = 101.0
 offset_right = 706.0

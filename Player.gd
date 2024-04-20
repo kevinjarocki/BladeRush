@@ -16,7 +16,6 @@ func _ready():
 	screen_size = get_viewport_rect().size
 	$Area2D/AnimatedSprite2D.animation = "Idle"
 	$Area2D/AnimatedSprite2D.play()
-	station = "none"
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -50,7 +49,7 @@ func _process(delta):
 			$Area2D/AnimatedSprite2D.animation = "down"
 
 		else:
-			if station:
+			if station != null:
 				if station.owner:
 					if station.owner.name == "Anvil":
 						$Area2D/AnimatedSprite2D.animation = "swing"

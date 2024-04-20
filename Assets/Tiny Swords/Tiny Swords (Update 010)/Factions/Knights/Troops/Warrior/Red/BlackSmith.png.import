@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dpjpqh73a8uds"
-path="res://.godot/imported/Blacksmith.png-0cde2abcdbf052cc9dfa9f94de2d137e.ctex"
+path="res://.godot/imported/BlackSmith.png-f4772552d6594785ea7a6296986d0b72.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tiny Swords/Tiny Swords (Update 010)/Factions/Knights/Troops/Warrior/Red/Blacksmith.png"
-dest_files=["res://.godot/imported/Blacksmith.png-0cde2abcdbf052cc9dfa9f94de2d137e.ctex"]
+source_file="res://Assets/Tiny Swords/Tiny Swords (Update 010)/Factions/Knights/Troops/Warrior/Red/BlackSmith.png"
+dest_files=["res://.godot/imported/BlackSmith.png-f4772552d6594785ea7a6296986d0b72.ctex"]
 
 [params]
 

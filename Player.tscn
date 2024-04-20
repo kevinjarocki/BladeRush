@@ -1,7 +1,6 @@
-[gd_scene load_steps=26 format=3 uid="uid://devtoi3ah4vy2"]
+[gd_scene load_steps=25 format=3 uid="uid://devtoi3ah4vy2"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_g1068"]
-[ext_resource type="Texture2D" uid="uid://dpjpqh73a8uds" path="res://Assets/Tiny Swords/Tiny Swords (Update 010)/Factions/Knights/Troops/Warrior/Red/Blacksmith.png" id="3_vema5"]
 [ext_resource type="Texture2D" uid="uid://dpjpqh73a8uds" path="res://Assets/Tiny Swords/Tiny Swords (Update 010)/Factions/Knights/Troops/Warrior/Red/BlackSmith.png" id="3_yvduj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fl4ui"]
@@ -17,23 +16,23 @@ atlas = ExtResource("3_yvduj")
 region = Rect2(192, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yisig"]
-atlas = ExtResource("3_vema5")
+atlas = ExtResource("3_yvduj")
 region = Rect2(0, 768, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dtjn6"]
-atlas = ExtResource("3_vema5")
+atlas = ExtResource("3_yvduj")
 region = Rect2(192, 768, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a4a85"]
-atlas = ExtResource("3_vema5")
+atlas = ExtResource("3_yvduj")
 region = Rect2(0, 576, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_te8hc"]
-atlas = ExtResource("3_vema5")
+atlas = ExtResource("3_yvduj")
 region = Rect2(192, 576, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wq5yq"]
-atlas = ExtResource("3_vema5")
+atlas = ExtResource("3_yvduj")
 region = Rect2(384, 576, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i8dmr"]
@@ -61,11 +60,11 @@ atlas = ExtResource("3_yvduj")
 region = Rect2(960, 384, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2yk8r"]
-atlas = ExtResource("3_vema5")
+atlas = ExtResource("3_yvduj")
 region = Rect2(0, 1152, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rpm17"]
-atlas = ExtResource("3_vema5")
+atlas = ExtResource("3_yvduj")
 region = Rect2(192, 1152, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gl3mg"]

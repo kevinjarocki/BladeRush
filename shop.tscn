@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cab2q7cer6567"]
+[gd_scene load_steps=31 format=3 uid="uid://cab2q7cer6567"]
 
 [ext_resource type="Script" path="res://ShopManager.gd" id="1_07efy"]
 [ext_resource type="PackedScene" uid="uid://c2foh3xf7xqox" path="res://ore_box.tscn" id="2_lioss"]
@@ -394,9 +394,21 @@ stream_3/weight = 1.0
 stream_4/stream = ExtResource("16_k12j5")
 stream_4/weight = 1.0
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_p462w"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+spread = 75.337
+orbit_velocity_min = -0.202
+orbit_velocity_max = 2.0
+radial_velocity_min = -247.19
+radial_velocity_max = 696.63
+gravity = Vector3(0, 98, 0)
+scale_max = 23.87
+color = Color(1, 1, 0, 1)
+
 [node name="Shop" type="Node2D"]
 script = ExtResource("1_07efy")
-money = 315
 minigame = ExtResource("2_vq7so")
 
 [node name="OreBox" parent="." instance=ExtResource("2_lioss")]
@@ -552,6 +564,12 @@ color = Color(0.752941, 0.784314, 0.596078, 1)
 energy = 0.4
 blend_mode = 1
 shadow_enabled = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(235, 376)
+emitting = false
+amount = 120
+process_material = SubResource("ParticleProcessMaterial_p462w")
 
 [connection signal="ready" from="." to="." method="_on_ready"]
 [connection signal="animation_finished" from="OreBox" to="." method="_on_ore_box_animation_finished1"]

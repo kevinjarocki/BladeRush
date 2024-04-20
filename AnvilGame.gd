@@ -43,7 +43,9 @@ func _input(event):
 func summonMinigame(instance):
 	
 	ingotInstance = instance
+
 	if (ingotInstance.stage < ingotInstance.recipeProperties["points"].size()):
+
 		gameCompletedBool = false
 		show()
 		if instanceBudget > 0:

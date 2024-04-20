@@ -11,11 +11,13 @@ var tempRecipeArray = []
 var instanceCounter = 0
 var instanceBudget = 1
 var mouseLocation = Vector2.ZERO
-var scaleValue = Vector2(1,1)
+var scaleValue = Vector2(3,3)
 @export var ingotPosition = Vector2(500,-500)
 var gameStarted = false
 var tempQualityMod = 0
 var tempMiss = 0
+var ingotSprite = AnimatedSprite2D
+var ingotFilter = AnimatedSprite2D
 
 signal gameCompleteSignal
 signal playerLeft(child)
@@ -56,11 +58,16 @@ func _input(event):
 			else:
 				ingotInstance.quality -= missDistance * ingotInstance.recipeProperties["punishRate"]
 		print("quality score" ,ingotInstance.quality)
+		
+		
 		ingotInstance.stage += 1
 		if (ingotInstance.stage < ingotInstance.recipeProperties["points"].size()):
 			nextClick.position = ingotInstance.recipeProperties["points"][ingotInstance.stage]
 			
 		else:
+			ingotSprite.frame = 1
+			ingotFilter.frame = 1
+			print(ingotSprite)
 			nextClick.killInstance()
 			gameCompletedBool = true
 			gameCompleteSignal.emit()
@@ -68,8 +75,9 @@ func _input(event):
 		$AnimatedSprite2D.position = event.position
 		
 func summonMinigame(instance):
-	
 	ingotInstance = instance
+	ingotSprite = ingotInstance.get_node("AnimatedSprite2D")
+	ingotFilter = ingotInstance.get_node("Filter")
 	gameStarted = true
 	ingotInstance.position = ingotPosition
 	ingotInstance.scale = scaleValue
@@ -100,7 +108,7 @@ func TemptQualitySubtract():
 		$Broken.play()
 	elif abs(tempMiss) > 0 and abs(tempMiss) <= 1000:
 		tempQualityMod = -0.008*abs(tempMiss)
-		ingotInstance.quality -= tempQualityMod
+		ingotInstance.quality += tempQualityMod
 	print("temp mod",tempQualityMod)
 		
 func _on_player_departed(body):
@@ -108,7 +116,7 @@ func _on_player_departed(body):
 		if !gameCompletedBool and instanceCounter > 0:
 			instanceCounter = 0
 		if gameStarted and ingotInstance != null:
-			ingotInstance.scale = Vector2(0.25,0.25)
+			ingotInstance.scale = Vector2(2,2)
 			remove_child(ingotInstance)
 			owner.add_child(ingotInstance)
 			#print(owner.get_children())

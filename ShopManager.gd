@@ -130,6 +130,9 @@ func playerAtOreBox():
 		
 		ingotNode.recipeProperties = recipeBook[activeRecipe]
 		ingotNode.materialProperties = materialBook[activeMaterial]
+		
+		ingotNode.get_node("AnimatedSprite2D").animation = ingotNode.recipeProperties["name"]
+		ingotNode.get_node("Filter").animation = ingotNode.recipeProperties["name"]
 
 		$"GUI HUD/ProgressBar/IdealHeat".size.y = ((ingotNode.materialProperties["idealTempRange"]*2)/ingotNode.maxTemp)*$"GUI HUD/ProgressBar".size.y
 		if ingotNode.materialProperties["idealTemp"] + ingotNode.materialProperties["idealTempRange"] > ingotNode.maxTemp:

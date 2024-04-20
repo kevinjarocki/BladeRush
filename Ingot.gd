@@ -10,7 +10,7 @@ var isForge = false
 var recipe = []
 var stage = 0
 var recipeProperties = {
-	"name" : "dagger",
+	"name" : "forged",
 	"points": [Vector2(100,100),Vector2(200,200),Vector2(150,150)], 
 	"perfectRange": 5, 
 	"punishRate": 10, 

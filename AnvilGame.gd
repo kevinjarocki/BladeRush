@@ -14,8 +14,8 @@ var mouseLocation = Vector2.ZERO
 var scaleValue = Vector2(1,1)
 @export var ingotPosition = Vector2(500,-500)
 var gameStarted = false
-var tempQualityMod = 1
-var tempMiss = 1
+var tempQualityMod = 0
+var tempMiss = 0
 
 signal gameCompleteSignal
 signal playerLeft(child)
@@ -46,11 +46,15 @@ func _input(event):
 			TemptQualitySubtract()
 		print("temp miss:",tempMiss)
 		
+		#distance punishment
 		if missDistance <= ingotInstance.recipeProperties["perfectRange"]:
 			print("Perfect Strike!")
 			$Perfect.play()
 		else:
-			ingotInstance.quality -= missDistance * ingotInstance.recipeProperties["punishRate"]
+			if missDistance*ingotInstance.recipeProperties["punishRate"] > ingotInstance.quality:
+				ingotInstance.quality = 0
+			else:
+				ingotInstance.quality -= missDistance * ingotInstance.recipeProperties["punishRate"]
 		print("quality score" ,ingotInstance.quality)
 		ingotInstance.stage += 1
 		if (ingotInstance.stage < ingotInstance.recipeProperties["points"].size()):
@@ -100,18 +104,19 @@ func TemptQualitySubtract():
 	print("temp mod",tempQualityMod)
 		
 func _on_player_departed(body):
-	if !gameCompletedBool and instanceCounter > 0:
-		instanceCounter = 0
-	if gameStarted:
-		ingotInstance.scale = Vector2(0.25,0.25)
-		remove_child(ingotInstance)
-		owner.add_child(ingotInstance)
-		#print(owner.get_children())
-		playerLeft.emit(ingotInstance)
-	if gameCompletedBool:
-		instanceBudget = 1
+	if body.owner.name == "Anvil":
+		if !gameCompletedBool and instanceCounter > 0:
+			instanceCounter = 0
+		if gameStarted and ingotInstance != null:
+			ingotInstance.scale = Vector2(0.25,0.25)
+			remove_child(ingotInstance)
+			owner.add_child(ingotInstance)
+			#print(owner.get_children())
+			playerLeft.emit(ingotInstance)
+		if gameCompletedBool:
+			instanceBudget = 1
 
-		gameStarted = false
+			gameStarted = false
 
 	
 	hide()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cab2q7cer6567"]
+[gd_scene load_steps=26 format=3 uid="uid://cab2q7cer6567"]
 
 [ext_resource type="Script" path="res://ShopManager.gd" id="1_07efy"]
 [ext_resource type="PackedScene" uid="uid://c2foh3xf7xqox" path="res://ore_box.tscn" id="2_lioss"]
@@ -18,9 +18,8 @@
 [ext_resource type="AudioStream" uid="uid://df4ym32qvy80h" path="res://Assets/Sounds/Ferret/155115__jzazvurek__ferret5.mp3" id="16_k12j5"]
 [ext_resource type="AudioStream" uid="uid://bdml4x3j8ni0w" path="res://Assets/Sounds/Ferret/477390__nuff3__steps-dirt_2a.ogg" id="17_axae4"]
 [ext_resource type="AudioStream" uid="uid://ba8u1nix4fee7" path="res://Assets/Sounds/214456__quaker540__hq-flamethrower-burning.wav" id="18_mw575"]
-[ext_resource type="PackedScene" uid="uid://k1brmsrvmi3s" path="res://end_day.tscn" id="19_bnti8"]
+[ext_resource type="PackedScene" path="res://end_day.tscn" id="19_bnti8"]
 [ext_resource type="AudioStream" uid="uid://dpmica7dit60i" path="res://Assets/Sounds/Audacity/blacksmith2.mp3" id="19_p3ybx"]
-
 
 [sub_resource type="Theme" id="Theme_d7is4"]
 default_font = ExtResource("9_6uv7d")
@@ -405,6 +404,7 @@ position = Vector2(622, 401)
 
 [node name="AnvilGame" parent="." instance=ExtResource("2_vq7so")]
 visible = false
+ingotPosition = Vector2(500, -500)
 
 [node name="Button2" parent="AnvilGame" instance=ExtResource("9_4745i")]
 offset_left = 2012.0

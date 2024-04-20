@@ -79,7 +79,6 @@ func _on_player_departed(body):
 	ingotInstance.scale = Vector2(0.25,0.25)
 	remove_child(ingotInstance)
 	owner.add_child(ingotInstance)
-	#print(owner.get_children())
 	playerLeft.emit(ingotInstance)
 	
 	hide()

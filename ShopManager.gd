@@ -160,7 +160,8 @@ func playerAtCashRegister():
 			money += int(1*ingotNode.recipeProperties["value"]*ingotNode.materialProperties["valueMod"]*(ingotNode.quality/100))
 			resetOrder()
 			ingotNode.queue_free()
-			
+			$CashRegister.play()
+			$CashRegister.get_node("Ding").play()
 			var query := PhysicsPointQueryParameters2D.new()
 			query.collide_with_areas = true
 			query.collide_with_bodies = false

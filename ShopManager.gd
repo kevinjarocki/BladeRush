@@ -29,7 +29,11 @@ func _process(delta):
 	
 	if(ingotNode != null):
 		var temp = ingotNode.temperature
-		$"GUI HUD/ProgressBar".value = temp
+		$"GUI HUD/ProgressBar".value = ((temp/ingotNode.maxTemp)*100)
+		
+		#$"GUI HUD/ColorRect2".position.y = (ingotNode.materialProperties["idealTemp"] + ingotNode.materialProperties["idealRange"])
+		#$"GUI HUD/ColorRect2".size.y = ingotNode.materialProperties["idealRange"]*2
+
 	else:
 		var temp = 0
 		$"GUI HUD/ProgressBar".value = temp
@@ -54,8 +58,8 @@ func _on_player_interacted(station):
 func playerAtAnvil():
 	if (ingotCheck()):
 		$Player.freeze()
-		var IngotNode = ingotCheck()
-		IngotNode.recipe = recipeBook[IngotNode.recipeName]
+		var ingotNode = ingotCheck()
+		ingotNode.recipe = recipeBook[ingotNode.recipeName]
 		$AnvilGame.summonMinigame(ingotCheck())
 		$Player.unFreeze()
 		print("here")
@@ -105,6 +109,11 @@ func playerAtOreBox():
 		$Player.add_child(item)
 		ingotNode = item
 		print ("Picked up ingot")
+		var ingotNode = ingotCheck()
+		$"GUI HUD/ProgressBar/IdealHeat".size.y = ((ingotNode.materialProperties["idealTempRange"]*2)/ingotNode.maxTemp)*$"GUI HUD/ProgressBar".size.y
+		if ingotNode.materialProperties["idealTemp"] + ingotNode.materialProperties["idealTempRange"] > ingotNode.maxTemp:
+			pass
+		else: $"GUI HUD/ProgressBar/IdealHeat".position.y = $"GUI HUD/ProgressBar".size.y - ((ingotNode.materialProperties["idealTemp"] + ingotNode.materialProperties["idealTempRange"])/ingotNode.maxTemp)*$"GUI HUD/ProgressBar".size.y
 	
 	else:
 		print ("Player already holding ingot")
@@ -118,7 +127,6 @@ func playerAtCashRegister():
 func ingotCheck():
 	for child in $Player.get_children():
 		if child.is_in_group("ingot"):
-
 			return child
 	return false
 

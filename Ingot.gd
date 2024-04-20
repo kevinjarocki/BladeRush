@@ -1,6 +1,7 @@
 extends Node2D
 
-var temperature = 0;
+var maxTemp = 8000.00
+var temperature = 0.00;
 var quality = 100;
 var isCompleted = false;
 var recipeName = "axe"; #i.e Could be "Longsword"
@@ -19,8 +20,8 @@ var materialProperties = {
 	"name" : "tin",
 	"coolRate" : 10, 
 	"heatRate" : 25, 
-	"idealTemp": 1000, 
-	"idealTempRange": 500,
+	"idealTemp": 6000, 
+	"idealTempRange": 1000,
 	"valueMod": 6,
 	"cost": 1
 }
@@ -45,7 +46,7 @@ func _process(delta):
 	$Filter.self_modulate = MetalGlow
 	#$ColorRect.set_color(MetalGlow)
 	if isForge:
-		if temperature < 8000:
+		if temperature < maxTemp:
 			temperature += materialProperties["heatRate"]
 	else:
 		if temperature >= materialProperties["coolRate"]:

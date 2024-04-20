@@ -20,7 +20,7 @@
 [ext_resource type="AudioStream" uid="uid://ba8u1nix4fee7" path="res://Assets/Sounds/214456__quaker540__hq-flamethrower-burning.wav" id="18_mw575"]
 [ext_resource type="PackedScene" uid="uid://k1brmsrvmi3s" path="res://end_day.tscn" id="19_bnti8"]
 [ext_resource type="AudioStream" uid="uid://dpmica7dit60i" path="res://Assets/Sounds/Audacity/blacksmith2.mp3" id="19_p3ybx"]
-[ext_resource type="PackedScene" uid="uid://dlgvjnk6rw5xy" path="res://trashCan.tscn" id="21_lpgaf"]
+[ext_resource type="PackedScene" path="res://trashCan.tscn" id="21_lpgaf"]
 
 [sub_resource type="Theme" id="Theme_d7is4"]
 default_font = ExtResource("9_6uv7d")

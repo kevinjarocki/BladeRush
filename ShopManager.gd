@@ -266,7 +266,7 @@ func resetDay():
 		child.queue_free()
 		
 	resetOrder()
-	if(day % 5):
+	if(day % 5 == 0):
 		createTaxMan()
 
 func resetOrder():

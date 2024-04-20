@@ -79,3 +79,6 @@ func freeze():
 	
 func unFreeze():
 	isFrozen = false
+
+func increaseSpeed(value):
+	speed += value

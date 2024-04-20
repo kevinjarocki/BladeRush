@@ -3,10 +3,14 @@ extends Node2D
 @export var money = 0
 @export var day = 1
 @export var dayTimer = 0.00
-@export var endDayTime = 8000
+@export var endDayTime = 60
 @export var activeRecipe = "Awaiting Order"
 @export var activeMaterial = ""
 @export var minigame: PackedScene
+
+@export var heatingMod = 0
+@export var coolingMod = 0
+
 var ingotNode = null
 var gameFinished = false
 
@@ -23,7 +27,7 @@ var recipeBook = {
 }
 
 var materialBook = {
-	"Tin" : {"name": "tin", "coolRate" : 10, "heatRate" : 25, "idealTemp": 3000, "idealTempRange": 1200, "valueMod": 1, "cost": 1},
+	"Tin" : {"name": "tin", "coolRate" : 10, "heatRate" : 25, "idealTemp": 7500, "idealTempRange": 1200, "valueMod": 1, "cost": 1},
 	"Iron" : {"name": "iron", "coolRate" : 8, "heatRate" : 25, "idealTemp": 6600, "idealTempRange": 800, "valueMod": 2, "cost": 1},
 	"Bronze" : {"name": "bronze", "coolRate" : 4, "heatRate" : 25, "idealTemp": 4000, "idealTempRange": 1000, "valueMod": 4, "cost": 1},
 	"Gold": {"name": "gold", "coolRate" : 25, "heatRate" : 50, "idealTemp": 2000, "idealTempRange": 500, "valueMod": 6, "cost": 1}
@@ -131,8 +135,9 @@ func playerAtOreBox():
 		
 		ingotNode.recipeProperties = recipeBook[activeRecipe]
 		ingotNode.materialProperties = materialBook[activeMaterial]
+		ingotNode.heatingMod = heatingMod
+		ingotNode.coolingMod = coolingMod
 		
-
 		ingotNode.get_node("AnimatedSprite2D").animation = ingotNode.recipeProperties["name"]
 		ingotNode.get_node("Filter").animation = ingotNode.recipeProperties["name"]
 
@@ -261,25 +266,59 @@ func setHeatBars():
 	var idealHeat = $"GUI HUD/ProgressBar/IdealHeat"
 	var heatRange = $"GUI HUD/ProgressBar/HeatRange"
 	var ingotNode = ingotCheck()
+	var idealTemp = ingotNode.materialProperties["idealTemp"]
+	var idealTempRange = ingotNode.materialProperties["idealTempRange"]
 	
 	#Sets top of green ideal temp bar
-	if ingotNode.materialProperties["idealTemp"] + ingotNode.materialProperties["idealTempRange"] > ingotNode.maxTemp:
-		idealHeat.position.y = $"GUI HUD/ProgressBar".position.y
+	if idealTemp + idealTempRange > ingotNode.maxTemp:
+		idealHeat.position.y = 0
 	else: 
-		idealHeat.position.y = $"GUI HUD/ProgressBar".size.y - ((ingotNode.materialProperties["idealTemp"] + ingotNode.materialProperties["idealTempRange"])/ingotNode.maxTemp)*$"GUI HUD/ProgressBar".size.y
+		idealHeat.position.y = $"GUI HUD/ProgressBar".size.y - ((idealTemp + idealTempRange)/ingotNode.maxTemp)*$"GUI HUD/ProgressBar".size.y
 
 	#Sets size (downwards) of ideal temp bar
-	if ingotNode.materialProperties["idealTemp"] - ingotNode.materialProperties["idealTempRange"] < 0:
+	if idealTemp - idealTempRange < 0:
 		idealHeat.size.y = $"GUI HUD/ProgressBar".size.y - idealHeat.position.y
+	elif idealTemp + idealTempRange > ingotNode.maxTemp:
+		idealHeat.size.y = (((idealTempRange*2) - ((idealTemp + idealTempRange) - ingotNode.maxTemp)) /ingotNode.maxTemp)*$"GUI HUD/ProgressBar".size.y
 	else:
-		idealHeat.size.y = ((ingotNode.materialProperties["idealTempRange"]*2)/ingotNode.maxTemp)*$"GUI HUD/ProgressBar".size.y
+		idealHeat.size.y = ((idealTempRange*2)/ingotNode.maxTemp)*$"GUI HUD/ProgressBar".size.y
 		
-	if ingotNode.materialProperties["idealTemp"] + ingotNode.materialProperties["idealTempRange"] + 1000 > ingotNode.maxTemp:
-		heatRange.position.y = $"GUI HUD/ProgressBar".position.y
+	if idealTemp + idealTempRange + 1000 > ingotNode.maxTemp:
+		heatRange.position.y = 0
+		
 	else: 
-		heatRange.position.y = $"GUI HUD/ProgressBar".size.y - ((ingotNode.materialProperties["idealTemp"] + ingotNode.materialProperties["idealTempRange"] + 1000 )/ingotNode.maxTemp)*$"GUI HUD/ProgressBar".size.y
+		heatRange.position.y = $"GUI HUD/ProgressBar".size.y - ((idealTemp + idealTempRange + 1000 )/ingotNode.maxTemp)*$"GUI HUD/ProgressBar".size.y
 		
-	if ingotNode.materialProperties["idealTemp"] - ingotNode.materialProperties["idealTempRange"] - 1000 < 0:
+	if idealTemp - idealTempRange - 1000 < 0:
 		heatRange.size.y = $"GUI HUD/ProgressBar".size.y - heatRange.position.y
+	elif idealTemp + idealTempRange + 1000 > ingotNode.maxTemp:
+		heatRange.size.y = ((((idealTempRange+1000)*2) - ((idealTemp + idealTempRange+1000) - ingotNode.maxTemp)) /ingotNode.maxTemp)*$"GUI HUD/ProgressBar".size.y
 	else:
-		heatRange.size.y = (((ingotNode.materialProperties["idealTempRange"]+1000)*2)/ingotNode.maxTemp)*$"GUI HUD/ProgressBar".size.y
+		heatRange.size.y = (((idealTempRange+1000)*2)/ingotNode.maxTemp)*$"GUI HUD/ProgressBar".size.y
+
+func _on_end_day_cooling_dec():
+	if money > 9:
+		money -= 10
+		coolingMod += 5
+	else:
+		money -= 10
+		coolingMod += 5
+		print("cant afford, but you're cool ;)")
+
+func _on_end_day_heat_inc():
+	if money > 9:
+		money -= 10
+		heatingMod += 5
+	else:
+		money -= 10
+		heatingMod += 5
+		print("cant afford, but you're cool ;)")
+
+func _on_end_day_speed_inc():
+	if money > 9:
+		money -= 10
+		$Player.increaseSpeed(20)
+	else:
+		money -= 10
+		$Player.increaseSpeed(20)
+		print("cant afford, but you're cool ;)")

@@ -1,50 +1,23 @@
 extends Node2D
 
 @export var money = 0
+@export var day = 0
+@export var activeRecipe = "Awaiting Order"
+@export var activeMaterial = "Awaiting Order"
 @export var minigame: PackedScene
 var ingotNode = null
 
 var recipeBook = {
-	"dagger" : [Vector2(100,100),Vector2(200,200),Vector2(150,150)],
-	"scimtar" : [Vector2(600,100),Vector2(420,696),Vector2(337,808)],
-	"axe" : 
-		[
-		Vector2(466, 236),
-		Vector2(480, 263),
-		Vector2(473, 284),
-		Vector2(454, 306),
-		Vector2(452, 309),
-		Vector2(413, 319),
-		Vector2(412, 320),
-		Vector2(397, 333),
-		Vector2(397, 334),
-		Vector2(439, 350),
-		Vector2(440, 350),
-		Vector2(504, 347),
-		Vector2(508, 347),
-		Vector2(558, 327),
-		Vector2(602, 284),
-		Vector2(603, 282),
-		Vector2(618, 250),
-		Vector2(619, 249),
-		Vector2(631, 226),
-		Vector2(593, 234),
-		Vector2(564, 229),
-		Vector2(562, 229),
-		Vector2(525, 200),
-		Vector2(525, 199),
-		Vector2(561, 245),
-		Vector2(543, 261),
-		Vector2(542, 261),
-		Vector2(512, 267),
-		Vector2(510, 267),
-		Vector2(488, 269),
-		Vector2(458, 349),
-		Vector2(570, 338),
-		Vector2(571, 338),
-		Vector2(620, 274),
-		Vector2(620, 273),
-		]
+	"dagger" : {"points": [Vector2(100,100),Vector2(200,200),Vector2(150,150)], "perfectRange": 5, "punishRate": 10, "value" : 1},
+	"scimtar" : {"points": [Vector2(600,100),Vector2(420,696),Vector2(337,808)], "perfectRange": 3, "punishRate": 15, "value" : 3},
+	"axe" : {"points": [Vector2(466, 236),Vector2(480, 263),Vector2(473, 284),Vector2(454, 306),Vector2(452, 309),Vector2(413, 319),Vector2(412, 320),Vector2(397, 333),Vector2(397, 334),Vector2(439, 350),Vector2(440, 350),Vector2(504, 347),Vector2(508, 347),Vector2(558, 327),Vector2(602, 284),Vector2(603, 282),Vector2(618, 250),Vector2(619, 249),Vector2(631, 226),Vector2(593, 234),Vector2(564, 229),Vector2(562, 229),Vector2(525, 200),Vector2(525, 199),Vector2(561, 245),Vector2(543, 261),Vector2(542, 261),Vector2(512, 267),Vector2(510, 267),Vector2(488, 269),Vector2(458, 349),Vector2(570, 338),Vector2(571, 338),Vector2(620, 274),Vector2(620, 273)], 
+		"perfectRange": 3, "punishRate": 15, "value" : 3}
+}
+
+var recipeBookValue = {
+	"dagger" : 1,
+	"scimtar" : 2,
+	"axe" : 5
 }
 
 var materialBook = {
@@ -53,16 +26,14 @@ var materialBook = {
 	"bronze" : {"coolRate" : 4, "heatRate" : 25, "idealTemp": 2000, "idealTempRange": 500, "valueMod": 4, "cost": 1},
 	"gold": {"coolRate" : 25, "heatRate" : 50, "idealTemp": 700, "idealTempRange": 200, "valueMod": 6, "cost": 1}
 }
-func _on_ingot_temperature_broadcast(temp, maxTemp):
-
-	$"GUI HUD/ProgressBar".value = temp
-	
-	pass # Replace with function body.
 
 func _process(delta):
+	$"GUI HUD/ActiveRecipe".text = ("Active Recipe: " + str(activeRecipe))
+	$"GUI HUD/DayCount".text = ("Day " + str(day))
+	$"GUI HUD/MoneyCount".text = ("Gold: " + str(money))
+	
 	if(ingotNode != null):
 		var temp = ingotNode.temperature
-		ingotNode.temperature
 		$"GUI HUD/ProgressBar".value = temp
 	else:
 		var temp = 0
@@ -146,9 +117,9 @@ func playerAtOreBox():
 func playerAtCashRegister():
 	if ingotCheck():
 		ingotCheck().queue_free()
+		money += 1
 
 #Checks if player is holding an ingot, returns ingot node or false
-
 func ingotCheck():
 	for child in $Player.get_children():
 		if child.is_in_group("ingot"):
@@ -164,6 +135,9 @@ func createCustomer():
 	item.want = randi_range(0, recipeBook.size()-1)
 	print(item.want)
   
+func nextDay():
+	day += 1
+
 func _on_anvil_game_game_complete_signal():
 	$AnvilGame.hide()
 
@@ -175,13 +149,14 @@ func _on_button_pressed():
 	createCustomer()
 	pass # Replace with function body.
 
-
 func _on_ore_box_animation_looped():
 	print("loop anim")
 	$OreBox.pause()
 	
-
-
 func _on_ore_box_animation_finished(Start):
 	print("fninshedm")
 	$OreBox.pause()
+
+func _on_day_button_pressed():
+	nextDay()
+	pass # Replace with function body.

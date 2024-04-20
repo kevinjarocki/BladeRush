@@ -15,7 +15,6 @@ func _input(event):
 	if (recipeTool and Input.is_action_just_pressed("click")):
 		tempRecipeArray.append(event.position)
 
-
 func _on_button_pressed():
 	tempRecipeArray.pop_back()
 	recipeTool = !recipeTool
@@ -24,4 +23,3 @@ func _on_button_pressed():
 		for x in tempRecipeArray:
 			print("Vector2",x,",")
 		print("]")
-

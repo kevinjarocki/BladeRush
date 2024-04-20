@@ -35,4 +35,8 @@ func start(pos):
 	position = pos
 	show()
 	$Area2D/TaxManCollisionShape2D.disabled = false
+	
+func ExitShop():
+	set_velocity(Vector2(-10,0))
+	$Timer.start()
 

@@ -1,5 +1,5 @@
 extends Node2D
-
+var dialog_system = preload("res://dialog_system_01.tscn").instantiate()
 @export var money = 0
 @export var day = 1
 @export var dayTimer = 0.00
@@ -11,6 +11,7 @@ extends Node2D
 @export var heatingMod = 0
 @export var coolingMod = 0
 var taxManHere = false
+var taxPayed = false
 
 var ingotNode = null
 var gameFinished = false
@@ -56,6 +57,11 @@ func _process(delta):
 		var temp = 0
 		$"GUI HUD/ProgressBar".value = temp
 
+func call_dialog_system(output: String):
+	if not has_node("DialogSystem01"):
+		add_child(dialog_system)
+		
+	dialog_system.add_new_output(output)
 
 func _on_player_interacted(station):
 	
@@ -128,7 +134,7 @@ func playerAtForge():
 		print("Nothing to do, player does not have ingot")
 	
 func playerAtOreBox():
-	if !ingotCheck() and activeRecipe != "Awaiting Order":
+	if !ingotCheck() and activeRecipe != "Awaiting Order" and !taxManHere:
 		
 		$OreBox.play()
 		$Ferret.play()
@@ -152,7 +158,7 @@ func playerAtOreBox():
 		setHeatBars()
 		
 	else:
-		print ("Player already holding ingot")
+		print ("Player already holding ingot or Tax Man is here")
 	
 func playerAtCashRegister():
 	
@@ -184,9 +190,11 @@ func playerAtCashRegister():
 		activeRecipe = recipeBook.keys()[randi_range(0, recipeBook.size()-1)]
 		activeMaterial = materialBook.keys()[randi_range(0, materialBook.size()-1)]
 	elif taxManHere:
+		var taxesOwed = 3*pow(day,1.1)
 		activeRecipe = "Tax Man is here. Time to Pay up!"
-		activeMaterial = "Total Owed:"
-		# totalTax = 10*pwr(day,1.1)
+		activeMaterial = "Total Taxes Owed: " + str(snappedf(taxesOwed,1.5))
+		
+
 		
 func playerAtTrashCan():
 	if ingotCheck():

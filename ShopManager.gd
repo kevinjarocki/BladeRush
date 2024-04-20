@@ -3,7 +3,7 @@ extends Node2D
 @export var money = 0
 @export var day = 1
 @export var dayTimer = 0.00
-@export var endDayTime = 60
+@export var endDayTime = 5
 @export var activeRecipe = "Awaiting Order"
 @export var activeMaterial = ""
 @export var minigame: PackedScene
@@ -65,6 +65,8 @@ func _on_player_interacted(station):
 			playerAtForge()
 		elif station.owner.name == "OreBox":
 			playerAtOreBox()
+		elif station.owner.name == "TrashCan":
+			playerAtTrashCan()
 		elif station.owner.name == "CashRegister":
 			playerAtCashRegister()
 			
@@ -175,6 +177,13 @@ func playerAtCashRegister():
 		activeRecipe = recipeBook.keys()[randi_range(0, recipeBook.size()-1)]
 		activeMaterial = materialBook.keys()[randi_range(0, materialBook.size()-1)]
 		
+func playerAtTrashCan():
+	if ingotCheck():
+		
+		ingotNode = ingotCheck()
+		$AnvilGame.abortAnvilGame()
+		ingotNode.queue_free()
+		
 #Checks if player is holding an ingot, returns ingot node or false
 func ingotCheck():
 	for child in $Player.get_children():
@@ -218,16 +227,11 @@ func _on_day_button_pressed():
 	resetDay()
 	$EndDay.endDay(day, money)
 
-func _on_customer_pressed():
-	createCustomer()
-	pass # Replace with function body.
-
 func _on_end_day_next_day_pressed():
 	day += 1
-	dayTimer = 0
+	dayTimer = 0.00
 	createCustomer()
-	pass # Replace with function body.
-
+	
 func _on_ready():
 	$ThwakToMainMenu.play()
 	createCustomer()
@@ -260,6 +264,8 @@ func resetOrder():
 	activeMaterial = ""
 	$"GUI HUD/ProgressBar/IdealHeat".size.y = 0
 	$"GUI HUD/ProgressBar/HeatRange".size.y = 0
+	
+	$AnvilGame.abortAnvilGame()
 
 func setHeatBars():
 	
@@ -299,10 +305,10 @@ func setHeatBars():
 func _on_end_day_cooling_dec():
 	if money > 9:
 		money -= 10
-		coolingMod += 5
+		coolingMod += .1
 	else:
 		money -= 10
-		coolingMod += 5
+		coolingMod += .1
 		print("cant afford, but you're cool ;)")
 
 func _on_end_day_heat_inc():

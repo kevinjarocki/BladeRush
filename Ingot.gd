@@ -46,7 +46,7 @@ func _process(delta):
 			temperature += materialProperties["heatRate"] + heatingMod
 	else:
 		if temperature >= materialProperties["coolRate"]:
-			temperature -= materialProperties["coolRate"] - coolingMod
+			temperature -= (materialProperties["coolRate"] * (1-coolingMod))
 		else:
 			temperature = 0
 

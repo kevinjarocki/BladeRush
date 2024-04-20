@@ -199,6 +199,7 @@ motion_mode = 1
 platform_floor_layers = 4294936576
 platform_wall_layers = 1
 script = ExtResource("1_g1068")
+speed = null
 metadata/_edit_group_ = true
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -209,8 +210,8 @@ shape = SubResource("CapsuleShape2D_fl4ui")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D"]
 sprite_frames = SubResource("SpriteFrames_coupt")
-animation = &"Idle"
-frame_progress = 0.0705105
+animation = &"walk"
+frame_progress = 0.524197
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
 position = Vector2(0, 18.39)

@@ -46,18 +46,22 @@ func _process(delta):
 			$Area2D/AnimatedSprite2D.animation = "up"
 		elif velocity.y > 0:
 			$Area2D/AnimatedSprite2D.animation = "down"
-		if station:
-			if station.owner:
-				if station.owner.name == "Anvil":
-					$Area2D/AnimatedSprite2D.animation = "swing"
-				if station.owner.name == "Forge":
-					$Area2D/AnimatedSprite2D.animation = "swing"
-				if station.owner.name == "OreBox":
-					$Area2D/AnimatedSprite2D.animation = "swing"
-				if station.owner.name == "CashRegister":
-					$Area2D/AnimatedSprite2D.animation = "swing"
+
 		else:
-			$Area2D/AnimatedSprite2D.animation = "Idle"
+			if station:
+				if station.owner:
+					if station.owner.name == "Anvil":
+						$Area2D/AnimatedSprite2D.animation = "swing"
+					if station.owner.name == "Forge":
+						$Area2D/AnimatedSprite2D.animation = "swing"
+					if station.owner.name == "OreBox":
+						$Area2D/AnimatedSprite2D.animation = "swing"
+					if station.owner.name == "CashRegister":
+						$Area2D/AnimatedSprite2D.animation = "swing"
+			else:
+				$Area2D/AnimatedSprite2D.animation = "Idle"
+
+		
 
 func start(pos):
 	position = pos

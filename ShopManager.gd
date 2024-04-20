@@ -109,17 +109,21 @@ func playerAtForge():
 func playerAtOreBox():
 	
 	print("still interacting")
-	$OreBox.play()
-	$Ferret.play()
-	$Dirt.play()
-	if !ingotCheck():
+
+	if !ingotCheck() and activeRecipe != "Awaiting Order":
+		
+		$OreBox.play()
+		$Ferret.play()
+		$Dirt.play()
+	
 		gameFinished = false
-		var item = load("res://ingot.tscn").instantiate()
-		$Player.add_child(item)
-		ingotNode = item
+		var ingotNode = load("res://ingot.tscn").instantiate()
+		$Player.add_child(ingotNode)
 		print ("Picked up ingot")
 		
-		var ingotNode = ingotCheck()
+		ingotNode.recipeProperties = recipeBook[activeRecipe]
+		ingotNode.materialProperties = materialBook[activeMaterial]
+
 		$"GUI HUD/ProgressBar/IdealHeat".size.y = ((ingotNode.materialProperties["idealTempRange"]*2)/ingotNode.maxTemp)*$"GUI HUD/ProgressBar".size.y
 		if ingotNode.materialProperties["idealTemp"] + ingotNode.materialProperties["idealTempRange"] > ingotNode.maxTemp:
 			pass
@@ -132,6 +136,8 @@ func playerAtCashRegister():
 	if ingotCheck():
 		ingotCheck().queue_free()
 		money += 1
+		activeRecipe = "Awaiting Order"
+		activeMaterial = ""
 		
 	elif activeRecipe == "Awaiting Order":
 		activeRecipe = recipeBook.keys()[randi_range(0, recipeBook.size()-1)]

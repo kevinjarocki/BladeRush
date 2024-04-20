@@ -3,13 +3,23 @@ extends Node2D
 @export var money = 0
 @export var day = 1
 @export var dayTimer = 0.00
-@export var endDayTime = 5
+@export var endDayTime = 60
 @export var activeRecipe = "Awaiting Order"
 @export var activeMaterial = ""
 @export var minigame: PackedScene
 
 @export var heatingMod = 0
 @export var coolingMod = 0
+@export var autoMolmol = false
+
+var heatingModInc = 0
+var coolingModInc = 0
+var playerSpeedModInc = 0
+
+var heatingModCost = [10,12,15,20,25,35,45,50,60,80,100]
+var coolingModCost = [10,12,15,20,25,35,45,50,60,80,100]
+var playerSpeedModCost = [10,12,15,20,25,35,45,50,60,80,100]
+var autoMolmolCost = 150
 
 var ingotNode = null
 var gameFinished = false
@@ -39,7 +49,7 @@ func _process(delta):
 	$"GUI HUD/DayTimer".value = (dayTimer/endDayTime)*100
 	dayTimer += delta
 	
-	if dayTimer > endDayTime:
+	if dayTimer > endDayTime and !$EndDay.visible:
 		resetDay()
 		$EndDay.endDay(day, money)
 	
@@ -110,7 +120,7 @@ func playerAtForge():
 			$Forge.pause()
 			$Forge.set_frame_and_progress(0,0)
 			return
-	
+
 	if ingotCheck():
 		ingotNode = ingotCheck()
 		$Player.remove_child(ingotNode)
@@ -123,7 +133,7 @@ func playerAtForge():
 			
 	else:
 		print("Nothing to do, player does not have ingot")
-	
+
 func playerAtOreBox():
 	if !ingotCheck() and activeRecipe != "Awaiting Order":
 		
@@ -157,7 +167,16 @@ func playerAtCashRegister():
 		
 		ingotNode = ingotCheck()
 		if $AnvilGame.gameCompletedBool:
-			money += int(1*ingotNode.recipeProperties["value"]*ingotNode.materialProperties["valueMod"]*(ingotNode.quality/100))
+			var recipeValue = ingotNode.recipeProperties["value"]
+			var materialValue = ingotNode.materialProperties["valueMod"]
+			
+			if ingotNode.quality == 100:
+				money += int(recipeValue*materialValue*5)
+			elif ingotNode.quality > 90:
+				money += int(recipeValue*materialValue*2)
+			else:
+				money += int(recipeValue*materialValue*(ingotNode.quality/100))
+
 			resetOrder()
 			ingotNode.queue_free()
 			
@@ -179,6 +198,9 @@ func playerAtCashRegister():
 	elif activeRecipe == "Awaiting Order" and get_tree().get_nodes_in_group("customer"):
 		activeRecipe = recipeBook.keys()[randi_range(0, recipeBook.size()-1)]
 		activeMaterial = materialBook.keys()[randi_range(0, materialBook.size()-1)]
+		
+		if autoMolmol:
+			playerAtOreBox()
 		
 func playerAtTrashCan():
 	if ingotCheck():
@@ -314,28 +336,35 @@ func setHeatBars():
 		heatRange.size.y = (((idealTempRange+1000)*2)/ingotNode.maxTemp)*$"GUI HUD/ProgressBar".size.y
 
 func _on_end_day_cooling_dec():
-	if money > 9:
-		money -= 10
-		coolingMod += .1
+	if money >= coolingModCost[coolingModInc]:
+		money -= coolingModCost[coolingModInc]
+		coolingModInc += 1
+		coolingMod += .09
 	else:
-		money -= 10
-		coolingMod += .1
+		money -= coolingModCost[coolingModInc]
+		coolingModInc += 1
+		coolingMod += .09
 		print("cant afford, but you're cool ;)")
 
 func _on_end_day_heat_inc():
-	if money > 9:
-		money -= 10
+	if money >= heatingModCost[heatingModInc]:
+		money -= heatingModCost[heatingModInc]
+		heatingModInc += 1
 		heatingMod += 5
 	else:
-		money -= 10
+		money -= heatingModCost[heatingModInc]
+		heatingModInc += 1
 		heatingMod += 5
 		print("cant afford, but you're cool ;)")
 
 func _on_end_day_speed_inc():
-	if money > 9:
-		money -= 10
+	if money >= playerSpeedModCost[playerSpeedModInc]:
+		money -= playerSpeedModCost[playerSpeedModInc]
+		playerSpeedModInc += 1
 		$Player.increaseSpeed(20)
+		 
 	else:
-		money -= 10
+		money -= playerSpeedModCost[playerSpeedModInc]
+		playerSpeedModInc += 1
 		$Player.increaseSpeed(20)
 		print("cant afford, but you're cool ;)")

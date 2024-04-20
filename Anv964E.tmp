@@ -90,7 +90,6 @@ offset_left = 465.0
 offset_top = 101.0
 offset_right = 706.0
 offset_bottom = 525.0
-pivot_offset = Vector2(120.01, 308.53)
 color = Color(0.188235, 0.188235, 0.188235, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

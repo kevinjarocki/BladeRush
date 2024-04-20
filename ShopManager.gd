@@ -101,9 +101,11 @@ func _on_player_interacted(station):
 func playerAtAnvil():
 	if (ingotCheck()):
 		$Player.freeze()
-		var IngotNode = ingotCheck()
-		IngotNode.recipe = recipeBook[IngotNode.recipeName]
-		$AnvilGame.summonMinigame(ingotCheck())
+		var ingotNode = ingotCheck()
+		ingotNode.recipe = recipeBook[ingotNode.recipeName]
+		$Player.remove_child(ingotNode)
+		$AnvilGame.add_child(ingotNode)
+		$AnvilGame.summonMinigame(ingotNode)
 		$Player.unFreeze()
 		print("here")
 	else:
@@ -198,3 +200,12 @@ func _on_ore_box_animation_looped():
 func _on_ore_box_animation_finished(Start):
 	print("fninshedm")
 	$OreBox.pause()
+	
+	
+
+
+func _on_anvil_game_player_left(child):
+		remove_child(child)
+		$Player.add_child(child)
+		print($Player.get_children())
+		child.position = Vector2.ZERO

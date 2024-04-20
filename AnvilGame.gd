@@ -110,8 +110,6 @@ func _on_player_departed(body):
 		playerLeft.emit(ingotInstance)
 	if gameCompletedBool:
 		instanceBudget = 1
-
 		gameStarted = false
 
-	
 	hide()

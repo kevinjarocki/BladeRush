@@ -8,6 +8,7 @@ var recipeBook = {
 	"dagger" : [Vector2(100,100),Vector2(200,200),Vector2(150,150)],
 	"scimtar" : [Vector2(600,100),Vector2(420,696),Vector2(337,808)],
 	"axe" : 
+		
 		[
 		Vector2(466, 236),
 		Vector2(480, 263),
@@ -44,6 +45,18 @@ var recipeBook = {
 		Vector2(571, 338),
 		Vector2(620, 274),
 		Vector2(620, 273),
+		],
+	"blade" : [
+		Vector2(583, 503),
+		Vector2(582, 424),
+		Vector2(584, 366),
+		Vector2(586, 290),
+		Vector2(609, 506),
+		Vector2(611, 450),
+		Vector2(613, 387),
+		Vector2(611, 327),
+		Vector2(535, 276),
+		Vector2(535, 275),
 		]
 }
 

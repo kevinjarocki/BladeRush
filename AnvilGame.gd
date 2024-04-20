@@ -43,6 +43,8 @@ func _input(event):
 func summonMinigame(instance):
 	
 	ingotInstance = instance
+	#This will change the ingot animation to the recipe animation we need. Every animation for evcery weapon type will be a part of the ingot scene
+	#ingotInstance.AnimatedSprite2D.animation = ingotInstance.recipe.name
 	if (ingotInstance.stage < ingotInstance.recipe.size()):
 		gameCompletedBool = false
 		show()

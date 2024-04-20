@@ -3,13 +3,24 @@ var dialog_system = preload("res://dialog_system_01.tscn").instantiate()
 @export var money = 0
 @export var day = 1
 @export var dayTimer = 0.00
-@export var endDayTime = 5
+@export var endDayTime = 60
 @export var activeRecipe = "Awaiting Order"
 @export var activeMaterial = ""
 @export var minigame: PackedScene
 
 @export var heatingMod = 0
 @export var coolingMod = 0
+@export var autoMolmol = false
+
+var heatingModInc = 0
+var coolingModInc = 0
+var playerSpeedModInc = 0
+
+var heatingModCost = [10,12,15,20,25,35,45,50,60,80,100]
+var coolingModCost = [10,12,15,20,25,35,45,50,60,80,100]
+var playerSpeedModCost = [10,12,15,20,25,35,45,50,60,80,100]
+var autoMolmolCost = 150
+
 var taxManHere = false
 var taxPayed = false
 
@@ -41,7 +52,7 @@ func _process(delta):
 	$"GUI HUD/DayTimer".value = (dayTimer/endDayTime)*100
 	dayTimer += delta
 	
-	if dayTimer > endDayTime:
+	if dayTimer > endDayTime and !$EndDay.visible:
 		resetDay()
 		$EndDay.endDay(day, money)
 	
@@ -114,12 +125,12 @@ func playerAtForge():
 		if x.collider.owner.is_in_group("ingot"):
 			remove_child(x.collider.owner)
 			$Player.add_child(x.collider.owner)
-			x.collider.owner.position = Vector2.ZERO
+			x.collider.owner.position = Vector2(20,10)
 			x.collider.owner.isForge = false
 			$Forge.pause()
 			$Forge.set_frame_and_progress(0,0)
 			return
-	
+
 	if ingotCheck():
 		ingotNode = ingotCheck()
 		$Player.remove_child(ingotNode)
@@ -132,7 +143,7 @@ func playerAtForge():
 			
 	else:
 		print("Nothing to do, player does not have ingot")
-	
+
 func playerAtOreBox():
 	if !ingotCheck() and activeRecipe != "Awaiting Order" and !taxManHere:
 		
@@ -143,6 +154,7 @@ func playerAtOreBox():
 		gameFinished = false
 		var ingotNode = load("res://ingot.tscn").instantiate()
 		$Player.add_child(ingotNode)
+		ingotNode.position = Vector2(20,10)
 		print ("Picked up ingot")
 		
 		ingotNode.recipeProperties = recipeBook[activeRecipe]
@@ -166,7 +178,16 @@ func playerAtCashRegister():
 		
 		ingotNode = ingotCheck()
 		if $AnvilGame.gameCompletedBool:
-			money += int(1*ingotNode.recipeProperties["value"]*ingotNode.materialProperties["valueMod"]*(ingotNode.quality/100))
+			var recipeValue = ingotNode.recipeProperties["value"]
+			var materialValue = ingotNode.materialProperties["valueMod"]
+			
+			if ingotNode.quality == 100:
+				money += int(recipeValue*materialValue*5)
+			elif ingotNode.quality > 90:
+				money += int(recipeValue*materialValue*2)
+			else:
+				money += int(recipeValue*materialValue*(ingotNode.quality/100))
+
 			resetOrder()
 			ingotNode.queue_free()
 			$CashRegister.play()
@@ -195,6 +216,9 @@ func playerAtCashRegister():
 		activeMaterial = "Total Taxes Owed: " + str(snappedf(taxesOwed,1.5))
 		
 
+		
+		if autoMolmol:
+			playerAtOreBox()
 		
 func playerAtTrashCan():
 	if ingotCheck():
@@ -332,28 +356,35 @@ func setHeatBars():
 		heatRange.size.y = (((idealTempRange+1000)*2)/ingotNode.maxTemp)*$"GUI HUD/ProgressBar".size.y
 
 func _on_end_day_cooling_dec():
-	if money > 9:
-		money -= 10
-		coolingMod += .1
+	if money >= coolingModCost[coolingModInc]:
+		money -= coolingModCost[coolingModInc]
+		coolingModInc += 1
+		coolingMod += .09
 	else:
-		money -= 10
-		coolingMod += .1
+		money -= coolingModCost[coolingModInc]
+		coolingModInc += 1
+		coolingMod += .09
 		print("cant afford, but you're cool ;)")
 
 func _on_end_day_heat_inc():
-	if money > 9:
-		money -= 10
+	if money >= heatingModCost[heatingModInc]:
+		money -= heatingModCost[heatingModInc]
+		heatingModInc += 1
 		heatingMod += 5
 	else:
-		money -= 10
+		money -= heatingModCost[heatingModInc]
+		heatingModInc += 1
 		heatingMod += 5
 		print("cant afford, but you're cool ;)")
 
 func _on_end_day_speed_inc():
-	if money > 9:
-		money -= 10
+	if money >= playerSpeedModCost[playerSpeedModInc]:
+		money -= playerSpeedModCost[playerSpeedModInc]
+		playerSpeedModInc += 1
 		$Player.increaseSpeed(20)
+		 
 	else:
-		money -= 10
+		money -= playerSpeedModCost[playerSpeedModInc]
+		playerSpeedModInc += 1
 		$Player.increaseSpeed(20)
 		print("cant afford, but you're cool ;)")

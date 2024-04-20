@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cab2q7cer6567"]
+[gd_scene load_steps=30 format=3 uid="uid://cab2q7cer6567"]
 
 [ext_resource type="Script" path="res://ShopManager.gd" id="1_07efy"]
 [ext_resource type="PackedScene" uid="uid://c2foh3xf7xqox" path="res://ore_box.tscn" id="2_lioss"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bdnf3f3fjgnoh" path="res://recipeTool.tscn" id="9_4745i"]
 [ext_resource type="Script" path="res://GUI HUD.gd" id="9_laghi"]
 [ext_resource type="Texture2D" uid="uid://bbulknjel8w2a" path="res://Assets/Sprites/ShopScene/interior_.png" id="11_3pdu3"]
+[ext_resource type="Texture2D" uid="uid://cin7oklhjhe8s" path="res://Assets/Tiny Swords/Tiny Swords (Update 010)/UI/Banners/Banner_Horizontal.png" id="11_aeu1v"]
 [ext_resource type="AudioStream" uid="uid://btbfj47m04llr" path="res://Assets/Sounds/Ferret/155115__jzazvurek__ferret1.mp3" id="12_jdva2"]
 [ext_resource type="AudioStream" uid="uid://dm1c6rd1ioylc" path="res://Assets/Sounds/Ferret/155115__jzazvurek__ferret2.mp3" id="13_t1mm5"]
 [ext_resource type="AudioStream" uid="uid://b47won4vrbchq" path="res://Assets/Sounds/Ferret/155115__jzazvurek__ferret3.mp3" id="14_clega"]
@@ -28,6 +29,14 @@ default_font_size = 22
 
 [sub_resource type="LabelSettings" id="LabelSettings_8qs8s"]
 font_size = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_81hsu"]
+font_size = 20
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_mpd5g"]
+font_size = 20
+font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tbcg6"]
 resource_name = "Base"
@@ -387,7 +396,7 @@ stream_4/weight = 1.0
 
 [node name="Shop" type="Node2D"]
 script = ExtResource("1_07efy")
-endDayTime = 80
+money = 315
 minigame = ExtResource("2_vq7so")
 
 [node name="OreBox" parent="." instance=ExtResource("2_lioss")]
@@ -454,11 +463,21 @@ label_settings = SubResource("LabelSettings_8qs8s")
 
 [node name="DayCount" type="Label" parent="GUI HUD"]
 layout_mode = 0
-offset_left = 906.0
-offset_top = -15.0
-offset_right = 969.0
-offset_bottom = 13.0
+offset_left = 956.5
+offset_top = -14.875
+offset_right = 1019.5
+offset_bottom = 13.125
 text = "Day: 0"
+label_settings = SubResource("LabelSettings_81hsu")
+
+[node name="MoneyCount" type="Label" parent="GUI HUD"]
+layout_mode = 0
+offset_left = 954.5
+offset_top = 16.125
+offset_right = 1013.5
+offset_bottom = 44.125
+text = "Gold: "
+label_settings = SubResource("LabelSettings_mpd5g")
 
 [node name="DayButton" type="Button" parent="GUI HUD"]
 layout_mode = 0
@@ -467,23 +486,6 @@ offset_top = 461.0
 offset_right = 1010.0
 offset_bottom = 511.0
 text = "Next Day"
-
-[node name="MoneyCount" type="Label" parent="GUI HUD"]
-layout_mode = 0
-offset_left = 904.0
-offset_top = 16.0
-offset_right = 963.0
-offset_bottom = 44.0
-text = "Gold: "
-
-[node name="GUIBacking" type="ColorRect" parent="GUI HUD"]
-z_index = -3
-layout_mode = 0
-offset_left = 902.0
-offset_top = -13.0
-offset_right = 1026.0
-offset_bottom = 99.0
-color = Color(0.494118, 0.494118, 0.494118, 0.556863)
 
 [node name="Button" type="Button" parent="GUI HUD"]
 layout_mode = 0
@@ -507,6 +509,12 @@ offset_left = 738.0
 offset_top = 555.0
 offset_right = 1061.0
 offset_bottom = 602.0
+
+[node name="Sprite2D" type="Sprite2D" parent="GUI HUD"]
+z_index = -1
+position = Vector2(994.25, 15.125)
+scale = Vector2(1.05469, 0.688802)
+texture = ExtResource("11_aeu1v")
 
 [node name="TileMap" type="TileMap" parent="."]
 light_mask = 0
@@ -538,6 +546,12 @@ stream = ExtResource("19_p3ybx")
 [node name="TrashCan" parent="." instance=ExtResource("21_lpgaf")]
 position = Vector2(985, 309)
 scale = Vector2(0.303125, 0.303125)
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+color = Color(0.752941, 0.784314, 0.596078, 1)
+energy = 0.4
+blend_mode = 1
+shadow_enabled = true
 
 [connection signal="ready" from="." to="." method="_on_ready"]
 [connection signal="animation_finished" from="OreBox" to="." method="_on_ore_box_animation_finished1"]

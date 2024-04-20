@@ -63,9 +63,6 @@ func _process(delta):
 	if(ingotNode != null):
 		var temp = ingotNode.temperature
 		$"GUI HUD/ProgressBar".value = ((temp/ingotNode.maxTemp)*100)
-		
-		#$"GUI HUD/ColorRect2".position.y = (ingotNode.materialProperties["idealTemp"] + ingotNode.materialProperties["idealRange"])
-		#$"GUI HUD/ColorRect2".size.y = ingotNode.materialProperties["idealRange"]*2
 
 	else:
 		var temp = 0
@@ -75,7 +72,6 @@ func _on_player_interacted(station):
 	
 	#If player is at an interactable station -> Go to a function for each station
 	if station:
-		print(station.owner.name)
 		if station.owner.name == "Anvil":
 			playerAtAnvil()
 		elif station.owner.name == "Forge":
@@ -140,9 +136,6 @@ func playerAtForge():
 		print("Nothing to do, player does not have ingot")
 	
 func playerAtOreBox():
-	
-	print("still interacting")
-
 	if !ingotCheck() and activeRecipe != "Awaiting Order":
 		
 		$OreBox.play()
@@ -167,12 +160,27 @@ func playerAtOreBox():
 	
 func playerAtCashRegister():
 	if ingotCheck():
-		ingotCheck().queue_free()
-		money += 1
-		activeRecipe = "Awaiting Order"
-		activeMaterial = ""
+		ingotNode = ingotCheck()
+		if $AnvilGame.gameCompletedBool:
+			money += int(1*ingotNode.recipeProperties["value"]*ingotNode.materialProperties["valueMod"]*(ingotNode.quality/100))
+			activeRecipe = "Awaiting Order"
+			activeMaterial = ""
+			ingotNode.queue_free()
+			
+			var query := PhysicsPointQueryParameters2D.new()
+			query.collide_with_areas = true
+			query.collide_with_bodies = false
+			query.position = Vector2(173, 431)
+			var space = get_world_2d().direct_space_state
+	
+			for x in get_world_2d().direct_space_state.intersect_point(query):
+
+				if x.collider.owner.is_in_group("customer"):
+					print(x.collider)
+					x.collider.owner.ExitShop()
+		else: print("Sorry bar is not complete")
 		
-	elif activeRecipe == "Awaiting Order":
+	elif activeRecipe == "Awaiting Order" and get_tree().get_nodes_in_group("customer"):
 		activeRecipe = recipeBook.keys()[randi_range(0, recipeBook.size()-1)]
 		activeMaterial = materialBook.keys()[randi_range(0, materialBook.size()-1)]
 		
@@ -188,30 +196,47 @@ func createCustomer():
 	add_child(item)
 	item.position = Vector2(172,580)
 	item.speed = 100
-	item.want = randi_range(0, recipeBook.size()-1)
-	print(item.want)
-  
+
+func daysDone():
+	if ingotCheck():
+		ingotNode.queue_free()
+		
+	var query := PhysicsPointQueryParameters2D.new()
+	query.collide_with_areas = true
+	query.collide_with_bodies = false
+	query.position = $Forge.position + Vector2(80,100)
+	var space = get_world_2d().direct_space_state
+	
+	for x in get_world_2d().direct_space_state.intersect_point(query):
+		if x.collider.owner.is_in_group("ingot"):
+			x.collider.owner.queue_free()
+			
+	for child in get_tree().get_nodes_in_group("customer"):
+		child.queue_free()
+
 func nextDay():
 	day += 1
+	
 
 func _on_anvil_game_game_complete_signal():
 	gameFinished = true
 	$AnvilGame.hide()
 
-#func _input(event):
-	#if Input.is_action_just_pressed("click"):
-		#print(event.get_position())
+func _input(event):
+	if Input.is_action_just_pressed("click"):
+		print(event.get_position())
 
 func _on_button_pressed():
-	createCustomer()
-	pass # Replace with function body.
+	var ingotNode = ingotCheck()
+	money += 1*ingotNode.recipeProperties["value"]*ingotNode.materialProperties["valueMod"]*(ingotNode.quality/100)
+	activeRecipe = "Awaiting Order"
+	activeMaterial = ""
+	ingotNode.queue_free()
 
 func _on_ore_box_animation_looped():
-	print("loop anim")
 	$OreBox.pause()
 	
 func _on_ore_box_animation_finished(Start):
-	print("fninshedm")
 	$OreBox.pause()
 
 func _on_anvil_game_player_left(child):
@@ -221,5 +246,10 @@ func _on_anvil_game_player_left(child):
 		child.position = Vector2.ZERO
 
 func _on_day_button_pressed():
+	daysDone()
 	nextDay()
+	pass # Replace with function body.
+
+func _on_customer_pressed():
+	createCustomer()
 	pass # Replace with function body.

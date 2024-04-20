@@ -24,7 +24,7 @@ signal playerLeft(child)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	ingotPosition = $ColorRect.position + $ColorRect.pivot_offset
+	ingotPosition = $AnvilTop.position + $AnvilTop.offset
 	hide()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -35,6 +35,7 @@ func _input(event):
 	if (event is InputEventMouseButton and visible and Input.is_action_just_pressed("click") and not gameCompletedBool):
 		$AnimatedSprite2D.play()
 		$Ping.play()
+		$AnvilTop.play()
 		userClick = event.position
 		missDistanceVector = userClick - nextClick.position
 		missDistance = missDistanceVector.length()
@@ -90,6 +91,7 @@ func summonMinigame(instance):
 		show()
 		if instanceBudget > 0:
 			nextClick = clickTarget.instantiate()
+			nextClick.play()
 			instanceCounter += 1
 			instanceBudget -= 1
 		nextClick.position = ingotInstance.recipeProperties["points"][ingotInstance.stage]

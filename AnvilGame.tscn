@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://b1qqtnco6o3b5"]
+[gd_scene load_steps=24 format=3 uid="uid://b1qqtnco6o3b5"]
 
 [ext_resource type="Script" path="res://AnvilGame.gd" id="1_3ooct"]
 [ext_resource type="PackedScene" uid="uid://bxch7joyvexmh" path="res://click_target.tscn" id="2_k18te"]
+[ext_resource type="Texture2D" uid="uid://dc1yopttemrmx" path="res://Assets/Shareef/anvilTop.png" id="3_410m1"]
 [ext_resource type="AudioStream" uid="uid://7sjplt5w0opd" path="res://Assets/Sounds/Audacity/AnvilHit1.wav" id="3_k1k31"]
 [ext_resource type="AudioStream" uid="uid://dfc24sukfej28" path="res://Assets/Sounds/Audacity/AnvilHit2.wav" id="4_1ywx1"]
 [ext_resource type="AudioStream" uid="uid://bokbvu8wkxrk" path="res://Assets/Sounds/Audacity/blacksmith1.mp3" id="5_ckptm"]
@@ -10,6 +11,45 @@
 [ext_resource type="AudioStream" uid="uid://bsv436vlcuyea" path="res://Assets/Sounds/Audacity/blacksmith3.mp3" id="7_qfhuv"]
 [ext_resource type="AudioStream" uid="uid://br7qg3ntb3h2j" path="res://Assets/Sounds/pog ping.mp3" id="9_ix781"]
 [ext_resource type="AudioStream" uid="uid://xky5hhp50v5n" path="res://Assets/Sounds/break_metal.mp3" id="10_kile0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_km7r8"]
+atlas = ExtResource("3_410m1")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bh7gs"]
+atlas = ExtResource("3_410m1")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_drmks"]
+atlas = ExtResource("3_410m1")
+region = Rect2(0, 200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pye2g"]
+atlas = ExtResource("3_410m1")
+region = Rect2(200, 200, 200, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fg74g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_km7r8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bh7gs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_drmks")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pye2g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_km7r8")
+}],
+"loop": false,
+"name": &"Whack",
+"speed": 30.0
+}]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_6cs55"]
 streams_count = 5
@@ -80,14 +120,14 @@ grow_vertical = 2
 script = ExtResource("1_3ooct")
 clickTarget = ExtResource("2_k18te")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 0
-offset_left = 465.0
-offset_top = 101.0
-offset_right = 706.0
-offset_bottom = 525.0
-pivot_offset = Vector2(120.01, 308.53)
-color = Color(0.188235, 0.188235, 0.188235, 1)
+[node name="AnvilTop" type="AnimatedSprite2D" parent="."]
+position = Vector2(579, 402)
+scale = Vector2(3.065, 3.065)
+sprite_frames = SubResource("SpriteFrames_fg74g")
+animation = &"Whack"
+frame = 4
+frame_progress = 1.0
+offset = Vector2(-3.98, -21.775)
 
 [node name="Ping" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_6cs55")

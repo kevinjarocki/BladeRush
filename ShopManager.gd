@@ -16,7 +16,7 @@ var gameFinished = false
 
 var recipeBook = {
 
-	"Dagger" : {"points": [Vector2(569, 139),Vector2(628, 191),Vector2(654, 237),Vector2(660, 291),Vector2(660, 293),Vector2(626, 328),Vector2(626, 329),Vector2(583, 353),Vector2(581, 354),Vector2(543, 372),Vector2(543, 373),Vector2(529, 405),Vector2(529, 407),Vector2(530, 217),Vector2(658, 471)], 
+	"Dagger" : {"points": [Vector2(569, 139),Vector2(628, 191),Vector2(654, 237),Vector2(660, 291),Vector2(660, 293)], 
 	"name": "dagger", "perfectRange": 5, "punishRate": 0.1, "value" : 1},
 	
 	"Scimitar" : {"points": [Vector2(553, 214),Vector2(610, 282),Vector2(515, 326),Vector2(619, 398),Vector2(534, 448)], 
@@ -140,6 +140,8 @@ func playerAtOreBox():
 		ingotNode.materialProperties = materialBook[activeMaterial]
 		ingotNode.heatingMod = heatingMod
 		ingotNode.coolingMod = coolingMod
+		
+		ingotNode.SetMaterialColor()
 		
 		ingotNode.get_node("AnimatedSprite2D").animation = ingotNode.recipeProperties["name"]
 		ingotNode.get_node("Filter").animation = ingotNode.recipeProperties["name"]

@@ -6,6 +6,7 @@ extends Node2D
 @export var activeMaterial = "Awaiting Order"
 @export var minigame: PackedScene
 var ingotNode = null
+var gameFinished = false
 
 var recipeBook = {
 
@@ -60,11 +61,16 @@ func playerAtAnvil():
 		$Player.freeze()
 		var ingotNode = ingotCheck()
 		ingotNode.recipe = recipeBook[ingotNode.recipeName]
-		$Player.remove_child(ingotNode)
-		$AnvilGame.add_child(ingotNode)
-		$AnvilGame.summonMinigame(ingotNode)
+		if !gameFinished:
+			print("take my ingot")
+			$Player.remove_child(ingotNode)
+			$AnvilGame.add_child(ingotNode)
+			$AnvilGame.summonMinigame(ingotNode)
+			
+		else:
+			print("dont take my ingot")
+		
 		$Player.unFreeze()
-		print("here")
 	else:
 		print("no ingot")
 	
@@ -107,6 +113,7 @@ func playerAtOreBox():
 	$Ferret.play()
 	$Dirt.play()
 	if !ingotCheck():
+		gameFinished = false
 		var item = load("res://ingot.tscn").instantiate()
 		$Player.add_child(item)
 		ingotNode = item
@@ -144,6 +151,7 @@ func nextDay():
 	day += 1
 
 func _on_anvil_game_game_complete_signal():
+	gameFinished = true
 	$AnvilGame.hide()
 
 #func _input(event):

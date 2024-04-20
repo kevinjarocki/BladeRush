@@ -253,3 +253,8 @@ func _on_day_button_pressed():
 func _on_customer_pressed():
 	createCustomer()
 	pass # Replace with function body.
+
+
+func _on_ready():
+	$ThwakToMainMenu.play()
+	createCustomer()

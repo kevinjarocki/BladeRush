@@ -32,8 +32,8 @@ func _input(event):
 		ingotInstance.quality -= missDistance
 		print(ingotInstance.quality)
 		ingotInstance.stage += 1
-		if (ingotInstance.stage < ingotInstance.recipe.size()):
-			nextClick.position = ingotInstance.recipe[ingotInstance.stage]
+		if (ingotInstance.stage < ingotInstance.recipeProperties["points"].size()):
+			nextClick.position = ingotInstance.recipeProperties["points"][ingotInstance.stage]
 			
 		else:
 			nextClick.killInstance()
@@ -43,14 +43,14 @@ func _input(event):
 func summonMinigame(instance):
 	
 	ingotInstance = instance
-	if (ingotInstance.stage < ingotInstance.recipe.size()):
+	if (ingotInstance.stage < ingotInstance.recipeProperties["points"].size()):
 		gameCompletedBool = false
 		show()
 		if instanceBudget > 0:
 			nextClick = clickTarget.instantiate()
 			instanceCounter += 1
 			instanceBudget -= 1
-		nextClick.position = ingotInstance.recipe[ingotInstance.stage]
+		nextClick.position = ingotInstance.recipeProperties["points"][ingotInstance.stage]
 		add_child(nextClick)
 	else:
 		hide()

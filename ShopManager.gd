@@ -3,7 +3,7 @@ extends Node2D
 @export var money = 0
 @export var day = 1
 @export var dayTimer = 0.00
-@export var endDayTime = 20
+@export var endDayTime = 8
 @export var activeRecipe = "Awaiting Order"
 @export var activeMaterial = ""
 @export var minigame: PackedScene
@@ -159,6 +159,8 @@ func playerAtCashRegister():
 				if x.collider.owner.is_in_group("customer"):
 					print(x.collider)
 					x.collider.owner.ExitShop()
+					createCustomer()
+					
 		else: print("Sorry bar is not complete")
 		
 	elif activeRecipe == "Awaiting Order" and get_tree().get_nodes_in_group("customer"):
@@ -214,6 +216,8 @@ func _on_customer_pressed():
 	pass # Replace with function body.
 
 func daysDone():
+	if $AnvilGame.visible:
+		$AnvilGame._on_player_departed("Anvil")
 	
 	if ingotCheck():
 		ingotCheck().queue_free()

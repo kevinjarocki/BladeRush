@@ -8,6 +8,7 @@ signal heatInc
 func endDay(day, money):
 	visible = true
 	$Control/Info.text = "Finished day: " + str(day) + "\n"
+	#print(self.owner.heatingMod)
 
 func _on_next_day_pressed():
 	visible = false

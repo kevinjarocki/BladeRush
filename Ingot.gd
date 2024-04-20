@@ -49,7 +49,20 @@ func _process(delta):
 			temperature -= materialProperties["coolRate"] - coolingMod
 		else:
 			temperature = 0
-
+func SetMaterialColor():
+	var targetColor = Color(0,0,0,0)
+	
+	if materialProperties["name"] == "tin":
+		targetColor = Color(192.0/255,225.0/255,254.0/255,255.0/255)
+	elif materialProperties["name"] == "bronze":
+		targetColor = Color(233.0/255,163.0/255,54.0/255,255.0/255)
+	elif materialProperties["name"] == "iron":
+		targetColor = Color(254.0/255,208.0/255,200.0/255,255.0/255)
+	elif materialProperties["name"] == "gold":
+		targetColor = Color(254.0/255,208.0/255,47.0/255,255.0/255)
+		
+	$AnimatedSprite2D.modulate = targetColor
+	print("new color" ,targetColor)
 
 
 

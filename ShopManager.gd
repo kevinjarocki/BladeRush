@@ -138,6 +138,8 @@ func playerAtOreBox():
 		ingotNode.heatingMod = heatingMod
 		ingotNode.coolingMod = coolingMod
 		
+		ingotNode.SetMaterialColor()
+		
 		ingotNode.get_node("AnimatedSprite2D").animation = ingotNode.recipeProperties["name"]
 		ingotNode.get_node("Filter").animation = ingotNode.recipeProperties["name"]
 

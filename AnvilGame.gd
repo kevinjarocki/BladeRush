@@ -44,7 +44,7 @@ func _input(event):
 		elif ingotInstance.temperature < ingotInstance.materialProperties["idealTemp"] - ingotInstance.materialProperties["idealTempRange"]:
 			tempMiss = (ingotInstance.materialProperties["idealTemp"] - ingotInstance.materialProperties["idealTempRange"]) - ingotInstance.temperature
 			TemptQualitySubtract()
-		print(tempMiss)
+		print("temp miss:",tempMiss)
 		
 		if missDistance <= ingotInstance.recipeProperties["perfectRange"]:
 			print("Perfect Strike!")

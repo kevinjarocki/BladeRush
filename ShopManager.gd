@@ -30,7 +30,7 @@ var materialBook = {
 	"Tin" : {"name": "tin", "coolRate" : 10, "heatRate" : 25, "idealTemp": 7500, "idealTempRange": 1200, "valueMod": 1, "cost": 1},
 	"Iron" : {"name": "iron", "coolRate" : 8, "heatRate" : 25, "idealTemp": 6600, "idealTempRange": 800, "valueMod": 2, "cost": 1},
 	"Bronze" : {"name": "bronze", "coolRate" : 4, "heatRate" : 25, "idealTemp": 4000, "idealTempRange": 1000, "valueMod": 4, "cost": 1},
-	"Gold": {"name": "gold", "coolRate" : 25, "heatRate" : 50, "idealTemp": 2000, "idealTempRange": 500, "valueMod": 6, "cost": 1}
+	"Gold": {"name": "gold", "coolRate" : 20, "heatRate" : 50, "idealTemp": 2000, "idealTempRange": 800, "valueMod": 6, "cost": 1}
 
 }
 

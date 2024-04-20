@@ -39,7 +39,7 @@ func _process(delta):
 	var ColdMetal = Color(0.0150,0,0,0.198)
 	var MetalGlow = ColdMetal + Color(.25/1000 * 1.1 *temperature, .25/1000*0.1*pow(temperature,1.2) - 0.25/1000*0.2*temperature, 0 , .202/1000*0.5*temperature)
 	$AnimatedSprite2D.self_modulate = Color(1,1,1,1)
-
+	$PointLight2D.energy = temperature/maxTemp
 	$Filter.self_modulate = MetalGlow
 	if isForge:
 		if temperature < maxTemp:

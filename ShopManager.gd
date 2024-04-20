@@ -19,8 +19,8 @@ var recipeBook = {
 	"Dagger" : {"points": [Vector2(569, 139),Vector2(628, 191),Vector2(654, 237),Vector2(660, 291),Vector2(660, 293),Vector2(626, 328),Vector2(626, 329),Vector2(583, 353),Vector2(581, 354),Vector2(543, 372),Vector2(543, 373),Vector2(529, 405),Vector2(529, 407),Vector2(530, 217),Vector2(658, 471)], 
 	"name": "dagger", "perfectRange": 5, "punishRate": 0.1, "value" : 1},
 	
-	"Scimtar" : {"points": [Vector2(553, 214),Vector2(610, 282),Vector2(515, 326),Vector2(619, 398),Vector2(534, 448)], 
-	"name": "scimtar","perfectRange": 3, "punishRate": 0.1, "value" : 3},
+	"Scimitar" : {"points": [Vector2(553, 214),Vector2(610, 282),Vector2(515, 326),Vector2(619, 398),Vector2(534, 448)], 
+	"name": "scimitar","perfectRange": 3, "punishRate": 0.1, "value" : 3},
 	
 	"Axe" : {"points": [Vector2(580, 508),Vector2(576, 431),Vector2(578, 365),Vector2(578, 287),Vector2(613, 492),Vector2(614, 440),Vector2(614, 391),Vector2(615, 325),Vector2(550, 266)], 
 	"name": "axe", "perfectRange": 3, "punishRate": 0.1, "value" : 3}

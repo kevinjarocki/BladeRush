@@ -96,6 +96,8 @@ func summonMinigame(instance):
 		add_child(nextClick)
 		move_child(nextClick, 2)
 	else:
+		ingotSprite.frame = 1
+		ingotFilter.frame = 1
 		hide()
 
 	#await get_tree().create_timer(1.0).timeout

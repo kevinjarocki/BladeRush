@@ -1,13 +1,17 @@
-[gd_scene load_steps=14 format=3 uid="uid://7nch364v2svb"]
+[gd_scene load_steps=13 format=3 uid="uid://7nch364v2svb"]
 
 [ext_resource type="Script" path="res://Ingot.gd" id="1_iac0r"]
-[ext_resource type="Texture2D" uid="uid://cimw46c1oonm0" path="res://Assets/Ingot&Ore_Kit/Ingot/Ingot Blue 4.png" id="1_w3osd"]
-[ext_resource type="Texture2D" uid="uid://cl16pp0ody17o" path="res://Assets/Ingot&Ore_Kit/Ingot/Ingot Light Blue 4.png" id="2_hkw53"]
-[ext_resource type="Texture2D" uid="uid://bm8cdevx2e7sw" path="res://Assets/Ingot&Ore_Kit/Ingot/Ingot Silver 4.png" id="2_th0rr"]
-[ext_resource type="Texture2D" uid="uid://d0fugghvi6o0c" path="res://Assets/Ingot&Ore_Kit/Ingot/Ingot Gold 4.png" id="3_2owca"]
-[ext_resource type="Texture2D" uid="uid://bmws2yp1dafx" path="res://Assets/Ingot&Ore_Kit/Ingot/Ingot Red 4.png" id="3_qynva"]
+[ext_resource type="Texture2D" uid="uid://db52wh6xkyow2" path="res://Assets/Shareef/Ingot_Axe.png" id="2_jgmdq"]
+[ext_resource type="Texture2D" uid="uid://dfrdi5r22eshs" path="res://Assets/Shareef/Ingot_Scimitar.png" id="4_f5qwb"]
 [ext_resource type="Texture2D" uid="uid://wsjx08weifro" path="res://Assets/Shareef/dagger.png" id="6_3ku6o"]
-[ext_resource type="Texture2D" uid="uid://dg4gp6gnk1wk0" path="res://Assets/weapons/blade.png" id="7_rlxdu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_46kyo"]
+atlas = ExtResource("2_jgmdq")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h6rb8"]
+atlas = ExtResource("2_jgmdq")
+region = Rect2(200, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tqgal"]
 atlas = ExtResource("6_3ku6o")
@@ -17,27 +21,25 @@ region = Rect2(0, 0, 200, 200)
 atlas = ExtResource("6_3ku6o")
 region = Rect2(200, 0, 200, 200)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vtc0f"]
-atlas = ExtResource("7_rlxdu")
-region = Rect2(0, 0, 27, 28)
+[sub_resource type="AtlasTexture" id="AtlasTexture_8mr8m"]
+atlas = ExtResource("4_f5qwb")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3oa4w"]
+atlas = ExtResource("4_f5qwb")
+region = Rect2(200, 0, 200, 200)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6qvr0"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_w3osd")
+"texture": SubResource("AtlasTexture_46kyo")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_hkw53")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_2owca")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_qynva")
+"texture": SubResource("AtlasTexture_h6rb8")
 }],
 "loop": true,
-"name": &"coldtoHot",
+"name": &"axe",
 "speed": 5.0
 }, {
 "frames": [{
@@ -53,21 +55,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_th0rr")
+"texture": SubResource("AtlasTexture_8mr8m")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_vtc0f")
+"texture": SubResource("AtlasTexture_3oa4w")
 }],
 "loop": true,
-"name": &"default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_qynva")
-}],
-"loop": true,
-"name": &"forged",
+"name": &"scimitar",
 "speed": 5.0
 }]
 
@@ -82,12 +76,13 @@ metadata/_edit_group_ = true
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.308594, 0.302734)
 sprite_frames = SubResource("SpriteFrames_6qvr0")
+animation = &"scimitar"
 
 [node name="Filter" type="AnimatedSprite2D" parent="."]
 self_modulate = Color(0.788235, 0.678431, 0.67451, 1)
 scale = Vector2(0.308594, 0.302734)
 sprite_frames = SubResource("SpriteFrames_6qvr0")
-animation = &"dagger"
+animation = &"scimitar"
 
 [node name="Area2D" type="Area2D" parent="."]
 

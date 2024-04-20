@@ -482,6 +482,22 @@ offset_right = 1026.0
 offset_bottom = 99.0
 color = Color(0.494118, 0.494118, 0.494118, 0.556863)
 
+[node name="Button" type="Button" parent="GUI HUD"]
+layout_mode = 0
+offset_left = 410.0
+offset_top = 567.0
+offset_right = 637.0
+offset_bottom = 603.0
+text = "Sell Ingot DEV ONLY PLZ"
+
+[node name="DoNothing" type="Button" parent="GUI HUD"]
+layout_mode = 0
+offset_left = 143.0
+offset_top = 548.0
+offset_right = 260.0
+offset_bottom = 600.0
+text = "Do Nothing"
+
 [node name="TileMap" type="TileMap" parent="."]
 light_mask = 0
 tile_set = SubResource("TileSet_sq3e3")
@@ -509,5 +525,6 @@ panning_strength = 1.86
 [connection signal="interacted" from="Player" to="." method="_on_player_interacted"]
 [connection signal="gameCompleteSignal" from="AnvilGame" to="." method="_on_anvil_game_game_complete_signal"]
 [connection signal="playerLeft" from="AnvilGame" to="." method="_on_anvil_game_player_left"]
-[connection signal="pressed" from="GUI HUD/Customer" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="GUI HUD/Customer" to="." method="_on_customer_pressed"]
 [connection signal="pressed" from="GUI HUD/DayButton" to="." method="_on_day_button_pressed"]
+[connection signal="pressed" from="GUI HUD/Button" to="." method="_on_button_pressed"]

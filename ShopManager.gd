@@ -87,7 +87,7 @@ func _on_player_interacted(station):
 func playerAtAnvil():
 	if (ingotCheck()):
 		$Player.freeze()
-		var ingotNode = ingotCheck()
+		ingotNode = ingotCheck()
 		ingotNode.recipe = recipeBook[ingotNode.recipeName]
 		if !gameFinished:
 			print("take my ingot")

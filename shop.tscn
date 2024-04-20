@@ -508,9 +508,6 @@ panning_strength = 1.86
 [connection signal="departed" from="Player" to="AnvilGame" method="_on_player_departed"]
 [connection signal="interacted" from="Player" to="." method="_on_player_interacted"]
 [connection signal="gameCompleteSignal" from="AnvilGame" to="." method="_on_anvil_game_game_complete_signal"]
-
 [connection signal="playerLeft" from="AnvilGame" to="." method="_on_anvil_game_player_left"]
-
 [connection signal="pressed" from="GUI HUD/Customer" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="GUI HUD/DayButton" to="." method="_on_day_button_pressed"]
-

@@ -13,6 +13,7 @@ var instanceBudget = 1
 var mouseLocation = Vector2.ZERO
 var scaleValue = Vector2(1,1)
 @export var ingotPosition = Vector2(500,-500)
+var gameStarted = false
 
 signal gameCompleteSignal
 signal playerLeft(child)
@@ -26,7 +27,7 @@ func _process(delta):
 	pass
 	
 func _input(event):
-	#print(event.position)
+	
 	if (event is InputEventMouseButton and visible and Input.is_action_just_pressed("click") and not gameCompletedBool):
 		$AnimatedSprite2D.play()
 		$Ping.play()
@@ -43,11 +44,14 @@ func _input(event):
 			nextClick.killInstance()
 			gameCompletedBool = true
 			gameCompleteSignal.emit()
-			
+	if (event is InputEventMouseMotion and visible):
+		print(event.position)
+		$AnimatedSprite2D.position = event.position
+		
 func summonMinigame(instance):
 	
 	ingotInstance = instance
-
+	gameStarted = true
 	ingotInstance.position = ingotPosition
 	ingotInstance.scale = scaleValue
 	#This will change the ingot animation to the recipe animation we need. Every animation for evcery weapon type will be a part of the ingot scene
@@ -63,6 +67,7 @@ func summonMinigame(instance):
 			instanceBudget -= 1
 		nextClick.position = ingotInstance.recipeProperties["points"][ingotInstance.stage]
 		add_child(nextClick)
+		move_child(nextClick, 2)
 	else:
 		hide()
 
@@ -74,11 +79,21 @@ func _on_button_pressed():
 func _on_player_departed(body):
 	if !gameCompletedBool and instanceCounter > 0:
 		instanceCounter = 0
+	if gameStarted:
+		ingotInstance.scale = Vector2(0.25,0.25)
+		remove_child(ingotInstance)
+		owner.add_child(ingotInstance)
+		#print(owner.get_children())
+		playerLeft.emit(ingotInstance)
 	if gameCompletedBool:
 		instanceBudget = 1
+
+		gameStarted = false
+
 	ingotInstance.scale = Vector2(0.25,0.25)
 	remove_child(ingotInstance)
 	owner.add_child(ingotInstance)
 	playerLeft.emit(ingotInstance)
+
 	
 	hide()

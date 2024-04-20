@@ -1,15 +1,13 @@
-[gd_scene load_steps=18 format=3 uid="uid://b1qqtnco6o3b5"]
+[gd_scene load_steps=16 format=3 uid="uid://b1qqtnco6o3b5"]
 
 [ext_resource type="Script" path="res://AnvilGame.gd" id="1_3ooct"]
 [ext_resource type="PackedScene" uid="uid://bxch7joyvexmh" path="res://click_target.tscn" id="2_k18te"]
-[ext_resource type="Texture2D" uid="uid://cin7oklhjhe8s" path="res://Assets/Tiny Swords/Tiny Swords (Update 010)/UI/Banners/Banner_Horizontal.png" id="2_tk58i"]
 [ext_resource type="AudioStream" uid="uid://7sjplt5w0opd" path="res://Assets/Sounds/Audacity/AnvilHit1.wav" id="3_k1k31"]
 [ext_resource type="AudioStream" uid="uid://dfc24sukfej28" path="res://Assets/Sounds/Audacity/AnvilHit2.wav" id="4_1ywx1"]
 [ext_resource type="AudioStream" uid="uid://bokbvu8wkxrk" path="res://Assets/Sounds/Audacity/blacksmith1.mp3" id="5_ckptm"]
 [ext_resource type="AudioStream" uid="uid://dpmica7dit60i" path="res://Assets/Sounds/Audacity/blacksmith2.mp3" id="6_5xbeg"]
 [ext_resource type="Texture2D" uid="uid://cudha08dbdm6e" path="res://Assets/Shareef/HammerThwack2.png" id="6_agt10"]
 [ext_resource type="AudioStream" uid="uid://bsv436vlcuyea" path="res://Assets/Sounds/Audacity/blacksmith3.mp3" id="7_qfhuv"]
-[ext_resource type="Texture2D" uid="uid://dg4gp6gnk1wk0" path="res://Assets/weapons/blade.png" id="10_q20t0"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_6cs55"]
 streams_count = 5
@@ -80,10 +78,6 @@ grow_vertical = 2
 script = ExtResource("1_3ooct")
 clickTarget = ExtResource("2_k18te")
 
-[node name="Ping" type="AudioStreamPlayer" parent="."]
-stream = SubResource("AudioStreamRandomizer_6cs55")
-pitch_scale = 0.7
-
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
 offset_left = 465.0
@@ -93,20 +87,13 @@ offset_bottom = 525.0
 pivot_offset = Vector2(120.01, 308.53)
 color = Color(0.188235, 0.188235, 0.188235, 1)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(157, 111)
-texture = ExtResource("2_tk58i")
+[node name="Ping" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_6cs55")
+pitch_scale = 0.7
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(686, 433)
 scale = Vector2(2.07, 2.07)
 sprite_frames = SubResource("SpriteFrames_xmowa")
 animation = &"thwack"
-frame = 5
-frame_progress = 1.0
-
-[node name="Blade" type="Sprite2D" parent="."]
-position = Vector2(568, 433)
-rotation = -0.785398
-scale = Vector2(10.245, 10.245)
-texture = ExtResource("10_q20t0")
+offset = Vector2(16.245, 27.71)

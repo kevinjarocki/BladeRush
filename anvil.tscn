@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cwaciop3hck2r" path="res://Assets/Shareef/Anvil.png" id="1_qradj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l1pib"]
-size = Vector2(200.333, 163.4)
+size = Vector2(135.714, 145.017)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ov7ng"]
 
@@ -21,7 +21,8 @@ metadata/_edit_group_ = true
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(6.33333, -1.88889)
+position = Vector2(9.28571, -11.0802)
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_l1pib")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]

@@ -14,7 +14,9 @@ var screen_size
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport_rect().size
+	$Area2D/AnimatedSprite2D.animation = "Idle"
 	$Area2D/AnimatedSprite2D.play()
+	station = "none"
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -53,11 +55,11 @@ func _process(delta):
 					if station.owner.name == "Anvil":
 						$Area2D/AnimatedSprite2D.animation = "swing"
 					if station.owner.name == "Forge":
-						$Area2D/AnimatedSprite2D.animation = "swing"
+						$Area2D/AnimatedSprite2D.animation = "fiddling"
 					if station.owner.name == "OreBox":
-						$Area2D/AnimatedSprite2D.animation = "swing"
+						$Area2D/AnimatedSprite2D.animation = "fiddling"
 					if station.owner.name == "CashRegister":
-						$Area2D/AnimatedSprite2D.animation = "swing"
+						$Area2D/AnimatedSprite2D.animation = "fiddling"
 			else:
 				$Area2D/AnimatedSprite2D.animation = "Idle"
 

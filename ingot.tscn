@@ -69,7 +69,6 @@ animations = [{
 size = Vector2(31.2811, 17.7589)
 
 [node name="Ingot" type="Node2D" groups=["ingot"]]
-scale = Vector2(2, 2)
 script = ExtResource("1_iac0r")
 metadata/_edit_group_ = true
 

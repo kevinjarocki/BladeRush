@@ -121,9 +121,10 @@ func _on_player_departed(body):
 		if !gameCompletedBool and instanceCounter > 0:
 			instanceCounter = 0
 		if gameStarted and ingotInstance != null:
-			ingotInstance.scale = Vector2(2,2)
+			ingotInstance.scale = Vector2(1.5,1.5)
 			remove_child(ingotInstance)
 			owner.add_child(ingotInstance)
+			ingotInstance.position = Vector2(20,-10)
 			#print(owner.get_children())
 			playerLeft.emit(ingotInstance)
 		if gameCompletedBool:
@@ -138,9 +139,10 @@ func abortAnvilGame():
 	if !gameCompletedBool and instanceCounter > 0:
 		instanceCounter = 0
 	if gameStarted and ingotInstance != null:
-		ingotInstance.scale = Vector2(0.25,0.25)
+		ingotInstance.scale = Vector2(1.5,1.5)
 		remove_child(ingotInstance)
 		owner.add_child(ingotInstance)
+		ingotInstance.position = Vector2(20,10)
 		playerLeft.emit(ingotInstance)
 	if gameCompletedBool:
 		instanceBudget = 1

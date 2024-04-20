@@ -17,13 +17,13 @@ var gameFinished = false
 var recipeBook = {
 
 	"Dagger" : {"points": [Vector2(569, 139),Vector2(628, 191),Vector2(654, 237),Vector2(660, 291),Vector2(660, 293)], 
-	"name": "dagger", "perfectRange": 5, "punishRate": 0.1, "value" : 1},
+	"name": "dagger", "perfectRange": 5, "punishRate": 0.2, "value" : 3},
 	
 	"Scimitar" : {"points": [Vector2(553, 214),Vector2(610, 282),Vector2(515, 326),Vector2(619, 398),Vector2(534, 448)], 
-	"name": "scimitar","perfectRange": 3, "punishRate": 0.1, "value" : 3},
+	"name": "scimitar","perfectRange": 3, "punishRate": 0.1, "value" : 5},
 	
 	"Axe" : {"points": [Vector2(580, 508),Vector2(576, 431),Vector2(578, 365),Vector2(578, 287),Vector2(613, 492),Vector2(614, 440),Vector2(614, 391),Vector2(615, 325),Vector2(550, 266)], 
-	"name": "axe", "perfectRange": 3, "punishRate": 0.1, "value" : 3}
+	"name": "axe", "perfectRange": 10, "punishRate": 0.5, "value" : 8}
 }
 
 var materialBook = {

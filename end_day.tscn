@@ -16,7 +16,6 @@ font = ExtResource("2_ixve3")
 font_size = 62
 
 [node name="EndDay" type="Node2D"]
-visible = false
 z_index = 30
 script = ExtResource("1_5xngi")
 
@@ -57,10 +56,37 @@ color = Color(0.329412, 0.329412, 0.329412, 0.803922)
 [node name="NextDay" type="Button" parent="Control"]
 z_index = 5
 layout_mode = 0
-offset_left = 549.0
-offset_top = 427.0
-offset_right = 687.0
-offset_bottom = 475.0
+offset_left = 853.0
+offset_top = 530.0
+offset_right = 991.0
+offset_bottom = 578.0
 text = "Next Day"
 
+[node name="PlayerSpeedInc" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 348.0
+offset_right = 593.0
+offset_bottom = 396.0
+text = "Increase Player Speed: 10G"
+
+[node name="CoolingRateDec" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 195.0
+offset_top = 406.0
+offset_right = 589.0
+offset_bottom = 454.0
+text = "Decrease Cooling Rate: 10G"
+
+[node name="HeatRateInc" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 198.0
+offset_top = 463.0
+offset_right = 595.0
+offset_bottom = 511.0
+text = "Increase Heat Rate: 10G"
+
 [connection signal="pressed" from="Control/NextDay" to="." method="_on_next_day_pressed"]
+[connection signal="pressed" from="Control/PlayerSpeedInc" to="." method="_on_player_speed_inc_pressed"]
+[connection signal="pressed" from="Control/CoolingRateDec" to="." method="_on_cooling_rate_dec_pressed"]
+[connection signal="pressed" from="Control/HeatRateInc" to="." method="_on_heat_rate_inc_pressed"]

@@ -121,3 +121,16 @@ func _on_player_departed(body):
 
 
 	hide()
+
+func abortAnvilGame():
+	if !gameCompletedBool and instanceCounter > 0:
+		instanceCounter = 0
+	if gameStarted and ingotInstance != null:
+		ingotInstance.scale = Vector2(0.25,0.25)
+		remove_child(ingotInstance)
+		owner.add_child(ingotInstance)
+		playerLeft.emit(ingotInstance)
+	if gameCompletedBool:
+		instanceBudget = 1
+		gameStarted = false
+	hide()

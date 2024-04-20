@@ -267,7 +267,8 @@ func resetDay():
 		
 	resetOrder()
 	if(day % 5):
-		createTaxMan()
+		#createTaxMan()
+		pass
 
 func resetOrder():
 	

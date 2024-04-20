@@ -386,7 +386,6 @@ stream_4/weight = 1.0
 
 [node name="Shop" type="Node2D"]
 script = ExtResource("1_07efy")
-endDayTime = 60
 minigame = ExtResource("2_vq7so")
 
 [node name="OreBox" parent="." instance=ExtResource("2_lioss")]
@@ -536,6 +535,7 @@ max_polyphony = 5
 panning_strength = 1.86
 
 [node name="EndDay" parent="." instance=ExtResource("19_bnti8")]
+visible = false
 
 [node name="ThwakToMainMenu" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("19_p3ybx")
@@ -550,4 +550,7 @@ stream = ExtResource("19_p3ybx")
 [connection signal="pressed" from="GUI HUD/Customer" to="." method="_on_customer_pressed"]
 [connection signal="pressed" from="GUI HUD/DayButton" to="." method="_on_day_button_pressed"]
 [connection signal="pressed" from="GUI HUD/Button" to="." method="_on_button_pressed"]
+[connection signal="coolingDec" from="EndDay" to="." method="_on_end_day_cooling_dec"]
+[connection signal="heatInc" from="EndDay" to="." method="_on_end_day_heat_inc"]
 [connection signal="nextDayPressed" from="EndDay" to="." method="_on_end_day_next_day_pressed"]
+[connection signal="speedInc" from="EndDay" to="." method="_on_end_day_speed_inc"]

@@ -25,6 +25,10 @@ var materialProperties = {
 	"valueMod": 6,
 	"cost": 1
 }
+
+var coolingMod = 0
+var heatingMod = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var stage = 0
@@ -39,10 +43,10 @@ func _process(delta):
 	$Filter.self_modulate = MetalGlow
 	if isForge:
 		if temperature < maxTemp:
-			temperature += materialProperties["heatRate"]
+			temperature += materialProperties["heatRate"] + heatingMod
 	else:
 		if temperature >= materialProperties["coolRate"]:
-			temperature -= materialProperties["coolRate"]
+			temperature -= materialProperties["coolRate"] - coolingMod
 		else:
 			temperature = 0
 

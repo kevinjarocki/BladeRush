@@ -55,6 +55,7 @@ func _process(delta):
 		var temp = 0
 		$"GUI HUD/ProgressBar".value = temp
 
+
 func _on_player_interacted(station):
 	
 	#If player is at an interactable station -> Go to a function for each station
@@ -187,6 +188,12 @@ func createCustomer():
 	add_child(item)
 	item.position = Vector2(172,580)
 	item.speed = 100
+	
+func createTaxMan():
+	var taxMan = load("res://tax_man.tscn").instantiate()
+	add_child(taxMan)
+	taxMan.position = Vector2(0,300)
+	#taxMan.speed = 1
 
 func _on_anvil_game_game_complete_signal():
 	gameFinished = true
@@ -253,6 +260,8 @@ func resetDay():
 		child.queue_free()
 		
 	resetOrder()
+	if(day % 5):
+		createTaxMan()
 
 func resetOrder():
 	

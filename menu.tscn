@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=3 uid="uid://bwcpjndqan6i2"]
+
+[ext_resource type="Script" path="res://Menu.gd" id="1_t4i6g"]
+[ext_resource type="Script" path="res://VBoxContainer.gd" id="2_3dkdv"]
+[ext_resource type="FontFile" uid="uid://d4gloc7rb6s5s" path="res://Assets/Font/vinque rg.otf" id="3_swbaj"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jnv8r"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"Menu",
+"speed": 5.0
+}]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 72.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_t4i6g")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 500.0
+offset_top = 200.0
+offset_right = 564.0
+offset_bottom = 295.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+script = ExtResource("2_3dkdv")
+
+[node name="Play" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_swbaj")
+text = "Play"
+
+[node name="Options" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_swbaj")
+text = "Options"
+
+[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_swbaj")
+text = "Quit"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="MarginContainer/VBoxContainer"]
+sprite_frames = SubResource("SpriteFrames_jnv8r")
+animation = &"Menu"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

@@ -236,3 +236,8 @@ func _on_end_day_next_day_pressed():
 	dayTimer = 0
 	createCustomer()
 	pass # Replace with function body.
+
+func _on_ready():
+	$ThwakToMainMenu.play()
+	createCustomer()
+

@@ -18,7 +18,9 @@
 [ext_resource type="AudioStream" uid="uid://df4ym32qvy80h" path="res://Assets/Sounds/Ferret/155115__jzazvurek__ferret5.mp3" id="16_k12j5"]
 [ext_resource type="AudioStream" uid="uid://bdml4x3j8ni0w" path="res://Assets/Sounds/Ferret/477390__nuff3__steps-dirt_2a.ogg" id="17_axae4"]
 [ext_resource type="AudioStream" uid="uid://ba8u1nix4fee7" path="res://Assets/Sounds/214456__quaker540__hq-flamethrower-burning.wav" id="18_mw575"]
+[ext_resource type="PackedScene" uid="uid://k1brmsrvmi3s" path="res://end_day.tscn" id="19_bnti8"]
 [ext_resource type="AudioStream" uid="uid://dpmica7dit60i" path="res://Assets/Sounds/Audacity/blacksmith2.mp3" id="19_p3ybx"]
+
 
 [sub_resource type="Theme" id="Theme_d7is4"]
 default_font = ExtResource("9_6uv7d")
@@ -499,6 +501,13 @@ offset_right = 260.0
 offset_bottom = 600.0
 text = "Do Nothing"
 
+[node name="DayTimer" type="ProgressBar" parent="GUI HUD"]
+layout_mode = 0
+offset_left = 738.0
+offset_top = 555.0
+offset_right = 1061.0
+offset_bottom = 602.0
+
 [node name="TileMap" type="TileMap" parent="."]
 light_mask = 0
 tile_set = SubResource("TileSet_sq3e3")
@@ -520,6 +529,8 @@ attenuation = 2.37841
 max_polyphony = 5
 panning_strength = 1.86
 
+[node name="EndDay" parent="." instance=ExtResource("19_bnti8")]
+
 [node name="ThwakToMainMenu" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("19_p3ybx")
 
@@ -533,3 +544,4 @@ stream = ExtResource("19_p3ybx")
 [connection signal="pressed" from="GUI HUD/Customer" to="." method="_on_customer_pressed"]
 [connection signal="pressed" from="GUI HUD/DayButton" to="." method="_on_day_button_pressed"]
 [connection signal="pressed" from="GUI HUD/Button" to="." method="_on_button_pressed"]
+[connection signal="nextDayPressed" from="EndDay" to="." method="_on_end_day_next_day_pressed"]

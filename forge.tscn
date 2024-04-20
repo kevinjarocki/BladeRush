@@ -81,4 +81,5 @@ debug_color = Color(0.937255, 0.129412, 0.541176, 0.419608)
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(99, 101.464)
 color = Color(0.635294, 0.309804, 0.054902, 1)
+energy = 1.5
 texture = SubResource("GradientTexture2D_qtmqi")

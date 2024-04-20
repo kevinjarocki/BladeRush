@@ -174,14 +174,18 @@ func playerAtCashRegister():
 		if $AnvilGame.gameCompletedBool:
 			var recipeValue = ingotNode.recipeProperties["value"]
 			var materialValue = ingotNode.materialProperties["valueMod"]
+			var sellValue = 0
 			
 			if ingotNode.quality == 100:
-				money += int(recipeValue*materialValue*5)
+				sellValue = int(recipeValue*materialValue*4)
 			elif ingotNode.quality > 90:
-				money += int(recipeValue*materialValue*2)
+				sellValue = int(recipeValue*materialValue*2)
 			else:
-				money += int(recipeValue*materialValue*(ingotNode.quality/100))
+				sellValue = int(recipeValue*materialValue*(ingotNode.quality/100))
 
+			money += sellValue
+			$CashRegister.drawGoldValue(sellValue)
+			
 			resetOrder()
 			ingotNode.queue_free()
 			$CashRegister.play()

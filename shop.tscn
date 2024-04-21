@@ -1,6 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 [gd_scene load_steps=30 format=3 uid="uid://cab2q7cer6567"]
+=======
+[gd_scene load_steps=27 format=3 uid="uid://cab2q7cer6567"]
+>>>>>>> parent of 402836c (tilemaps)
 =======
 [gd_scene load_steps=27 format=3 uid="uid://cab2q7cer6567"]
 >>>>>>> parent of 402836c (tilemaps)
@@ -16,10 +20,14 @@
 [ext_resource type="PackedScene" uid="uid://bdnf3f3fjgnoh" path="res://recipeTool.tscn" id="9_4745i"]
 [ext_resource type="Script" path="res://GUI HUD.gd" id="9_laghi"]
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 [ext_resource type="Texture2D" uid="uid://bbulknjel8w2a" path="res://Assets/Sprites/ShopScene/interior_.png" id="11_3pdu3"]
 [ext_resource type="Texture2D" uid="uid://cin7oklhjhe8s" path="res://Assets/Tiny Swords/Tiny Swords (Update 010)/UI/Banners/Banner_Horizontal.png" id="11_aeu1v"]
 
+=======
+[ext_resource type="Texture2D" uid="uid://bbulknjel8w2a" path="res://Assets/Sprites/ShopScene/interior_.png" id="11_3pdu3"]
+>>>>>>> parent of 402836c (tilemaps)
 =======
 [ext_resource type="Texture2D" uid="uid://bbulknjel8w2a" path="res://Assets/Sprites/ShopScene/interior_.png" id="11_3pdu3"]
 >>>>>>> parent of 402836c (tilemaps)
@@ -34,9 +42,12 @@
 [ext_resource type="AudioStream" uid="uid://dpmica7dit60i" path="res://Assets/Sounds/Audacity/blacksmith2.mp3" id="19_p3ybx"]
 
 [ext_resource type="PackedScene" path="res://trashCan.tscn" id="21_lpgaf"]
+<<<<<<< HEAD
 
 [ext_resource type="PackedScene" uid="uid://dlgvjnk6rw5xy" path="res://trashCan.tscn" id="21_lpgaf"]
 
+=======
+>>>>>>> parent of 402836c (tilemaps)
 
 [sub_resource type="Theme" id="Theme_d7is4"]
 default_font = ExtResource("9_6uv7d")
@@ -45,6 +56,7 @@ default_font_size = 22
 [sub_resource type="LabelSettings" id="LabelSettings_8qs8s"]
 font_size = 18
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 [sub_resource type="LabelSettings" id="LabelSettings_81hsu"]
@@ -55,6 +67,8 @@ font_color = Color(0, 0, 0, 1)
 font_size = 20
 font_color = Color(0, 0, 0, 1)
 
+=======
+>>>>>>> parent of 402836c (tilemaps)
 =======
 >>>>>>> parent of 402836c (tilemaps)
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tbcg6"]
@@ -542,12 +556,15 @@ offset_right = 1061.0
 offset_bottom = 602.0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 [node name="Sprite2D" type="Sprite2D" parent="GUI HUD"]
 z_index = -1
 position = Vector2(994.25, 15.125)
 scale = Vector2(1.05469, 0.688802)
 texture = ExtResource("11_aeu1v")
 
+=======
+>>>>>>> parent of 402836c (tilemaps)
 =======
 >>>>>>> parent of 402836c (tilemaps)
 [node name="TileMap" type="TileMap" parent="."]

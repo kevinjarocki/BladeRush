@@ -1,5 +1,5 @@
 extends Node2D
-var dialog_system = preload("res://dialog_system_01.tscn").instantiate()
+
 @export var money = 0
 @export var day = 1
 @export var dayTimer = 0.00
@@ -20,10 +20,11 @@ var heatingModCost = [10,12,15,20,25,35,45,50,60,80,100]
 var coolingModCost = [10,12,15,20,25,35,45,50,60,80,100]
 var playerSpeedModCost = [10,12,15,20,25,35,45,50,60,80,100]
 var autoMolmolCost = 150
-
+#Tax man stuff
 var taxManHere = false
 var taxPayed = false
-
+var taxMan = InstancePlaceholder
+var taxesOwed = 10*pow(day,1.1)
 var ingotNode = null
 var gameFinished = false
 
@@ -47,6 +48,7 @@ var materialBook = {
 
 }
 
+
 func _process(delta):
 	
 	$"GUI HUD/DayTimer".value = (dayTimer/endDayTime)*100
@@ -68,11 +70,7 @@ func _process(delta):
 		var temp = 0
 		$"GUI HUD/ProgressBar".value = temp
 
-func call_dialog_system(output: String):
-	if not has_node("DialogSystem01"):
-		add_child(dialog_system)
-		
-	dialog_system.add_new_output(output)
+
 
 func _on_player_interacted(station):
 	
@@ -211,11 +209,11 @@ func playerAtCashRegister():
 		activeRecipe = recipeBook.keys()[randi_range(0, recipeBook.size()-1)]
 		activeMaterial = materialBook.keys()[randi_range(0, materialBook.size()-1)]
 	elif taxManHere:
-		var taxesOwed = 3*pow(day,1.1)
-		activeRecipe = "Tax Man is here. Time to Pay up!"
-		activeMaterial = "Total Taxes Owed: " + str(snappedf(taxesOwed,1.5))
-		
-
+		money -= snappedf(taxesOwed,1.5)
+		#activeRecipe = "Tax Man is here. Time to Pay up!"
+		#activeMaterial = "Total Taxes Owed: " + str(snappedf(taxesOwed,1.5))
+		taxMan.ExitShop()
+		taxManHere = false
 		
 		if autoMolmol:
 			playerAtOreBox()
@@ -241,10 +239,9 @@ func createCustomer():
 	item.speed = 100
 	
 func createTaxMan():
-	var taxMan = load("res://tax_man.tscn").instantiate()
+	taxMan = load("res://tax_man.tscn").instantiate()
 	add_child(taxMan)
 	taxMan.position = Vector2(172,580)
-	#taxMan.speed = 1
 
 func _on_anvil_game_game_complete_signal():
 	gameFinished = true
@@ -281,6 +278,9 @@ func _on_end_day_next_day_pressed():
 	dayTimer = 0.00
 	if !taxManHere:
 		createCustomer()
+	elif taxManHere:
+		activeRecipe = "Tax Man is here. Time to Pay up!"
+		activeMaterial = "Total Taxes Owed: " + str(snappedf(taxesOwed,1.5))
 	
 func _on_ready():
 	$ThwakToMainMenu.play()
@@ -307,7 +307,7 @@ func resetDay():
 		child.queue_free()
 		
 	resetOrder()
-	if(day % 5 == 0):
+	if(day == 1 || day % 5 == 0):
 		taxManHere = true
 		createTaxMan()
 

@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://sneqw0sp171j"]
+[gd_scene load_steps=3 format=3 uid="uid://sneqw0sp171j"]
 
 [ext_resource type="Script" path="res://DialogSystem01.gd" id="1_ulsan"]
+[ext_resource type="FontFile" uid="uid://d4gloc7rb6s5s" path="res://Assets/Font/vinque rg.otf" id="2_f1eku"]
 
 [node name="DialogSystem01" type="Node2D"]
+scale = Vector2(3, 3)
 script = ExtResource("1_ulsan")
 
 [node name="DialogBackground" type="Sprite2D" parent="."]
@@ -10,3 +12,4 @@ script = ExtResource("1_ulsan")
 [node name="Dialog" type="RichTextLabel" parent="."]
 offset_right = 40.0
 offset_bottom = 40.0
+theme_override_fonts/normal_font = ExtResource("2_f1eku")

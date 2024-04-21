@@ -21,6 +21,15 @@ var coolingModCost = [10,12,15,20,25,35,45,50,60,80,100]
 var playerSpeedModCost = [10,12,15,20,25,35,45,50,60,80,100]
 var autoMolmolCost = 150
 
+@export var goldenHammer = false
+@export var bottledFire = false
+@export var kingsSigil = false
+@export var beBackIn5 = false
+@export var goldenHammerCost = 10
+@export var bottledFireCost = 10
+@export var kingsSigilCost = 25
+@export var beBackIn5Cost = 50
+
 var taxManHere = false
 
 var ingotNode = null
@@ -42,8 +51,10 @@ var materialBook = {
 	"Tin" : {"name": "tin", "coolRate" : 10, "heatRate" : 25, "idealTemp": 7500, "idealTempRange": 1200, "valueMod": 1, "cost": 1},
 	"Iron" : {"name": "iron", "coolRate" : 8, "heatRate" : 25, "idealTemp": 6600, "idealTempRange": 800, "valueMod": 2, "cost": 1},
 	"Bronze" : {"name": "bronze", "coolRate" : 4, "heatRate" : 25, "idealTemp": 4000, "idealTempRange": 1000, "valueMod": 4, "cost": 1},
-	"Gold": {"name": "gold", "coolRate" : 20, "heatRate" : 50, "idealTemp": 2000, "idealTempRange": 800, "valueMod": 6, "cost": 1}
-
+	"Gold": {"name": "gold", "coolRate" : 20, "heatRate" : 50, "idealTemp": 2000, "idealTempRange": 800, "valueMod": 6, "cost": 1},
+	"Rune": {"name": "gold", "coolRate" : 20, "heatRate" : 50, "idealTemp": 2000, "idealTempRange": 800, "valueMod": 6, "cost": 1},
+	"Mithril": {"name": "gold", "coolRate" : 20, "heatRate" : 50, "idealTemp": 2000, "idealTempRange": 800, "valueMod": 6, "cost": 1},
+	"Caledonite": {"name": "gold", "coolRate" : 20, "heatRate" : 50, "idealTemp": 2000, "idealTempRange": 800, "valueMod": 6, "cost": 1}
 }
 
 func _process(delta):
@@ -185,11 +196,14 @@ func playerAtCashRegister():
 
 			money += sellValue
 			$CashRegister.drawGoldValue(sellValue)
-			
-			resetOrder()
-			ingotNode.queue_free()
 			$CashRegister.play()
 			$CashRegister.get_node("Ding").play()
+			$GPUParticles2D.amount = sellValue
+			$GPUParticles2D.emitting = true
+			#$GPUParticles2D.emitting = false
+			resetOrder()
+			ingotNode.queue_free()
+
 			var query := PhysicsPointQueryParameters2D.new()
 			query.collide_with_areas = true
 			query.collide_with_bodies = false

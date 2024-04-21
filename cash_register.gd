@@ -3,7 +3,7 @@ extends AnimatedSprite2D
 var drawAnim = false
 
 func drawGoldValue(value):
-	$Label.text = "+" + str(value) + "G"
+	$Label.text = "+" + str(value) + " G"
 	$Label.visible = true
 	$Label.position.y = -9
 	

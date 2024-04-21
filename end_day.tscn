@@ -129,6 +129,7 @@ text = "Kings
 Sigil"
 
 [node name="Label" type="Label" parent="Control/Kings Sigil"]
+layout_mode = 0
 offset_left = 10.0
 offset_top = 80.0
 offset_right = 96.0
@@ -146,6 +147,7 @@ text = "Be back
 in 5"
 
 [node name="Label" type="Label" parent="Control/Be Back in 5"]
+layout_mode = 0
 offset_left = 10.0
 offset_top = 80.0
 offset_right = 96.0
@@ -163,6 +165,7 @@ text = "Bottled
 Fire"
 
 [node name="Label" type="Label" parent="Control/Bottled Fire"]
+layout_mode = 0
 offset_left = 10.0
 offset_top = 80.0
 offset_right = 96.0

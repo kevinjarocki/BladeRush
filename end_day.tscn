@@ -1,57 +1,93 @@
-[gd_scene load_steps=6 format=3 uid="uid://k1brmsrvmi3s"]
+[gd_scene load_steps=12 format=3 uid="uid://k1brmsrvmi3s"]
 
 [ext_resource type="Script" path="res://EndDay.gd" id="1_5xngi"]
 [ext_resource type="FontFile" uid="uid://d4gloc7rb6s5s" path="res://Assets/Font/vinque rg.otf" id="2_ixve3"]
+[ext_resource type="Texture2D" uid="uid://d2vttneovta0k" path="res://Assets/Tiny Swords/Tiny Swords (Update 010)/UI/Buttons/Button_Hover_3Slides.png" id="2_kwosq"]
+[ext_resource type="Texture2D" uid="uid://bafxm7jd4fpqk" path="res://Assets/Tiny Swords/Tiny Swords (Update 010)/UI/Buttons/Button_Red_3Slides.png" id="2_xvfy2"]
+[ext_resource type="Texture2D" uid="uid://w2lkuadd08w1" path="res://Assets/Tiny Swords/Tiny Swords (Update 010)/UI/Buttons/Button_Red_3Slides_Pressed.png" id="4_d63wf"]
+[ext_resource type="Texture2D" uid="uid://cwhgt788030vg" path="res://Assets/Tiny Swords/Tiny Swords (Update 010)/UI/Banners/Carved_9Slides.png" id="6_l5164"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_07xwv"]
+texture = ExtResource("2_kwosq")
+texture_margin_left = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 17.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ttkck"]
+texture = ExtResource("2_xvfy2")
+texture_margin_left = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 17.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_w5jf4"]
+texture = ExtResource("4_d63wf")
+texture_margin_left = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 17.0
 
 [sub_resource type="Theme" id="Theme_6i3ax"]
 default_font = ExtResource("2_ixve3")
-default_font_size = 32
+default_font_size = 22
+Button/colors/font_color = Color(0.027451, 0.0666667, 0, 1)
+Button/colors/font_disabled_color = Color(0.027451, 0.0666667, 0, 1)
+Button/colors/font_focus_color = Color(0.027451, 0.0666667, 0, 1)
+Button/colors/font_hover_color = Color(0.027451, 0.0666667, 0, 1)
+Button/colors/font_hover_pressed_color = Color(0.027451, 0.0666667, 0, 1)
+Button/colors/font_outline_color = Color(0.513726, 0.513726, 0.513726, 1)
+Button/colors/font_pressed_color = Color(0.027451, 0.0666667, 0, 1)
+Button/constants/h_separation = 0
+Button/constants/outline_size = 2
+Button/styles/hover = SubResource("StyleBoxTexture_07xwv")
+Button/styles/normal = SubResource("StyleBoxTexture_ttkck")
+Button/styles/pressed = SubResource("StyleBoxTexture_w5jf4")
+Label/colors/font_color = Color(0.027451, 0.0666667, 0, 1)
+Label/colors/font_outline_color = Color(0.513726, 0.513726, 0.513726, 1)
+Label/font_sizes/font_size = 48
 
-[sub_resource type="LabelSettings" id="LabelSettings_50jbx"]
-font = ExtResource("2_ixve3")
-font_size = 48
-
-[sub_resource type="LabelSettings" id="LabelSettings_e3iif"]
-font = ExtResource("2_ixve3")
-font_size = 62
+[sub_resource type="Theme" id="Theme_nmuwe"]
+resource_local_to_scene = true
 
 [node name="EndDay" type="Node2D"]
 z_index = 30
 script = ExtResource("1_5xngi")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -5
+position = Vector2(576, 325)
+scale = Vector2(5.97917, 3.36458)
+texture = ExtResource("6_l5164")
+
 [node name="Control" type="Control" parent="."]
+texture_filter = 6
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 theme = SubResource("Theme_6i3ax")
 
+[node name="ColorRect" type="ColorRect" parent="Control"]
+z_index = -9
+layout_mode = 0
+offset_left = 2.0
+offset_right = 1152.0
+offset_bottom = 644.0
+color = Color(0.184314, 0.113725, 0.00392157, 1)
+
 [node name="Info" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 451.0
-offset_top = 249.0
-offset_right = 701.0
-offset_bottom = 410.0
+offset_left = 59.0
+offset_top = 153.0
+offset_right = 309.0
+offset_bottom = 314.0
 text = "INFO"
-label_settings = SubResource("LabelSettings_50jbx")
 
 [node name="DaysDone" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 448.0
-offset_top = 104.0
-offset_right = 768.0
-offset_bottom = 230.0
+offset_left = 57.0
+offset_top = 59.0
+offset_right = 377.0
+offset_bottom = 185.0
 text = "Days Done!"
-label_settings = SubResource("LabelSettings_e3iif")
-
-[node name="ColorRect" type="ColorRect" parent="Control"]
-z_index = -2
-layout_mode = 0
-offset_left = 173.0
-offset_top = 51.0
-offset_right = 1007.0
-offset_bottom = 587.0
-color = Color(0.329412, 0.329412, 0.329412, 0.803922)
 
 [node name="NextDay" type="Button" parent="Control"]
 z_index = 5
@@ -64,29 +100,43 @@ text = "Next Day"
 
 [node name="PlayerSpeedInc" type="Button" parent="Control"]
 layout_mode = 0
-offset_left = 192.0
-offset_top = 348.0
-offset_right = 593.0
-offset_bottom = 396.0
-text = "Increase Player Speed: 10G"
+offset_left = 685.0
+offset_top = 50.0
+offset_right = 1085.0
+offset_bottom = 140.0
+theme = SubResource("Theme_nmuwe")
+text = "Increase Player Speed:
+blet"
 
 [node name="CoolingRateDec" type="Button" parent="Control"]
 layout_mode = 0
-offset_left = 195.0
-offset_top = 406.0
-offset_right = 589.0
-offset_bottom = 454.0
-text = "Decrease Cooling Rate: 10G"
+offset_left = 685.0
+offset_top = 150.0
+offset_right = 1085.0
+offset_bottom = 240.0
+text = "Decrease Cooling Rate: 10G
+ree"
 
 [node name="HeatRateInc" type="Button" parent="Control"]
 layout_mode = 0
-offset_left = 198.0
-offset_top = 463.0
-offset_right = 595.0
-offset_bottom = 511.0
-text = "Increase Heat Rate: 10G"
+offset_left = 685.0
+offset_top = 250.0
+offset_right = 1085.0
+offset_bottom = 340.0
+text = "Increase Heat Rate: 10G
+meh"
+
+[node name="AutoIngot" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 685.0
+offset_top = 350.0
+offset_right = 1085.0
+offset_bottom = 440.0
+text = "Auto Molmol
+ "
 
 [connection signal="pressed" from="Control/NextDay" to="." method="_on_next_day_pressed"]
 [connection signal="pressed" from="Control/PlayerSpeedInc" to="." method="_on_player_speed_inc_pressed"]
 [connection signal="pressed" from="Control/CoolingRateDec" to="." method="_on_cooling_rate_dec_pressed"]
 [connection signal="pressed" from="Control/HeatRateInc" to="." method="_on_heat_rate_inc_pressed"]
+[connection signal="pressed" from="Control/AutoIngot" to="." method="_on_auto_ingot_pressed"]

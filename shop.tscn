@@ -9,10 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://c6cnd0kx11fvq" path="res://Assets/Shareef/walls Tilemap.png" id="4_cvtwc"]
 [ext_resource type="PackedScene" uid="uid://bewrwdr2l45aj" path="res://cash_register.tscn" id="5_bnaeq"]
 [ext_resource type="PackedScene" uid="uid://devtoi3ah4vy2" path="res://Player.tscn" id="5_lp5dw"]
-[ext_resource type="FontFile" uid="uid://d4gloc7rb6s5s" path="res://Assets/Font/vinque rg.otf" id="9_6uv7d"]
 [ext_resource type="PackedScene" uid="uid://bdnf3f3fjgnoh" path="res://recipeTool.tscn" id="9_4745i"]
 [ext_resource type="Script" path="res://GUI HUD.gd" id="9_laghi"]
-
+[ext_resource type="Theme" uid="uid://ccxq1ecn67rk" path="res://Assets/end_day.tres" id="9_ne1fh"]
 [ext_resource type="Texture2D" uid="uid://bbulknjel8w2a" path="res://Assets/Sprites/ShopScene/interior_.png" id="11_3pdu3"]
 [ext_resource type="Texture2D" uid="uid://cin7oklhjhe8s" path="res://Assets/Tiny Swords/Tiny Swords (Update 010)/UI/Banners/Banner_Horizontal.png" id="11_aeu1v"]
 
@@ -58,11 +57,12 @@ tile_size = Vector2i(200, 200)
 sources/0 = SubResource("TileSetAtlasSource_juptc")
 
 [ext_resource type="PackedScene" uid="uid://dlgvjnk6rw5xy" path="res://trashCan.tscn" id="21_lpgaf"]
-
+[ext_resource type="Texture2D" uid="uid://bl7n336mfvqcn" path="res://Assets/Shareef/coin.png" id="23_ijiq0"]
 
 [sub_resource type="Theme" id="Theme_d7is4"]
 default_font = ExtResource("9_6uv7d")
 default_font_size = 22
+
 
 [sub_resource type="LabelSettings" id="LabelSettings_8qs8s"]
 font_size = 18
@@ -434,19 +434,21 @@ stream_4/weight = 1.0
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_p462w"]
 particle_flag_disable_z = true
-emission_shape = 3
-emission_box_extents = Vector3(1, 1, 1)
-spread = 75.337
-orbit_velocity_min = -0.202
-orbit_velocity_max = 2.0
-radial_velocity_min = -247.19
-radial_velocity_max = 696.63
-gravity = Vector3(0, 98, 0)
-scale_max = 23.87
+inherit_velocity_ratio = 1.0
+direction = Vector3(1, -0.4, 0)
+spread = 30.0
+initial_velocity_min = 150.0
+initial_velocity_max = 400.0
+scale_max = 1.1
 color = Color(1, 1, 0, 1)
+hue_variation_min = -0.05
+turbulence_noise_strength = 15.58
+turbulence_noise_scale = 2.684
+turbulence_noise_speed_random = 0.0
 
 [node name="Shop" type="Node2D"]
 script = ExtResource("1_07efy")
+money = 100
 minigame = ExtResource("2_vq7so")
 
 [node name="Floors" type="TileMap" parent="."]
@@ -494,7 +496,7 @@ offset_left = 26.0
 offset_top = 21.0
 offset_right = 158.0
 offset_bottom = 52.0
-theme = SubResource("Theme_d7is4")
+theme = ExtResource("9_ne1fh")
 script = ExtResource("9_laghi")
 
 [node name="ProgressBar" type="ProgressBar" parent="GUI HUD"]
@@ -553,18 +555,18 @@ text = "Next Day"
 
 [node name="Button" type="Button" parent="GUI HUD"]
 layout_mode = 0
-offset_left = 410.0
-offset_top = 567.0
-offset_right = 637.0
-offset_bottom = 603.0
+offset_left = 387.0
+offset_top = 672.0
+offset_right = 667.0
+offset_bottom = 708.0
 text = "Sell Ingot DEV ONLY PLZ"
 
 [node name="DoNothing" type="Button" parent="GUI HUD"]
 layout_mode = 0
-offset_left = 143.0
-offset_top = 548.0
-offset_right = 260.0
-offset_bottom = 600.0
+offset_left = 149.0
+offset_top = 670.0
+offset_right = 266.0
+offset_bottom = 722.0
 text = "Do Nothing"
 
 [node name="DayTimer" type="ProgressBar" parent="GUI HUD"]
@@ -579,6 +581,43 @@ z_index = -1
 position = Vector2(994.25, 15.125)
 scale = Vector2(1.05469, 0.688802)
 texture = ExtResource("11_aeu1v")
+
+[node name="Golden Hammer" type="Button" parent="GUI HUD"]
+layout_mode = 0
+offset_left = 90.0
+offset_top = 550.0
+offset_right = 205.0
+offset_bottom = 645.0
+scale = Vector2(0.7, 0.7)
+text = "Golden
+Hammer"
+
+[node name="Kings Sigil" type="Button" parent="GUI HUD"]
+offset_left = 270.0
+offset_top = 550.0
+offset_right = 385.0
+offset_bottom = 645.0
+scale = Vector2(0.7, 0.7)
+text = "Kings
+Sigil"
+
+[node name="Be Back in 5" type="Button" parent="GUI HUD"]
+offset_left = 360.0
+offset_top = 550.0
+offset_right = 475.0
+offset_bottom = 645.0
+scale = Vector2(0.7, 0.7)
+text = "Be back
+in 5"
+
+[node name="Bottled Fire" type="Button" parent="GUI HUD"]
+offset_left = 180.0
+offset_top = 550.0
+offset_right = 295.0
+offset_bottom = 645.0
+scale = Vector2(0.7, 0.7)
+text = "Bottled
+Fire"
 
 [node name="TileMap" type="TileMap" parent="."]
 light_mask = 0
@@ -618,10 +657,15 @@ blend_mode = 1
 shadow_enabled = true
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-position = Vector2(235, 376)
+position = Vector2(257, 333)
 emitting = false
-amount = 120
+amount = 50
 process_material = SubResource("ParticleProcessMaterial_p462w")
+texture = ExtResource("23_ijiq0")
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.9
+randomness = 0.38
 
 [connection signal="ready" from="." to="." method="_on_ready"]
 [connection signal="animation_finished" from="OreBox" to="." method="_on_ore_box_animation_finished1"]

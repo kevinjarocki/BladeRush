@@ -398,3 +398,15 @@ func _on_end_day_speed_inc():
 		playerSpeedModInc += 1
 		$Player.increaseSpeed(20)
 		print("cant afford, but you're cool ;)")
+
+func _on_golden_hammer_pressed():
+	pass # Replace with function body.
+
+func _on_kings_sigil_pressed():
+	pass # Replace with function body.
+
+func _on_be_back_in_5_pressed():
+	pass # Replace with function body.
+
+func _on_bottled_fire_pressed():
+	pass # Replace with function body.
